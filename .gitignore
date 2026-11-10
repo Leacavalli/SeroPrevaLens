@@ -1,0 +1,10 @@
+# Saved sessions contain your raw data: keep them out of the repository
+SeroPrevaLens_session_*.html
+
+# Your own data files
+data/
+*.xlsx
+
+# System files
+.DS_Store
+Thumbs.db

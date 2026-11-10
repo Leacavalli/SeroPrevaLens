@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use SeroPrevaLens, please cite it as below."
+title: "SeroPrevaLens: Estimate SeroPrevalence using Bayesian Mixture Models"
+type: software
+authors:
+  - family-names: Cavalli
+    given-names: Léa
+    affiliation: "University of California, San Francisco (EPPIcenter)"
+version: "1.0.0"
+date-released: "2026-11-09"
+license: MIT
+repository-code: "https://github.com/Leacavalli/SeroPrevaLens"
+url: "https://leacavalli.github.io/SeroPrevaLens/"
+keywords:
+  - serology
+  - seroprevalence
+  - mixture model
+  - Bayesian
+  - multiplex bead assay
+references:
+  - type: article
+    title: "Epidemiological and antigenic inferences from serological cross-reactivity among arboviruses"
+    authors:
+      - family-names: O'Driscoll
+        given-names: Megan
+      - name: "et al."
+    journal: "Science Translational Medicine"
+    volume: 17
+    year: 2025
+    doi: "10.1126/scitranslmed.ads8680"
