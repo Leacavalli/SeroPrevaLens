@@ -721,10 +721,12 @@ svg .heat-val.on-dark { fill: #fff; }
 .em-cell .flag { white-space: normal; display: inline-flex; align-items: flex-start; margin-top: 3px; font-size: 12px; line-height: 1.35; }
 .side-select { font: inherit; font-size: 12.5px; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); }
 /* saved sessions */
-.topbar .btn-save { background: #15803d; border-color: #15803d; color: #ffffff; font-weight: 650; margin-left: 4px; }
-.topbar .btn-save:hover:not(:disabled) { background: #166534; border-color: #166534; color: #ffffff; }
-.topbar .btn-save:focus-visible { outline: 2px solid #15803d; outline-offset: 2px; }
-.topbar .btn-save:disabled { opacity: 0.7; cursor: progress; }
+.btn-save { position: fixed; right: 20px; bottom: 20px; z-index: 15; background: #15803d; border-color: #15803d; color: #ffffff; font-weight: 650; padding: 10px 18px; border-radius: 999px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22); }
+.btn-save:hover:not(:disabled) { background: #166534; border-color: #166534; color: #ffffff; }
+.btn-save:focus-visible { outline: 2px solid #15803d; outline-offset: 2px; }
+.btn-save:disabled { opacity: 0.7; cursor: progress; }
+@media (max-width: 600px) { .btn-save { right: 16px; bottom: 16px; } }
+@media print { .btn-save { display: none; } }
 .session-notice { border: 1px solid var(--border-strong); border-left: 4px solid var(--s1); background: var(--s1-wash); border-radius: 8px; padding: 9px 12px; margin: 0 0 12px; font-size: 13.5px; max-width: 760px; }
 .session-notice.err { border-left-color: var(--critical); background: var(--crit-wash); }
 
@@ -817,9 +819,9 @@ svg .heat-val.on-dark { fill: #fff; }
     </div>
     <button class="btn small" id="btn-math" aria-haspopup="dialog">The math</button>
     <button class="btn small" id="btn-about" aria-haspopup="dialog">About</button>
-    <button class="btn small btn-save" id="btn-save" title="Download a copy of this page with your data, settings and results inside">Save session</button>
   </div>
 </nav>
+<button class="btn btn-save" id="btn-save" title="Download a copy of this page with your data, settings and results inside">Save session</button>
 
 <div class="wrap">
 <header class="page-head">
