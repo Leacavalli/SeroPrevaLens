@@ -722,6 +722,8 @@ svg .heat-val.on-dark { fill: #fff; }
 .side-select { font: inherit; font-size: 12.5px; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); }
 /* saved sessions */
 .btn-save { position: fixed; right: 20px; bottom: 20px; z-index: 15; background: #15803d; border-color: #15803d; color: #ffffff; font-weight: 650; padding: 10px 18px; border-radius: 999px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22); }
+.btn-save { display: inline-flex; align-items: center; gap: 7px; }
+.btn-save .save-ico { flex: none; }
 .btn-save:hover:not(:disabled) { background: #166534; border-color: #166534; color: #ffffff; }
 .btn-save:focus-visible { outline: 2px solid #15803d; outline-offset: 2px; }
 .btn-save:disabled { opacity: 0.7; cursor: progress; }
@@ -821,7 +823,7 @@ svg .heat-val.on-dark { fill: #fff; }
     <button class="btn small" id="btn-about" aria-haspopup="dialog">About</button>
   </div>
 </nav>
-<button class="btn btn-save" id="btn-save" title="Download a copy of this page with your data, settings and results inside">Save session</button>
+<button class="btn btn-save" id="btn-save" title="Download a copy of this page with your data, settings and results inside"><svg class="save-ico" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span class="save-label">Save session</span></button>
 
 <div class="wrap">
 <header class="page-head">
@@ -8086,7 +8088,7 @@ async function saveSession() {
   const btn = $('btn-save');
   if (S.busy) { sessionNotice('A run is still going. Save the session once it has finished, or cancel it first.', true); return; }
   if (!S.ds) { sessionNotice('Load data first.', true); return; }
-  btn.disabled = true; btn.textContent = 'Saving…';
+  btn.disabled = true; btn.querySelector('.save-label').textContent = 'Saving…';
   try {
     readSettings();
     const now = new Date();
@@ -8102,7 +8104,7 @@ async function saveSession() {
     console.error(err);
     sessionNotice('Could not save the session: ' + (err.message || err), true);
   } finally {
-    btn.disabled = false; btn.textContent = 'Save session';
+    btn.disabled = false; btn.querySelector('.save-label').textContent = 'Save session';
   }
 }
 async function restoreSession(el) {
