@@ -317,6 +317,9 @@ html { scroll-padding-top: 64px; }
 .nav-links a { color: var(--text-2); text-decoration: none; font-size: 13px; padding: 5px 9px; border-radius: 6px; white-space: nowrap; }
 .nav-links a:hover { background: var(--surface-2); color: var(--text); }
 .topbar .btn { flex: none; }
+.topbar .btn-mv { text-decoration: none; display: inline-flex; align-items: center; gap: 4px; flex: none; border-color: var(--border-strong); }
+.topbar .btn-mv b { color: var(--s2); font-weight: 700; }
+.topbar .btn-mv:hover { background: var(--surface-2); }
 @media (max-width: 640px) { .brand { display: none; } }
 
 .notice-red { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--critical); border-left-width: 4px; background: var(--crit-wash); border-radius: 8px; padding: 10px 12px; margin: 0 0 14px; font-size: 13.5px; }
@@ -498,6 +501,39 @@ details.howto li { margin: 3px 0; }
 .pg-cell.off .pg-name { color: var(--muted); font-weight: 500; }
 .pg-cell.off .pg-chart { opacity: 0.4; }
 .run-count { color: var(--muted); margin-left: 4px; }
+.data-summary .scale-pick { margin-left: auto; white-space: nowrap; }
+.data-summary .scale-pick + #btn-adv { margin-left: 8px; }
+.prior-table .fix-cell { text-align: center; }
+.prior-table .fix-cell input { width: auto; accent-color: var(--text); cursor: pointer; }
+.prior-table tr.is-fixed td { background: var(--page); }
+#data-table tr.shared-row td { background: var(--page); border-bottom: 2px solid var(--border-strong); }
+#cov-corr-heat svg .corr-diag { fill: var(--band); }
+#cov-corr-heat svg .corr-sel { fill: none; stroke: var(--text); stroke-width: 2; pointer-events: none; }
+svg .corr-id { stroke: var(--text-2); stroke-dasharray: 4 3; stroke-width: 1; }
+.em-progress { min-height: 0; margin: 0 0 8px; }
+.editor-tools .em-progress { margin: 0; }
+.fg-tools { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+.fg-cell .fg-est { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fg-cell .fg-est .flag.mark { margin: 0; }
+.fg-cell.empty .pg-chart { opacity: 0.45; }
+.fit-dash { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); scroll-margin-top: 64px; }
+.dash-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-bottom: 10px; }
+.dash-bar .dash-label { font-weight: 650; font-size: 15px; }
+.dash-bar .group-buttons { margin: 0; }
+.dash-bar #dash-close { margin-left: auto; }
+.report .dash-sec { padding-top: 4px; border-top: 1px solid var(--border); }
+.report .dash-sec > h4 { margin: 12px 0 0; font-size: 13.5px; }
+.report-body > h4.dash-h { margin: 2px 0 6px; font-size: 13.5px; }
+.term { text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--muted); cursor: help; }
+.term:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; border-radius: 2px; }
+#tooltip .tt-def { color: var(--text); line-height: 1.45; white-space: normal; }
+#tooltip.def { max-width: 340px; }
+.measure-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 8px; }
+.measure-row .hint { font-size: 12.5px; }
+#ag-pick-head { margin-top: 14px; }
+#ag-pills { margin-bottom: 4px; }
+.data-notes li.np-warn { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.data-notes li.np-warn select { font: inherit; font-size: 12.5px; }
 /* step 5: prevalence by covariates */
 #cov-ags { margin-top: 6px; }
 .cov-models { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
@@ -519,9 +555,24 @@ td.small { color: var(--crit-text); font-weight: 650; }
 .cov-col-table td.cov-groups { white-space: normal; min-width: 180px; }
 #cov-samples { margin: 10px 0 0; }
 .cov-add-row { margin-top: 8px; }
-#cov-cmp tr.best td { font-weight: 650; }
-#cov-cmp td.warn-cell { color: var(--crit-text); font-weight: 650; }
-#cov-cmp td[title] { cursor: help; }
+.cov-cmp tr.best td { font-weight: 650; }
+.cov-cmp tbody tr { cursor: pointer; }
+.cov-cmp tbody tr:hover td, .cov-cmp tbody tr:focus-visible td { background: var(--hover, rgba(127, 127, 127, 0.08)); }
+#cov-sum tr.cmp-detail { cursor: default; }
+#cov-sum tr.cmp-detail > td { padding: 4px 10px 14px 34px; background: var(--page); white-space: normal; }
+#cov-sum tr.cmp-detail:hover > td { background: var(--page); }
+#cov-sum tr.cmp-detail .hint { margin: 4px 0 6px; font-size: 12.5px; }
+#cov-sum .chev { display: inline-block; width: 1.1em; color: var(--muted); transition: transform 0.12s; }
+#cov-sum tr[aria-expanded="true"] .chev { transform: rotate(90deg); }
+#cov-sum tr.cs-sum td { border-top: 2px solid var(--border-strong); }
+#cov-sum tbody tr.cs-row { cursor: pointer; }
+#cov-sum tbody tr.cs-row:hover td, #cov-sum tbody tr.cs-row:focus-visible td { background: var(--hover, rgba(127, 127, 127, 0.08)); }
+#cov-sum td.sel-model { font-weight: 650; }
+#cov-sum .ev { display: inline-block; min-width: 3.4em; font-weight: 650; }
+#cov-sum .ev-clear { color: #15803d; }
+#cov-sum .ev-tie { color: var(--crit-text); }
+#cov-sum td.ev-cell { white-space: normal; min-width: 220px; }
+.cov-cmp td.warn-cell { color: var(--crit-text); font-weight: 650; }
 svg .cov-base { stroke: var(--text-2); stroke-dasharray: 4 3; stroke-width: 1.2; }
 svg .cov-band { fill: var(--text); fill-opacity: 0.06; }
 .cov-shared { font-size: 12.5px; color: var(--text-2); margin: 6px 0 0; font-variant-numeric: tabular-nums; }
@@ -819,6 +870,7 @@ svg .heat-val.on-dark { fill: #fff; }
       <a href="#sec-cov">Covariates</a>
       <a href="#sec-sens">Sensitivity</a>
     </div>
+    <a class="btn small btn-mv" href="mv.html" title="The multivariate cross-reactivity model: all antigens fitted at once">SeroPrevaLens <b>MV</b></a>
     <button class="btn small" id="btn-math" aria-haspopup="dialog">The math</button>
     <button class="btn small" id="btn-about" aria-haspopup="dialog">About</button>
   </div>
@@ -867,9 +919,10 @@ svg .heat-val.on-dark { fill: #fff; }
   </div>
   <div class="files">
     <div class="file-box">
-      <label for="f-data">Antibody data <span class="opt">SerolyzeR output</span></label>
-      <input type="file" id="f-data" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values">
+      <label for="f-data">Antibody data <span class="opt">SerolyzeR output, one or more files</span></label>
+      <input type="file" id="f-data" multiple accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values">
       <p class="file-status" id="data-info" aria-live="polite"></p>
+      <div class="measure-row" id="measure-row" hidden><label class="inline-label">Measure <select id="m-measure"></select></label><span class="hint" id="measure-hint"></span></div>
       <p class="file-links"><button type="button" class="linklike" id="btn-example" hidden>Reload the example</button><span class="sep" id="sep-example" hidden> · </span><button type="button" class="linklike" id="dl-ex-data">Download example</button> · <button type="button" class="linklike" id="btn-format">File format</button></p>
     </div>
     <div class="file-box">
@@ -880,25 +933,24 @@ svg .heat-val.on-dark { fill: #fff; }
     </div>
   </div>
 
+  <div class="pill-head" id="ag-pick-head"><span class="pill-label">Antigens to include</span><button type="button" class="linklike" id="ag-all">Select all</button><span class="sep">&middot;</span><button type="button" class="linklike" id="ag-none">Clear</button><span class="run-count" id="ag-count"></span></div>
+  <div class="ag-buttons" id="ag-pills" role="group" aria-label="Antigens to include"></div>
+
   <div class="data-summary">
     <div class="summary-text" id="funnel" aria-live="polite"></div>
+    <label class="inline-label scale-pick">Scale <select id="m-transform2" aria-label="Log transform"><option value="log">Natural log, ln(value)</option><option value="log10">Base-10 log, log10(value)</option><option value="none">None (already on a log scale)</option></select></label>
     <button type="button" class="btn small" id="btn-adv" aria-expanded="false" aria-controls="adv-panel">Advanced settings<span id="adv-count"></span></button>
   </div>
   <ul class="data-notes" id="data-notes"></ul>
 
   <div class="adv-panel" id="adv-panel" hidden>
     <div class="tabs" role="tablist" aria-label="Advanced data settings">
-      <button type="button" class="tab" role="tab" id="tab-ag" aria-controls="panel-ag" aria-selected="true">Antigens</button>
-      <button type="button" class="tab" role="tab" id="tab-excl" aria-controls="panel-excl" aria-selected="false" tabindex="-1">Exclude samples</button>
+      <button type="button" class="tab" role="tab" id="tab-excl" aria-controls="panel-excl" aria-selected="true">Exclude samples</button>
       <button type="button" class="tab" role="tab" id="tab-req" aria-controls="panel-req" aria-selected="false" tabindex="-1">Required metadata</button>
       <button type="button" class="tab" role="tab" id="tab-sub" aria-controls="panel-sub" aria-selected="false" tabindex="-1">Subset</button>
       <button type="button" class="tab" role="tab" id="tab-scale" aria-controls="panel-scale" aria-selected="false" tabindex="-1">Scale</button>
     </div>
-    <div class="tab-panel" role="tabpanel" id="panel-ag" aria-labelledby="tab-ag">
-      <p class="hint">Antigen columns to analyse. Untick one to leave it out, for example a control bead. Columns that are not numeric are left out to begin with.</p>
-      <div class="checks" id="ag-cols"></div>
-    </div>
-<div class="tab-panel" role="tabpanel" id="panel-excl" aria-labelledby="tab-excl" hidden>
+<div class="tab-panel" role="tabpanel" id="panel-excl" aria-labelledby="tab-excl">
         <p class="hint">Rows whose sample_name matches any entry below are left out. Matching ignores upper and lower case. The defaults remove SerolyzeR's standard, blank and empty wells.</p>
         <div id="excl-list" class="excl-list"></div>
         <div class="excl-add">
@@ -923,8 +975,8 @@ svg .heat-val.on-dark { fill: #fff; }
         <div id="m-subset-vals" class="checks" style="margin-top:8px"></div>
       </div>
     <div class="tab-panel" role="tabpanel" id="panel-scale" aria-labelledby="tab-scale" hidden>
-      <p class="hint">The mixture is fitted to the logarithm of the values. Choose "None" only if your values are already on a log scale.</p>
-      <div class="row-tight"><label>Transform <select id="m-transform"><option value="log">log(value)</option><option value="none">None (already on log scale)</option></select></label></div>
+      <p class="hint">The mixture is fitted to the logarithm of the values: the natural log (ln, as in O&rsquo;Driscoll et al.) or base 10. The two give the same estimates; only the scale of the axes and of the priors differs (log10 = ln / 2.303). Switching between them rescales the priors you set by hand. Choose &ldquo;None&rdquo; only if your values are already on a log scale.</p>
+      <div class="row-tight"><label>Transform <select id="m-transform"><option value="log">Natural log, ln(value)</option><option value="log10">Base-10 log, log10(value)</option><option value="none">None (already on a log scale)</option></select></label></div>
     </div>
     <div class="row-tight" style="margin-top:12px"><button type="button" class="btn small" id="btn-adv-reset">Reset all to defaults</button></div>
   </div>
@@ -966,12 +1018,15 @@ svg .heat-val.on-dark { fill: #fff; }
       <label class="ag-inline" id="ag-priors-wrap">Prior for <select class="ag-select" id="ag-priors"></select></label>
       <h3 class="editor-h" id="editor-shared-title" hidden>Prior for all antigens</h3>
       <div class="editor-tools">
+        <button type="button" class="btn small" id="btn-fill-data" title="Fit a two-group mixture to each antigen&rsquo;s values by maximum likelihood (EM) and use the fitted values as the prior centres">Fill from the data</button>
+        <span class="progress em-progress" id="em-progress-own" aria-live="polite" hidden></span>
         <button type="button" class="btn small" id="btn-clear-prior">Clear</button>
       </div>
     </div>
     <div id="prior-source" class="row-tight"></div>
     <div id="prior-warning"></div>
     <div class="table-wrap" style="margin-top:10px"><table id="prior-table" class="prior-table"></table></div>
+    <p class="hint" style="margin:6px 0 0">Tick <b>Fix</b> to hold a parameter at a value instead of sampling it: the location is used (for prevalence, a value between 0 and 1), and its scale and limits are ignored (they come back if you untick it). Use it only for values that are well known, for example from negative controls: a fixed value carries no uncertainty into the estimates. To fix where the positive peak sits, fix both mu0 and muR.</p>
     <div class="limits-row" id="limits-row">
       <span class="hint" id="limits-summary"></span>
     </div>
@@ -980,17 +1035,20 @@ svg .heat-val.on-dark { fill: #fff; }
   </div>
 
   <div id="panel-data" class="mode-panel" hidden>
-    <div class="seg" role="radiogroup" aria-label="Rule for the suggested priors">
-      <label class="seg-opt"><input type="radio" name="pdata" value="data"><span>Peak and tail rule</span></label>
-      <label class="seg-opt"><input type="radio" name="pdata" value="em"><span>Maximum-likelihood fit (EM)</span></label>
+    <div class="seg" role="radiogroup" aria-label="One prior per antigen or one for all">
+      <label class="seg-opt"><input type="radio" name="pdshare" value="each"><span>One prior per antigen</span></label>
+      <label class="seg-opt"><input type="radio" name="pdshare" value="shared"><span>Same prior for all antigens</span></label>
     </div>
-    <p class="hint" style="margin:6px 0 10px">Set whether each antigen&rsquo;s prevalence is expected to be below or above 50% in the table. It decides which peak is taken as the negatives, where the EM fit starts, and the prior on prevalence.</p>
+    <p class="hint" id="data-share-hint" style="margin:6px 0 10px"></p>
+    <p class="progress em-progress" id="em-progress-data" aria-live="polite" hidden></p>
     <div id="data-caution"></div>
     <details class="howto"><summary>How these priors are computed</summary><div id="data-how"></div></details>
-    <div class="table-wrap" style="margin-top:12px"><table id="data-table" class="res-table"></table></div>
+    <p class="hint" style="margin:10px 0 0">Every antigen&rsquo;s prevalence is assumed to be below 50%: the lower group is taken as the negatives, EM starts with 20% of samples in the upper group, and prevalence gets a Beta(1, 5) prior. The plots below show the suggested priors over the data.</p>
+    <div class="toggle-row" style="margin-top:8px"><button type="button" class="btn small toggle-btn" id="data-table-btn" aria-expanded="false" aria-controls="data-table-wrap">Show the table of suggested priors</button></div>
+    <div id="data-table-wrap" hidden><div class="table-wrap" style="margin-top:10px"><table id="data-table" class="res-table"></table></div></div>
     <div class="row-tight" style="margin-top:10px">
       <button type="button" class="btn small" id="btn-data-edit">Edit these values myself</button>
-      <span class="hint" style="padding-bottom:5px">Copies them to &ldquo;One prior per antigen&rdquo;, where you can change them.</span>
+      <span class="hint" id="data-edit-hint" style="padding-bottom:5px">Copies them to &ldquo;One prior per antigen&rdquo;, where you can change them.</span>
     </div>
   </div>
   <p class="prior-msg" id="prior-msg" aria-live="polite"></p>
@@ -1027,15 +1085,22 @@ svg .heat-val.on-dark { fill: #fff; }
 
 <section class="card" id="sec-conv">
   <div class="card-head"><span class="step">3</span><h2>Fit checks</h2></div>
-  <p class="hint">Whether the sampler worked for each antigen&rsquo;s fit with its baseline prior, then the estimates themselves.</p>
-  <div class="ag-buttons" id="conv-ags" role="group" aria-label="Antigen"></div>
-  <div class="ag-buttons group-buttons" id="conv-groups" role="group" aria-label="Group" hidden></div>
-  <div id="conv-body"></div>
+  <p class="hint">One plot per antigen: its data with the mixture fitted with the baseline prior. The percentage is the median prevalence and the icon the sampler check. Click a plot to open its fit report: the fitted mixture, the sampler checks, the trace plots and the posterior estimates.</p>
+  <div class="ag-buttons" id="conv-ags" role="group" aria-label="Antigen" hidden></div>
+  <div class="chart-tools">
+    <div class="legend" id="lg-fitgrid"></div>
+    <span class="fg-tools"><button type="button" class="btn small primary" id="fg-fit" hidden></button><button type="button" class="btn small" id="dl-post-all">Download posterior estimates (CSV)</button></span>
+  </div>
+  <div class="prior-grid fit-grid" id="fit-grid"></div>
+  <div id="fit-dash" class="fit-dash" hidden>
+    <div class="dash-bar"><span class="dash-label">Fit report</span><div class="ag-buttons group-buttons" id="conv-groups" role="group" aria-label="Group" hidden></div><button type="button" class="btn small" id="dash-close">Close</button></div>
+    <div id="conv-body"></div>
+  </div>
 </section>
 
 <section class="card" id="sec-prev">
   <div class="card-head"><span class="step">4</span><h2>Prevalence estimates</h2></div>
-  <p class="hint">Fits each selected antigen with its baseline prior from step 2. Only the antigens ticked in step 2 are offered here and in steps 3, 5 and 6. &ldquo;Separate fits by&rdquo; a metadata column fits each group separately with the same prior, so groups don&rsquo;t borrow strength from each other. To let only prevalence vary between groups, with the antibody distributions shared, use step 5.</p>
+  <p class="hint">Fits each selected antigen with its baseline prior from step 2. Only the antigens selected in step 1 are offered here and in steps 3, 5 and 6. &ldquo;Separate fits by&rdquo; a metadata column fits each group separately with the same prior, so groups don&rsquo;t borrow strength from each other. To let only prevalence vary between groups, with the antibody distributions shared, use step 5.</p>
   <div class="pill-head"><span class="pill-label">Antigens</span><button type="button" class="linklike" id="prev-all">Select all</button><span class="sep">·</span><button type="button" class="linklike" id="prev-none">Clear</button></div>
   <div class="ag-buttons" id="prev-ags" role="group" aria-label="Antigens to estimate"></div>
   <p class="hint" id="prev-noprior" hidden></p>
@@ -1081,13 +1146,16 @@ svg .heat-val.on-dark { fill: #fff; }
     </div>
     <div id="cov-results" hidden>
       <div class="stale" id="cov-stale" hidden>The data, priors, sampler settings or models have changed since this run. Fit again to update.</div>
-      <div class="chart-head"><h3>Model comparison</h3></div>
-      <p class="hint" style="margin-top:4px">Within each antigen, the model with the highest ELPD-LOO is in bold and the others are compared with it. Click a row to see its prevalence estimates below.</p>
-      <div class="table-wrap" style="margin-top:8px"><table id="cov-cmp" class="res-table"></table></div>
-      <p class="caption">Mean log-lik: posterior mean of the total log-likelihood, the measure used by O&rsquo;Driscoll et al. More cells let the model follow the data more closely, so it tends to favour the model with the most cells (with priors on every cell it can still drop a little). ELPD-LOO: expected log predictive density from leave-one-out cross-validation (Pareto-smoothed importance sampling), which penalises extra parameters; p_loo is the effective number of parameters. A &Delta;ELPD smaller than about twice its SE is not a clear difference. Pareto k above 0.7: samples whose leave-one-out estimate is unreliable.</p>
-      <div class="toggle-row">
-        <button type="button" class="btn small" id="dl-cov-cmp">Download comparison (CSV)</button>
-        <button type="button" class="btn small" id="dl-cov-stan">Download Stan model</button>
+      <div class="chart-head"><h3>Selected model per antigen</h3></div>
+      <p class="hint" style="margin-top:4px">For each antigen, the simplest model (fewest cells) whose ELPD-LOO is within 2 SE of the best one. <b>Clear</b>: the selected model is more than 2 SE ahead of every other model. <b>Best</b>: it has the highest ELPD-LOO, and the models within 2 SE of it are more complex. <b>Tie</b>: a more complex model scores higher, but by less than 2 SE, so the simpler one is kept. Click an antigen to see the full likelihood comparison of its models, then a model to see its prevalence by cell. Hover over a column name for what it means.</p>
+      <div class="table-wrap" style="margin-top:8px"><table id="cov-sum" class="res-table"></table></div>
+      <div class="chart-head" style="margin-top:22px"><h3>Overall prevalence by model</h3><div class="legend prev-legend" id="lg-cov-overall"></div></div>
+      <div class="chart-tools"><span class="export-slot" id="cov-overall-export"></span></div>
+      <div id="cov-overall-chart" class="chart"></div>
+      <p class="caption">Each model&rsquo;s estimate of the prevalence among all its samples: the cell prevalences weighted by each cell&rsquo;s number of samples, with the median and 95% credible interval. All models are fitted to the same samples, so these usually agree closely: the models differ in how prevalence is spread between cells, not in its overall level. A clear difference between models is worth a look; it often comes from small cells pulled toward the prior. Outlined dot: the selected model. Dashed interval: the sampler check failed for that model.</p>
+      <div class="toggle-row" style="margin-top:14px">
+        <button type="button" class="btn small" id="dl-cov-prev">Download prevalence estimates (CSV)</button>
+        <button type="button" class="btn small" id="dl-cov-cmp">Download likelihood comparison (CSV)</button>
       </div>
       <div class="toggle-row" style="margin-top:18px">
         <button type="button" class="btn small toggle-btn" id="cov-cells-btn" aria-expanded="false" aria-controls="cov-cells-wrap">Show prevalence by cell</button>
@@ -1102,11 +1170,22 @@ svg .heat-val.on-dark { fill: #fff; }
       <div id="cov-chart" class="chart"></div>
       <p class="caption">Median and 95% credible interval of each cell&rsquo;s prevalence. Hollow dots: cells with fewer than 10 samples, where the prior carries more weight. Dashed intervals: the sampler check failed for this model. These are independent 1D fits, so they ignore cross-reactivity between antigens.</p>
       <p class="cov-shared" id="cov-shared"></p>
-      <div class="toggle-row">
-        <button type="button" class="btn small toggle-btn" id="cov-table-btn" aria-expanded="false" aria-controls="cov-table-wrap">Show table</button>
-        <button type="button" class="btn small" id="dl-cov-prev">Download estimates (CSV)</button>
       </div>
-      <div class="table-wrap" id="cov-table-wrap" style="margin-top:10px" hidden><table id="cov-table" class="res-table"></table></div>
+      <div class="toggle-row" style="margin-top:12px">
+        <button type="button" class="btn small toggle-btn" id="cov-corr-btn" aria-expanded="false" aria-controls="cov-corr-wrap">Show correlation of prevalence by cell</button>
+      </div>
+      <div id="cov-corr-wrap" hidden>
+        <div class="chart-head" style="margin-top:22px"><h3>Correlation of prevalence by cell</h3></div>
+        <p class="hint" style="margin-top:4px">Whether antigens rise and fall together across the cells of one model, for example the same subdistricts having high prevalence for two antigens. That can point to shared exposure or to cross-reactivity. Click a square to plot the two antigens against each other.</p>
+        <div class="cov-view">
+          <label class="inline-label">Model <select id="cov-corr-model"></select></label>
+          <span class="export-slot" id="cov-corr-export" style="margin-left:auto"></span>
+        </div>
+        <div id="cov-corr-heat" class="chart heat-scroll"></div>
+        <div class="chart-head" style="margin-top:18px"><h3 id="cov-corr-title" style="font-size:14px"></h3><div class="legend" id="lg-cov-corr"></div></div>
+        <div class="cov-view" style="margin-top:0"><span class="export-slot" id="cov-corr-sc-export" style="margin-left:auto"></span></div>
+        <div id="cov-corr-scatter" class="chart"></div>
+        <p class="caption">Pearson correlation of the cells&rsquo; median prevalences, over the cells with at least 10 samples for both antigens (n in each square). Smaller cells are pulled toward the prior and are shown hollow in the plot but left out of r. The medians ignore the uncertainty of each cell, so treat r as descriptive, and with few cells it is very uncertain. Each antigen is a separate 1D fit, so a correlation here is not modelled cross-reactivity.</p>
       </div>
     </div>
   </div>
@@ -1246,7 +1325,7 @@ svg .heat-val.on-dark { fill: #fff; }
 
   <h3>4. Priors and posterior</h3>
   <div class="eq"><var>p</var>(<var>&theta;</var> | <var>y</var>) &prop; <var>L</var>(<var>&theta;</var>) &middot; <var>p</var>(<var>&theta;</var>), &emsp; restricted to the bounds of each parameter</div>
-  <p>Every prior on this page has the form of Mixture1D.stan (Table 1 of the paper, priors entered by hand or uploaded, and the peak and tail rule). Each normal prior is truncated to its limits [<var>L</var>, <var>U</var>]:</p>
+  <p>Every prior on this page has the form of Mixture1D.stan (Table 1 of the paper, priors entered by hand or uploaded, and the priors suggested by the EM fit). Each normal prior is truncated to its limits [<var>L</var>, <var>U</var>]:</p>
   <div class="eq"><var>&pi;</var> ~ Beta(<var>a</var>, <var>b</var>), &emsp; <var>&mu;</var><sub>0</sub> ~ N(<var>m</var><sub>0</sub>, <var>s</var><sub>0</sub>), &emsp; <var>&mu;<sub>R</sub></var> ~ N(<var>m<sub>R</sub></var>, <var>s<sub>R</sub></var>), &emsp; <var>&sigma;</var><sub>0</sub> ~ N(<var>m</var><sub><var>&sigma;</var>0</sub>, <var>s</var><sub><var>&sigma;</var>0</sub>), &emsp; <var>&sigma;</var><sub>1</sub> ~ N(<var>m</var><sub><var>&sigma;</var>1</sub>, <var>s</var><sub><var>&sigma;</var>1</sub>)</div>
   <p>Table 1 values: <var>&pi;</var> ~ Beta(1, 5); <var>&mu;</var><sub>0</sub> ~ N(0, 0.1) on [&minus;1, &infin;); <var>&mu;<sub>R</sub></var> ~ N(3, 0.1) on [0, &infin;); <var>&sigma;</var><sub>0</sub> ~ N(0.4, 0.05) and <var>&sigma;</var><sub>1</sub> ~ N(0.7, 0.05) on [0, &infin;). The peak and tail rule (the priors suggested by the data) puts <var>m</var><sub>0</sub> at the peak of a smoothed histogram, <var>m</var><sub><var>&sigma;</var>0</sub> at the root-mean-square distance of the values below that peak, and <var>m</var><sub>0</sub> + <var>m<sub>R</sub></var> near the 95th percentile.</p>
 
@@ -1296,7 +1375,7 @@ svg .heat-val.on-dark { fill: #fff; }
   <div class="dlg-body">
 <div class="files" style="margin-top:10px">
       <div>
-        <p class="hint" style="margin-bottom:6px"><b>Data</b>: SerolyzeR's per-plate or merged output, as written by <code>process_plate()</code> or <code>merge_plate_outputs()</code>. One row per sample, a <code>sample_name</code> column, then one column per antigen. A <code>plate_name</code> column, if present, is kept as metadata.</p>
+        <p class="hint" style="margin-bottom:6px"><b>Data</b>: any SerolyzeR output, as written by <code>process_plate()</code>, <code>process_dir()</code> or <code>merge_plate_outputs()</code>. One row per sample, a <code>sample_name</code> column, then one column per antigen. A <code>plate_name</code> column, if present, is kept as metadata. You can load several files at once: they are grouped by measure from the file name (<code>_RAU</code>, <code>_nMFI</code> or <code>_MFI</code>), per-plate files of the same measure are stacked with the plate name taken from the file name, and a merged file is used instead of the per-plate files it covers. Choose the measure to analyse under the file box.</p>
         <div class="table-wrap"><table>
           <thead><tr><th>sample_name</th><th class="num">DENV1</th><th class="num">DENV2</th><th class="num">&hellip;</th><th class="num">CHIKV</th></tr></thead>
           <tbody><tr><td>CHPI_1</td><td class="num">1.07</td><td class="num">0.67</td><td class="num">&hellip;</td><td class="num">3.68</td></tr>
@@ -1331,7 +1410,7 @@ svg .heat-val.on-dark { fill: #fff; }
     <h3>Not from the paper</h3>
     <ul>
       <li>This page, its JavaScript sampler, the sensitivity analysis and the prevalence comparison. They are an independent implementation, not the authors' code.</li>
-      <li>The &ldquo;suggested by the data&rdquo; option uses a peak and tail rule written for this page, not a published method.</li>
+      <li>The &ldquo;suggested by the data&rdquo; option fits a maximum-likelihood mixture (EM) to each antigen&rsquo;s values; the way the fit is turned into priors was written for this page.</li>
     </ul>
   </div>
 </dialog>
@@ -3084,6 +3163,21 @@ function makeTarget(y, prior, bounds, useLik, grp, G) {
   return { logpGrad: logpGrad, toX: toX, toU: toU, inside: inside, lo: lo, hi: hi, kind: kind, D: D, G: G, names: names };
 }
 
+/* Fixed parameters: the sampler only moves the free coordinates; the fixed ones keep their
+ * unconstrained value uFix. The density of the full model is evaluated at the expanded point. */
+function reduceTarget(TF, free, uFix) {
+  var Df = TF.D, m = free.length, uF = new Float64Array(Df), gF = new Float64Array(Df);
+  function expand(u) { uF.set(uFix); for (var j = 0; j < m; j++) uF[free[j]] = u[j]; return uF; }
+  return {
+    D: m, G: TF.G, names: free.map(function (k) { return TF.names[k]; }), expand: expand,
+    logpGrad: function (u, grad) {
+      var v = TF.logpGrad(expand(u), grad ? gF : null);
+      if (grad) for (var j = 0; j < m; j++) grad[j] = gF[free[j]];
+      return v;
+    }
+  };
+}
+
 /* ---------- small linear algebra ---------- */
 function cholesky(A, d) {               // A: Float64Array d*d row-major -> lower L, or null
   var L = new Float64Array(d * d);
@@ -3136,14 +3230,35 @@ function runChain(opt) {
   var rng = makeRng(opt.seed);
   var Gc = opt.G || 1;
   var grp = opt.groups ? Int32Array.from(opt.groups) : null;
-  var T = makeTarget(y, prior, bounds, useLik, grp, Gc);
+  // prior.fix: parameters held at a value (pi at prior.pi_fix, the others at their location)
+  var fixed = prior.fix || null, prior0 = prior;
+  if (fixed) {   // finite stand-ins for the prior terms of fixed parameters, which are then constant
+    prior = Object.assign({}, prior0);
+    ['mu0', 'muR', 'sd0', 'sd1'].forEach(function (p) { if (fixed[p]) prior[p + '_scale'] = 1; });
+    if (fixed.pi) { prior.pi_a = 1; prior.pi_b = 1; }
+    bounds = Object.assign({}, bounds);   // limits do not apply to a fixed parameter
+    if (fixed.mu0) { bounds.mu0_lower = -Infinity; bounds.mu0_upper = Infinity; }
+    if (fixed.muR) { bounds.muR_lower = 0; bounds.muR_upper = Infinity; }
+    if (fixed.sd0) { bounds.sd0_lower = 0; bounds.sd0_upper = Infinity; }
+    if (fixed.sd1) { bounds.sd1_lower = 0; bounds.sd1_upper = Infinity; }
+  }
+  var TF = makeTarget(y, prior, bounds, useLik, grp, Gc);
+  var Df = TF.D, freeIdx = [], fixVal = new Float64Array(Df), k, i;
+  for (k = 0; k < Df; k++) {
+    var pn = k < Gc ? 'pi' : TF.names[k];
+    if (fixed && fixed[pn]) fixVal[k] = pn === 'pi' ? prior0.pi_fix : prior0[pn + '_loc'];
+    else { fixVal[k] = NaN; freeIdx.push(k); }
+  }
+  if (!freeIdx.length) throw new Error('Every parameter is fixed: leave at least one free');
+  var uFix = new Float64Array(Df);
+  var T = freeIdx.length < Df ? reduceTarget(TF, freeIdx, uFix) : TF;
   var onProgress = opt.onProgress || null;
-  var d = T.D, k, i;
+  var d = T.D;
 
   /* --- initial values. For normal priors as init_1D() in Fit_1D_Model.R (a draw near
    *     each prior location); otherwise around opt.init, a rough guess from the data.
    *     Always kept strictly inside the bounds. --- */
-  var q = new Float64Array(d), x0 = new Float64Array(d), g = new Float64Array(d), lp = -Infinity;
+  var qF = new Float64Array(Df), x0 = new Float64Array(Df), gF = new Float64Array(Df), lp = -Infinity;
   var im, is;
   if (opt.init) { im = opt.init.mean; is = opt.init.sd; }
   else {
@@ -3160,11 +3275,16 @@ function runChain(opt) {
     x0[Gc + 1] = Math.max(im[1] + widen * is[1] * rng.normal(), 0.1);
     x0[Gc + 2] = Math.max(im[2] + widen * is[2] * rng.normal(), 0.05);
     x0[Gc + 3] = Math.max(im[3] + widen * is[3] * rng.normal(), 0.05);
-    for (k = Gc; k < d; k++) x0[k] = T.inside(k, x0[k], Math.max(is[k - Gc], 0.05));
-    T.toU(x0, q);
-    lp = T.logpGrad(q, g);
+    for (k = Gc; k < Df; k++) x0[k] = TF.inside(k, x0[k], Math.max(is[k - Gc], 0.05));
+    for (k = 0; k < Df; k++) if (fixVal[k] === fixVal[k]) x0[k] = fixVal[k];
+    TF.toU(x0, qF);
+    lp = TF.logpGrad(qF, gF);
   }
   if (!isFinite(lp)) throw new Error('Could not find a finite starting value');
+  uFix.set(qF);
+  var q = new Float64Array(d), g = new Float64Array(d);
+  if (T === TF) q.set(qF); else for (k = 0; k < d; k++) q[k] = qF[freeIdx[k]];
+  lp = T.logpGrad(q, g);
 
   /* --- metric: q = q0 + L theta; NUTS runs on theta with identity metric --- */
   var L = new Float64Array(d * d);
@@ -3319,8 +3439,8 @@ function runChain(opt) {
   var thin = Math.max(1, Math.floor(iter / thinTo));
   var nKeep = Math.floor(iter / thin);
   var out = {};
-  for (k = 0; k < d; k++) out[T.names[k]] = new Float64Array(nKeep);
-  var lpOut = new Float64Array(nKeep), xs = new Float64Array(d);
+  for (k = 0; k < Df; k++) out[TF.names[k]] = new Float64Array(nKeep);
+  var lpOut = new Float64Array(nKeep), xs = new Float64Array(Df);
   var keep = 0, nDiv = 0, nMaxDepth = 0, sumAcc = 0, sumLeap = 0;
   var progressEvery = Math.max(50, Math.floor(total / 25));
 
@@ -3350,8 +3470,8 @@ function runChain(opt) {
       sumAcc += tr.accept; sumLeap += tr.nLeap;
       var ts = t - warmup;
       if (ts % thin === 0 && keep < nKeep) {
-        T.toX(q, xs);
-        for (k = 0; k < d; k++) out[T.names[k]][keep] = xs[k];
+        TF.toX(T === TF ? q : T.expand(q), xs);
+        for (k = 0; k < Df; k++) out[TF.names[k]][keep] = xs[k];
         lpOut[keep] = lp;
         keep++;
       }
@@ -3359,7 +3479,7 @@ function runChain(opt) {
     if (onProgress && (t + 1) % progressEvery === 0) onProgress((t + 1) / total);
   }
   return {
-    draws: out, parNames: T.names, lp: lpOut, stepsize: eps,
+    draws: out, parNames: TF.names, lp: lpOut, stepsize: eps,
     divergences: nDiv, maxTreedepthHits: nMaxDepth,
     meanAccept: iter ? sumAcc / iter : NaN,
     meanLeapfrog: iter ? sumLeap / iter : NaN
@@ -3774,7 +3894,7 @@ const BOUND_KEYS = ['mu0_lower', 'mu0_upper', 'muR_lower', 'muR_upper', 'sd0_low
 const KEY_LABEL = {
   mu0_loc: 'mu0 loc', mu0_scale: 'mu0 scale', muR_loc: 'muR loc', muR_scale: 'muR scale',
   sd0_loc: 'sd0 loc', sd0_scale: 'sd0 scale', sd1_loc: 'sd1 loc', sd1_scale: 'sd1 scale',
-  pi_a: 'pi a', pi_b: 'pi b'
+  pi_fix: 'fixed prevalence', pi_a: 'pi a', pi_b: 'pi b'
 };
 const FAMILY_LABEL = { normal: 'Normal priors' };
 const METHOD_LABEL = {
@@ -3789,7 +3909,7 @@ const DATA_METHODS = ['data', 'em'];
 /* Which side of 50% each antigen's prevalence is expected to be on ('low' or 'high'), set in step 2.
    It decides which peak is the negatives, where EM starts, and the Beta prior on prevalence. */
 const PI_PRIOR_BY_SIDE = { low: [1, 5], high: [5, 1] };
-function prevSide(ag) { return S.prevSide && S.prevSide[ag] === 'high' ? 'high' : 'low'; }
+function prevSide() { return 'low'; }   // every antigen's prevalence is assumed to be below 50%
 
 /* Table 1 of O'Driscoll et al. (2025): priors and limits */
 const PAPER_PRIOR = { family: 'normal', mu0_loc: 0, mu0_scale: 0.1, muR_loc: 3, muR_scale: 0.1,
@@ -3923,6 +4043,7 @@ function makeRngLocal(seed) {   // mulberry32 + Box-Muller, for prior simulation
 const tip = $('tooltip');
 function showTip(evt, title, rows) {
   tip.textContent = '';
+  tip.classList.remove('def');
   if (title) tip.appendChild(h('div', { class: 'tt-title', text: title }));
   rows.forEach(([k, v]) => tip.appendChild(h('div', { class: 'tt-row' }, h('span', { text: k }), h('span', { text: v }))));
   tip.style.display = 'block';
@@ -3941,6 +4062,43 @@ function moveTip(evt) {
   tip.style.top = Math.max(8, y) + 'px';
 }
 function hideTip() { tip.style.display = 'none'; }
+/* Definitions of diagnostic and model-comparison terms, shown when the term is hovered or focused */
+const DEFS = {
+  rhat: ['R-hat', 'Compares the chains: near 1 means they agree. It is the ratio of the spread across all chains to the spread within each chain. Target: below 1.01.'],
+  essBulk: ['Bulk ESS', 'Effective sample size for the median and the middle of the posterior: how many independent draws the correlated draws are worth. Target: 400 or more.'],
+  essTail: ['Tail ESS', 'Effective sample size for the ends of the 95% interval (the 2.5% and 97.5% quantiles), where draws are rarer. Target: 400 or more.'],
+  mcse: ['MCSE of the median', 'Monte Carlo standard error: how much the median would move from sampler noise alone. It should be small next to the width of the 95% interval.'],
+  div: ['Divergent transitions', 'Iterations where the sampler could not follow the shape of the posterior. Any divergence means part of the posterior may not have been explored, so the estimates may be biased. Target: 0.'],
+  treedepth: ['Maximum tree depth', 'Iterations where the sampler took the largest number of steps allowed. This makes sampling slower but does not bias the estimates.'],
+  meanLL: ['Mean log-lik', 'Posterior mean of the total log-likelihood: how well the model fits the samples it was fitted to. Models with more cells almost always fit better on this measure, so it is not used to choose between models.'],
+  elpd: ['ELPD-LOO (SE)', 'Expected log predictive density from leave-one-out cross-validation: how well the model predicts each sample when that sample is left out, summed over samples. Estimated by Pareto-smoothed importance sampling from one fit. Higher is better. SE: its standard error.'],
+  dElpd: ['ΔELPD (SE)', 'ELPD-LOO of this model minus that of the best model for the antigen (0 for the best). The SE comes from the per-sample differences between the two models. A difference smaller than about twice its SE is not a clear difference.'],
+  ploo: ['p_loo', 'Effective number of parameters: in-sample fit minus leave-one-out fit. Usually a little below the nominal count (cells + 4) because the priors pull small cells together. Much larger values point to a misspecified model or very influential samples.'],
+  pareto: ['Pareto k > 0.7', 'Number of samples whose leave-one-out estimate is unreliable: leaving them out would change the posterior too much for the shortcut to work. A handful is fine; many mean the ELPD should be treated with caution.'],
+  cells: ['Cells', 'Number of groups of samples defined by the model’s metadata columns, each with its own prevalence.'],
+  params: ['Parameters', 'Nominal number of parameters: one prevalence per cell plus the four shared ones (mu0, muR, sd0, sd1).'],
+  sampler: ['Sampler check', 'Passed when R-hat is below 1.01, bulk and tail ESS are 400 or more for every parameter, and there are no divergent transitions.'],
+  evidence: ['Evidence', 'Clear: the selected model is more than 2 SE ahead of every other model. Best: it has the highest ELPD-LOO and the models within 2 SE of it are more complex. Tie: a more complex model scores higher, but by less than 2 SE, so the simpler one is kept.']
+};
+function showDef(evt, key) {
+  const d = DEFS[key];
+  if (!d) return;
+  tip.textContent = '';
+  tip.classList.add('def');
+  tip.appendChild(h('div', { class: 'tt-title', text: d[0] }));
+  tip.appendChild(h('div', { class: 'tt-def', text: d[1] }));
+  tip.style.display = 'block';
+  moveTip(evt);
+}
+function defTerm(key, label) {
+  const el = h('span', { class: 'term', tabindex: 0, text: label || DEFS[key][0], 'aria-description': DEFS[key][1] });
+  el.addEventListener('pointerenter', (e) => showDef(e, key));
+  el.addEventListener('pointermove', moveTip);
+  el.addEventListener('pointerleave', () => { hideTip(); tip.classList.remove('def'); });
+  el.addEventListener('focus', (e) => showDef(e, key));
+  el.addEventListener('blur', () => { hideTip(); tip.classList.remove('def'); });
+  return el;
+}
 function hoverable(node, title, rowsFn) {
   const show = (e) => showTip(e, typeof title === 'function' ? title() : title, rowsFn());
   node.addEventListener('pointerenter', show);
@@ -4037,12 +4195,12 @@ const S = {
   /* Priors. pmode.mode: 'own' (the user informs them) or 'data' (suggested by the data).
    * pmode.own: 'each' (one per antigen), 'shared' (one for all antigens) or 'file' (uploaded, then per antigen).
    * Each mode keeps its own store, so switching back and forth never loses what was entered. */
-  pmode: { mode: 'own', own: 'each', dataMethod: 'data' },
+  pmode: { mode: 'own', own: 'each', dataMethod: 'em' },
   priEach: {}, shared: null, priData: {}, priDataKey: null, priorFileName: null, prevSide: {},
   priorMsg: null, undo: null, priVersion: 0,
   settings: { chains: 4, warmup: 1000, iter: 1000, seed: 1 },
   cfg: { dMu0: 0.25, dMuR: 0.5, dSd: 0.25, narrow: 0.5, wide: 3, mu0Free: 1 },
-  thrPP: 2,
+  thrPP: 10,
   scenarios: [], scenAntigen: null, scenariosEdited: false, scSeq: 0, sensAll: null,
   fitCache: new Map(), fits: [], convGroup: null,
   sens: null, prev: null, prevSel: null, runSeq: 0, busy: null, allRun: null
@@ -4197,7 +4355,66 @@ function resetAnalysis() {
   S.sens = null; S.sensAll = null; S.prev = null; S.prevSel = null; S.prevTouched = false; S.scenarios = []; S.scenAntigen = null;
   covReset();
 }
-function setDataset(t, isExample, metaT) {
+/* SerolyzeR writes one file per normalisation type (RAU, nMFI, MFI): per plate as {plate}_{type}.csv,
+ * merged as merged_{type}_{timestamp}.csv with a plate_name column. Files are grouped by type and
+ * stacked; when a merged file is present for a type, the per-plate files of that type are not used. */
+const MEASURE_ORDER = ['RAU', 'nMFI', 'MFI', ''];
+const MEASURE_DESC = { RAU: 'relative antibody units from the standard curve', nMFI: 'MFI relative to a standard-curve dilution', MFI: 'median fluorescence intensity', '': 'values as in the file' };
+function detectMeasure(name) {
+  const base = String(name).replace(/\.[^.]+$/, '');
+  const hits = [...base.matchAll(/(?:^|[_\-. ])(rau|nmfi|mfi)(?=[_\-. ]|$)/gi)];
+  if (!hits.length) return '';
+  const m = hits[hits.length - 1][1].toLowerCase();
+  return m === 'rau' ? 'RAU' : m === 'nmfi' ? 'nMFI' : 'MFI';
+}
+function plateFromName(name, measure) {
+  let b = String(name).replace(/\.[^.]+$/, '');
+  if (measure) b = b.replace(new RegExp('[_\\-. ]' + measure + '$', 'i'), '');
+  return b;
+}
+function assembleData(files) {
+  const groups = new Map(), errors = [];
+  files.forEach((f) => {
+    let chk;
+    try { chk = checkDataTable(f.t); } catch (err) { errors.push(f.name + ': ' + err.message); return; }
+    const measure = detectMeasure(f.name);
+    if (!groups.has(measure)) groups.set(measure, []);
+    groups.get(measure).push({ name: f.name, t: f.t, chk, merged: !!chk.plate || /^merged[_\-]/i.test(f.name) });
+  });
+  const list = [];
+  MEASURE_ORDER.forEach((measure) => {
+    const items = groups.get(measure);
+    if (!items) return;
+    const use = items.some((x) => x.merged) ? items.filter((x) => x.merged) : items;
+    const ignored = items.filter((x) => !use.includes(x)).map((x) => x.name);
+    let table;
+    if (use.length === 1) table = use[0].t;
+    else {
+      const cols = [];
+      use.forEach((x) => x.t.header.forEach((c) => { if (c !== x.chk.id && c !== x.chk.plate && !cols.includes(c)) cols.push(c); }));
+      const header = ['plate_name', 'sample_name'].concat(cols), rows = [];
+      use.forEach((x) => {
+        const H = x.t.header, iId = H.indexOf(x.chk.id), iPl = x.chk.plate ? H.indexOf(x.chk.plate) : -1, idx = cols.map((c) => H.indexOf(c));
+        const plate = plateFromName(x.name, measure);
+        x.t.rows.forEach((r) => rows.push([iPl >= 0 ? r[iPl] : plate, r[iId]].concat(idx.map((i) => (i >= 0 ? r[i] : '')))));
+      });
+      table = { header, rows };
+    }
+    table.name = use.length === 1 ? use[0].name : use.length + ' files';
+    table.files = use.map((x) => x.name);
+    table.stacked = use.length > 1;
+    list.push({ measure, table, ignored });
+  });
+  return { list, errors };
+}
+function setMeasure(measure) {
+  const sets = S.measureSets, m = sets && sets.find((x) => x.measure === measure);
+  if (!m || S.busy) return;
+  S.measure = measure;
+  setDataset(m.table, false, S.meta, true);
+}
+function setDataset(t, isExample, metaT, keepMeasures) {
+  if (!keepMeasures) { S.measureSets = null; S.measure = null; S.dataNote = null; }
   const chk = checkDataTable(t);
   const metaChk = metaT ? checkMetaTable(metaT, t, chk.id) : null;
   cancelRuns();
@@ -4257,14 +4474,22 @@ function getData(ag, group) {
   const key = ag + '\u0001' + (group ? group.col + '=' + group.value : '');
   if (S.dataCache.has(key)) return S.dataCache.get(key);
   const t = S.ds, H = t.header, f = S.filt;
-  const iId = H.indexOf(S.idCol), iVal = H.indexOf(ag);
+  const iId = H.indexOf(S.idCol), iVal = H.indexOf(ag), iCtl = snapDivided(ag) ? H.indexOf(snapControl()) : -1;
+  const value = (r) => { const x = toNum(r[iVal]); if (iCtl < 0) return x; const c = toNum(r[iCtl]); return c > 0 ? x / c : NaN; };
   const re = idPattern();
   const dup = f.dropDup ? dupIds() : new Set();
   const useMeta = !!S.meta;
   const req = [...f.required].map(attrReader).filter(Boolean);
   const sub = f.subsetCol ? attrReader(f.subsetCol) : null;
   const grp = group ? attrReader(group.col) : null;
-  const st = { rows: 0, std: 0, dup: 0, noMeta: 0, missing: 0, subset: 0, nonFinite: 0 };
+  const st = { rows: 0, std: 0, dup: 0, noMeta: 0, missing: 0, subset: 0, nonFinite: 0, missingVal: 0, nonPos: 0, replaced: 0 };
+  // zero or negative values cannot be logged: leave them out, or replace them with half the smallest positive value of the antigen
+  let fillNonPos = NaN;
+  if (isLogT(f.transform) && f.nonPos === 'half') {
+    let mp = Infinity;
+    for (const r of t.rows) { const x = value(r); if (x > 0 && x < mp) mp = x; }
+    if (Number.isFinite(mp)) fillNonPos = mp / 2;
+  }
   const subCounts = new Map(), ids = [], raw = [], ys = [], rows = [];
   for (const r of t.rows) {
     st.rows++;
@@ -4280,8 +4505,14 @@ function getData(ag, group) {
       if (f.subsetExcluded.has(v)) { st.subset++; continue; }
     }
     if (grp && grp(r, m) !== group.value) continue;
-    const x = toNum(r[iVal]);
-    const yv = f.transform === 'log' ? Math.log(x) : x;
+    let x = value(r);
+    if (!Number.isFinite(x)) { st.nonFinite++; st.missingVal++; continue; }
+    if (isLogT(f.transform) && x <= 0) {
+      st.nonPos++;
+      if (!Number.isFinite(fillNonPos)) { st.nonFinite++; continue; }
+      x = fillNonPos; st.replaced++;
+    }
+    const yv = f.transform === 'log' ? Math.log(x) : f.transform === 'log10' ? Math.log10(x) : x;
     if (!Number.isFinite(yv)) { st.nonFinite++; continue; }
     ids.push(id); raw.push(x); ys.push(yv); rows.push(r);
   }
@@ -4302,7 +4533,34 @@ function metaLevels(col, cap) {
   }
   return [...lv].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 }
-function yLabel(ag) { return S.filt.transform === 'log' ? 'log(' + ag + ')' : ag; }
+/* SNAP-tag antigens can be divided by the control_SNAP bead of the same sample (relative fluorescence, as the RFI of O'Driscoll et al. 2025) */
+// the control bead: a column with SNAP and control in its name (control, ctrl, ctl, cntrl), e.g. control_SNAP or CTRL_SNAP
+function snapControl() { return S.ds ? S.ds.header.find((c) => /(control|cntrl|ctrl|ctl)/i.test(c) && /snap/i.test(c)) || null : null; }
+function snapAntigens() { const c = snapControl(); return c ? antigenCandidates().filter((a) => a !== c && /snap/i.test(a)) : []; }
+function snapDivided(ag) { const c = snapControl(); return !!(S.filt.snapDiv && c && ag !== c && /snap/i.test(ag)); }
+function isLogT(t) { return t === 'log' || t === 'log10'; }
+function yLabel(ag) { const v = snapDivided(ag) ? ag + ' / ' + snapControl() : ag; const t = S.filt.transform; return t === 'log10' ? 'log10(' + v + ')' : t === 'log' ? 'ln(' + v + ')' : v; }
+/* Switching between ln and log10 multiplies every value on the log scale by the same factor, so the
+ * priors set by hand (and their limits) are rescaled with it; the data-suggested ones are recomputed anyway */
+function rescalePriors(f) {
+  const r = (v) => (Number.isFinite(v) ? round4(v * f) : v);
+  const ents = [S.shared].concat(Object.values(S.priEach || {}), Object.values(S.priFile || {})).filter((e) => e && e.prior);
+  ents.forEach((e) => ['mu0', 'muR', 'sd0', 'sd1'].forEach((p) => {
+    e.prior[p + '_loc'] = r(e.prior[p + '_loc']); e.prior[p + '_scale'] = r(e.prior[p + '_scale']);
+    e.bounds[p + '_lower'] = r(e.bounds[p + '_lower']); e.bounds[p + '_upper'] = r(e.bounds[p + '_upper']);
+  }));
+  return ents.filter((e) => e.source).length;
+}
+function setTransform(v) {
+  const old = S.filt.transform;
+  if (v === old) return;
+  const f = old === 'log' && v === 'log10' ? 1 / Math.LN10 : old === 'log10' && v === 'log' ? Math.LN10 : null;
+  S.filt.transform = v;
+  S.priorMsg = null; S.undo = null;
+  if (f && rescalePriors(f)) setPriorMsg('Your priors were rescaled from ' + (old === 'log' ? 'ln' : 'log10') + ' to ' + (v === 'log' ? 'ln' : 'log10') + ' (locations, scales and limits ' + (f < 1 ? 'divided' : 'multiplied') + ' by 2.303).');
+  else if (!f) setPriorMsg('The scale changed: check that your priors match the new scale.');
+  filtersChanged();
+}
 function dataChanged() {
   S.dataVersion++;
   S.dataCache.clear();
@@ -4318,9 +4576,11 @@ function cloneEntry(e) { return { prior: Object.assign({}, e.prior), bounds: Obj
 function entryFilled(e) { return !!e && e.source !== null && FAMILY_KEYS[e.prior.family].some((k) => Number.isFinite(e.prior[k])); }
 function isShared() { return S.pmode.mode === 'own' && S.pmode.own === 'shared'; }
 function resetPriors(isExample) {
-  S.pmode = { mode: 'own', own: isExample ? 'shared' : 'each', dataMethod: 'data' };
-  S.priEach = {}; S.priData = {}; S.priDataKey = null; S.priorFileName = null; S.prevSide = {};
+  S.pmode = { mode: 'own', own: isExample ? 'shared' : 'each', dataMethod: 'em' };
+  S.priEach = {}; S.priFile = {}; S.priData = {}; S.priDataKey = null; S.priorFileName = null; S.prevSide = {};
   S.shared = isExample ? paperEntry() : emptyEntry();
+  // only the example starts with filled tables (the paper's priors); your own data starts empty
+  if (isExample) antigens().forEach((ag) => { S.priEach[ag] = paperEntry(); });
   S.priorMsg = null; S.undo = null;
   S.priVersion++;
 }
@@ -4328,24 +4588,103 @@ function resetPriors(isExample) {
 function entry(ag) {
   if (S.pmode.mode === 'data') return dataEntry(ag);
   if (isShared()) return S.shared;
-  if (!S.priEach[ag]) S.priEach[ag] = emptyEntry();
-  return S.priEach[ag];
+  const store = ownStore();
+  if (!store[ag]) store[ag] = emptyEntry();
+  return store[ag];
 }
-/* Suggested by the data: recomputed whenever the analysed data or the method change */
-function dataEntry(ag) {
-  const key = S.pmode.dataMethod + '|' + S.dataVersion;
+/* "One prior per antigen" and "Upload a prior table" keep separate values */
+function ownStore() {
+  if (S.pmode.own === 'file') return S.priFile || (S.priFile = {});
+  return S.priEach;
+}
+/* Suggested by the data (EM fit): recomputed whenever the analysed data change.
+ * While runEMJob is working through the antigens, the ones not done yet return an empty, pending entry. */
+function emKey() {
+  const key = 'em|' + S.dataVersion;
   if (S.priDataKey !== key) { S.priData = {}; S.priDataKey = key; }
-  const side = prevSide(ag);
-  if (!S.priData[ag] || S.priData[ag].side !== side) {
-    const e = emptyEntry(), y = getData(ag).y;
-    e.side = side;
-    if (y.length >= 10) { const r = priorFromMethod(S.pmode.dataMethod, y, side); e.prior = r.prior; e.bounds = r.bounds; e.source = S.pmode.dataMethod; if (r.em) { e.em = r.em; e.emAlt = r.emAlt; } }
-    else e.tooFew = true;
-    S.priData[ag] = e;
-  }
-  return S.priData[ag];
+  return key;
 }
-function priorComplete(P) { return !!P && FAMILY_KEYS[P.family].every((k) => Number.isFinite(P[k])); }
+function computeDataEntry(ag) {
+  const e = emptyEntry(), y = getData(ag).y;
+  e.side = 'low';
+  if (y.length >= 10) { const r = priorFromMethod('em', y, 'low'); e.prior = r.prior; e.bounds = r.bounds; e.source = 'em'; e.em = r.em; e.emAlt = r.emAlt; }
+  else e.tooFew = true;
+  S.priData[ag] = e;
+  return e;
+}
+/* The prior the "suggested by the data" mode uses: each antigen's own EM prior, or one for all antigens */
+function dataEntry(ag) {
+  if (S.pmode.dataShared) return sharedDataEntry();
+  return rawDataEntry(ag);
+}
+/* Median, parameter by parameter, of the per-antigen EM priors; limits wide enough for every antigen */
+function medianEntry(list) {
+  const med = (vals) => { const v = vals.filter(Number.isFinite).sort((a, b) => a - b); return v.length ? round4(v[Math.floor((v.length - 1) / 2)] / 2 + v[Math.ceil((v.length - 1) / 2)] / 2) : NaN; };
+  const e = emptyEntry(), P0 = list[0].prior;
+  e.prior = { family: P0.family };
+  FAMILY_KEYS[P0.family].forEach((k) => { e.prior[k] = med(list.map((x) => x.prior[k])); });
+  BOUND_KEYS.forEach((k) => {
+    const vals = list.map((x) => x.bounds[k]);
+    e.bounds[k] = vals.every((v) => v === vals[0]) ? vals[0] : (k.endsWith('_lower') ? Math.min(...vals) : Math.max(...vals));
+  });
+  return e;
+}
+function sharedDataEntry() {
+  const key = emKey() + '|' + antigens().join('\u0001');
+  if (S.priDataShared && S.priDataShared.key === key) return S.priDataShared.e;
+  const raw = antigens().map(rawDataEntry);
+  if (raw.some((e) => e.pending)) { const e = emptyEntry(); e.pending = true; return e; }
+  const ok = raw.filter((e) => e.source);
+  let e;
+  if (!ok.length) { e = emptyEntry(); e.tooFew = true; }
+  else { e = medianEntry(ok); e.source = 'em'; e.side = 'low'; e.sharedData = ok.length; }
+  S.priDataShared = { key, e };
+  return e;
+}
+function rawDataEntry(ag) {
+  const key = emKey();
+  if (S.priData[ag]) return S.priData[ag];
+  if (S.emJob && S.emJob.key === key) { const e = emptyEntry(); e.pending = true; return e; }
+  return computeDataEntry(ag);
+}
+function emMissing() { emKey(); return antigens().filter((ag) => !S.priData[ag]); }
+/* Run the EM fits one antigen at a time, with a progress bar, then call then() */
+function runEMJob(then) {
+  if (S.emJob) { if (then) S.emJob.thens.push(then); return; }
+  const todo = emMissing();
+  if (!todo.length) { if (then) then(); return; }
+  const job = S.emJob = { key: S.priDataKey, todo, total: todo.length, done: 0, t0: performance.now(), thens: then ? [then] : [] };
+  const els = ['em-progress-data', 'em-progress-own'].map($);
+  const show = () => els.forEach((el) => {
+    el.hidden = false;
+    progressUI(el, job.done, job.total, job.t0);
+    el.appendChild(document.createTextNode(' · EM fit ' + Math.min(job.done + 1, job.total) + ' of ' + job.total + (job.todo[job.done] ? ' (' + job.todo[job.done] + ')' : '')));
+  });
+  const finish = () => { if (S.emJob === job) S.emJob = null; els.forEach((el) => { el.hidden = true; el.textContent = ''; }); };
+  show();
+  const step = () => {
+    if (S.emJob !== job) return;
+    if (job.key !== emKey()) { finish(); runEMJob(() => job.thens.forEach((f) => f())); return; }   // the data changed: start again
+    const ag = job.todo[job.done];
+    if (ag && !S.priData[ag]) computeDataEntry(ag);
+    job.done++;
+    show();
+    if (job.done < job.total) { setTimeout(step, 0); return; }
+    finish();
+    priorsChanged();
+    job.thens.forEach((f) => f());
+  };
+  setTimeout(step, 40);   // let the bar paint first
+}
+/* A fixed parameter is held at a value instead of sampled: pi at P.pi_fix, the others at their location */
+function isFixed(P, p) { return !!(P && P.fix && P.fix[p]); }
+function anyFixed(P) { return !!(P && P.fix && Object.keys(P.fix).some((p) => P.fix[p])); }
+function fixedValue(P, p) { return p === 'pi' ? P.pi_fix : P[p + '_loc']; }
+function keyNeeded(P, k) { const p = k.split('_')[0]; return !isFixed(P, p) || (p !== 'pi' && k === p + '_loc'); }
+function fixSig(P) { return anyFixed(P) ? JSON.stringify([Object.keys(P.fix).filter((p) => P.fix[p]).sort(), P.pi_fix]) : ''; }
+function priorComplete(P) {
+  return !!P && FAMILY_KEYS[P.family].every((k) => !keyNeeded(P, k) || Number.isFinite(P[k])) && (!isFixed(P, 'pi') || (P.pi_fix > 0 && P.pi_fix < 1));
+}
 function hasPrior(ag) { const e = entry(ag); return e.source !== null && priorComplete(e.prior) && validatePrior(e.prior, e.bounds).length === 0; }
 
 function dataStats(y) {
@@ -4439,18 +4778,24 @@ function validatePrior(P, B) {
   const errs = [];
   if (!P || !FAMILY_KEYS[P.family]) return ['no prior'];
   FAMILY_KEYS[P.family].forEach((k) => {
-    if (!Number.isFinite(P[k])) errs.push(KEY_LABEL[k] + ' is missing');
+    if (!keyNeeded(P, k)) return;
+    if (!Number.isFinite(P[k])) errs.push(KEY_LABEL[k] + (isFixed(P, k.split('_')[0]) ? ' (the fixed value)' : '') + ' is missing');
     else if (POSITIVE_KEYS.has(k) && !(P[k] > 0)) errs.push(KEY_LABEL[k] + ' must be > 0');
   });
+  if (isFixed(P, 'pi') && !(P.pi_fix > 0 && P.pi_fix < 1)) errs.push('the fixed prevalence must be between 0 and 1 (for example 0.15)');
+  if (BASE_PARS.every((p) => isFixed(P, p))) errs.push('every parameter is fixed: leave at least one free');
+  ['muR', 'sd0', 'sd1'].forEach((p) => { if (isFixed(P, p) && Number.isFinite(P[p + '_loc']) && !(P[p + '_loc'] > 0)) errs.push('the fixed value of ' + p + ' must be > 0'); });
   ['mu0', 'muR', 'sd0', 'sd1'].forEach((p) => {
+    if (isFixed(P, p)) return;   // limits do not apply to a fixed parameter
     const lo = B[p + '_lower'], hi = B[p + '_upper'];
     if (Number.isNaN(lo) || Number.isNaN(hi)) errs.push(p + ' bounds must be numbers or Inf');
     else if (!(hi > lo)) errs.push(p + ' upper bound must exceed its lower bound');
   });
-  if (!(B.muR_lower >= 0)) errs.push('muR lower bound must be ≥ 0');
-  if (!(B.sd0_lower >= 0)) errs.push('sd0 lower bound must be ≥ 0');
-  if (!(B.sd1_lower >= 0)) errs.push('sd1 lower bound must be ≥ 0');
+  if (!isFixed(P, 'muR') && !(B.muR_lower >= 0)) errs.push('muR lower bound must be ≥ 0');
+  if (!isFixed(P, 'sd0') && !(B.sd0_lower >= 0)) errs.push('sd0 lower bound must be ≥ 0');
+  if (!isFixed(P, 'sd1') && !(B.sd1_lower >= 0)) errs.push('sd1 lower bound must be ≥ 0');
   if (P.family === 'normal') ['mu0', 'muR', 'sd0', 'sd1'].forEach((p) => {
+    if (isFixed(P, p)) return;
     const loc = P[p + '_loc'];
     if (Number.isFinite(loc) && (loc <= B[p + '_lower'] || loc >= B[p + '_upper'])) errs.push(p + ' location must lie inside its bounds');
   });
@@ -4472,11 +4817,10 @@ function priorDraws(P, B, n) {
   let i = 0, tries = 0;
   while (i < n && tries < n * 200) {
     tries++;
-    const ga = r.g(P.pi_a), gb = r.g(P.pi_b), pi = ga / (ga + gb);
-    const mu0 = tnorm(P.mu0_loc, P.mu0_scale, B.mu0_lower, B.mu0_upper);
-    const muR = tnorm(P.muR_loc, P.muR_scale, B.muR_lower, B.muR_upper);
-    const sd0 = tnorm(P.sd0_loc, P.sd0_scale, B.sd0_lower, B.sd0_upper);
-    const sd1 = tnorm(P.sd1_loc, P.sd1_scale, B.sd1_lower, B.sd1_upper);
+    let pi;
+    if (isFixed(P, 'pi')) pi = P.pi_fix; else { const ga = r.g(P.pi_a), gb = r.g(P.pi_b); pi = ga / (ga + gb); }
+    const tn = (p) => (isFixed(P, p) ? P[p + '_loc'] : tnorm(P[p + '_loc'], P[p + '_scale'], B[p + '_lower'], B[p + '_upper']));
+    const mu0 = tn('mu0'), muR = tn('muR'), sd0 = tn('sd0'), sd1 = tn('sd1');
     out.pi[i] = pi; out.mu0[i] = mu0; out.muR[i] = muR; out.sd0[i] = sd0; out.sd1[i] = sd1;
     i++;
   }
@@ -4575,7 +4919,7 @@ function readSettings() {
 }
 function fitKey(ag, group, P, B, st, cm) {
   const k = [S.dataVersion, ag, group ? group.col + '=' + group.value : '', P.family,
-    FAMILY_KEYS[P.family].map((k) => P[k]), BOUND_KEYS.map((k) => boundText(B[k])), st.chains, st.warmup, st.iter, st.seed];
+    FAMILY_KEYS[P.family].map((k) => P[k]), BOUND_KEYS.map((k) => boundText(B[k])), st.chains, st.warmup, st.iter, st.seed, fixSig(P)];
   if (cm && cm.cols && cm.cols.length) k.push('model:' + covModelSig(cm));
   return JSON.stringify(k);
 }
@@ -4614,10 +4958,11 @@ async function fitModelCov(ag, P, B, st, onProg, cm) {
   fit.covModel = { id: cm.id, cols: cm.cols.slice(), label: covModelLabel(cm), dropped: des.dropped, G };
   fit.cells = per.cells.map((c, g) => {
     const arrs = res.map((r) => r.draws[cellName(g)]), a = Stats.concat(arrs), s = Float64Array.from(a).sort(), dg = Stats.diagnostics(arrs);
-    return { labels: c.labels, n: c.n, med: Stats.quantileSorted(s, 0.5), lo: Stats.quantileSorted(s, 0.025), hi: Stats.quantileSorted(s, 0.975), sd: Stats.sd(a), rhat: dg.rhat, ess: dg.ess };
+    return { fixed: s[0] === s[s.length - 1], labels: c.labels, n: c.n, med: Stats.quantileSorted(s, 0.5), lo: Stats.quantileSorted(s, 0.025), hi: Stats.quantileSorted(s, 0.975), sd: Stats.sd(a), rhat: dg.rhat, ess: dg.ess };
   });
   // the cell prevalences count in the sampler check too
   fit.cells.forEach((c) => {
+    if (c.fixed) return;
     const nm = 'pi[' + c.labels.join(', ') + ']';
     if (!(c.rhat <= fit.maxRhat)) { fit.maxRhat = Number.isFinite(c.rhat) ? c.rhat : Infinity; fit.rhatParX = nm; }
     if (c.ess < fit.minEss) { fit.minEss = c.ess; fit.essParX = nm; }
@@ -4649,17 +4994,18 @@ function summarise(res, P, B, d) {
     const a = Stats.concat(ch[p]), sorted = Float64Array.from(a).sort();
     const dg = Stats.diagnostics(ch[p]);
     const q = (x) => Stats.quantileSorted(sorted, x);
-    s[p] = { med: q(0.5), lo: q(0.025), hi: q(0.975), q001: q(0.001), q999: q(0.999),
+    s[p] = { fixed: sorted[0] === sorted[sorted.length - 1], med: q(0.5), lo: q(0.025), hi: q(0.975), q001: q(0.001), q999: q(0.999),
              mean: Stats.mean(a), sd: Stats.sd(a), rhat: dg.rhat, ess: dg.ess,
              chainMed: ch[p].map((c) => Stats.quantile(c, 0.5)) };
     all[p] = a;
   });
   let maxRhat = 0, minEss = Infinity;
-  BASE_PARS.forEach((p) => { if (s[p].rhat > maxRhat) maxRhat = s[p].rhat; if (s[p].ess < minEss) minEss = s[p].ess; });
+  BASE_PARS.forEach((p) => { if (s[p].fixed) return; if (s[p].rhat > maxRhat) maxRhat = s[p].rhat; if (s[p].ess < minEss) minEss = s[p].ess; });
   const divergences = res.reduce((a, r) => a + r.divergences, 0);
   const treedepth = res.reduce((a, r) => a + r.maxTreedepthHits, 0);
   const nearBound = [];
   ['mu0', 'muR', 'sd0', 'sd1'].forEach((p) => {
+    if (s[p].fixed) return;   // fixed
     const lo = B[p + '_lower'], hi = B[p + '_upper'], a = all[p];
     const tol = (Number.isFinite(lo) && Number.isFinite(hi)) ? 0.005 * (hi - lo) : 0.05 * s[p].sd;
     let nl = 0, nh = 0;
@@ -4759,6 +5105,7 @@ function fitChecks(fit) {
   const extra = {};
   let minTail = Infinity, tailPar = null, essPar = null, rhatPar = null;
   BASE_PARS.forEach((p) => {
+    if (fit.s[p].fixed) { extra[p] = { tailEss: NaN, mcse: 0, fixed: true }; return; }   // fixed, not sampled
     const t = Stats.essTail(fit.chains[p]);
     extra[p] = { tailEss: t, mcse: Stats.mcseQuantile(fit.chains[p], 0.5) };
     if (t < minTail) { minTail = t; tailPar = p; }
@@ -4902,13 +5249,13 @@ function drawHistogram(box, opt) {
   });
   if (opt.corner && !mini) sv('text', { x: W - m.r - 4, y: m.t + 10, 'text-anchor': 'end', class: 'axis-title', text: opt.corner }, svg);
   if (!mini) {
-    const isLog = S.filt.transform === 'log';
+    const tf = S.filt.transform, back = tf === 'log' ? Math.exp : tf === 'log10' ? (v) => Math.pow(10, v) : null;
     for (let k = 0; k < nb; k++) {
       const a = mn + k * bw, b = a + bw, x0 = X(a), x1 = X(b);
       const hit = sv('rect', { x: x0, y: m.t, width: x1 - x0, height: Y(0) - m.t, class: 'hit', tabindex: -1 }, svg);
       hoverable(hit, (opt.xLabel || 'value') + ' ' + num(a, 2) + ' to ' + num(b, 2), () => {
         const rows = [['Samples', fmtInt(counts[k])]];
-        if (isLog) rows.push(['Original scale', numAuto(Math.exp(a)) + ' – ' + numAuto(Math.exp(b))]);
+        if (back) rows.push(['Original scale', numAuto(back(a)) + ' – ' + numAuto(back(b))]);
         if (opt.extraTip) opt.extraTip((a + b) / 2).forEach((r) => rows.push(r));
         return rows;
       });
@@ -5067,8 +5414,23 @@ function renderData() {
   // data file status
   const nAg = antigenCandidates().length;
   if (S.dataErr) statusLine($('data-info'), 'crit', S.dataErr);
-  else statusLine($('data-info'), 'good', (t.isExample ? 'Example data' : t.name) + ': ' + fmtInt(t.rows.length) + ' rows, ' + nAg + ' antigen column' + (nAg === 1 ? '' : 's') +
-    (S.plateCol ? ', plus ' + S.plateCol + ' (used as metadata)' : '') + '.');
+  else statusLine($('data-info'), 'good', (t.isExample ? 'Example data' : t.name) + (S.measure ? ' (' + S.measure + ')' : '') + ': ' + fmtInt(t.rows.length) + ' rows, ' + nAg + ' antigen column' + (nAg === 1 ? '' : 's') +
+    (t.stacked ? ', stacked from ' + listText(t.files) : '') + (S.plateCol ? ', plus ' + S.plateCol + ' (used as metadata)' : '') + '.');
+  // measure: one SerolyzeR normalisation type at a time
+  const sets = S.measureSets || [], mrow = $('measure-row');
+  mrow.hidden = !(sets.length > 1 || (sets.length === 1 && sets[0].measure) || S.dataNote);
+  if (!mrow.hidden) {
+    const msel = $('m-measure');
+    fillSelect(msel, sets.map((x) => x.measure), S.measure, Object.fromEntries(sets.map((x) => [x.measure, (x.measure || 'Values') + ' · ' + MEASURE_DESC[x.measure]])));
+    msel.disabled = sets.length < 2 || !!S.busy;
+    msel.closest('label').hidden = !sets.length;
+    const cur = sets.find((x) => x.measure === S.measure);
+    const bits = [];
+    if (sets.length > 1) bits.push('Found ' + listText(sets.map((x) => x.measure || 'unlabelled values')) + '. One is analysed at a time; switching resets the priors and results.');
+    if (cur && cur.ignored.length) bits.push('Per-plate files not used because a merged file covers them: ' + listText(cur.ignored) + '.');
+    if (S.dataNote) bits.push(S.dataNote);
+    $('measure-hint').textContent = bits.join(' ');
+  }
   // metadata status
   const js = joinSummary();
   if (S.metaErr) statusLine($('meta-info'), 'crit', S.metaErr);
@@ -5080,7 +5442,7 @@ function renderData() {
   $('m-dup').checked = S.filt.dropDup;
   $('m-reqmeta').checked = S.filt.requireMeta;
   $('reqmeta-wrap').hidden = !S.meta;
-  $('m-transform').value = S.filt.transform;
+  $('m-transform').value = S.filt.transform; $('m-transform2').value = S.filt.transform;
   const meta = metaCols(), box = $('m-required');
   box.textContent = '';
   if (!meta.length) box.appendChild(h('span', { class: 'hint', text: 'Load a metadata file to use this.' }));
@@ -5100,18 +5462,27 @@ function renderData() {
   renderFilterSummary();
   renderFunnel();
 }
+/* Step 1: one button per antigen column; only the selected ones are analysed in the steps that follow */
+function agPillCands() { return antigenCandidates().filter((c) => S.ds.numeric.has(c) || S.agCols.has(c)); }
 function renderAntigenCols() {
-  const t = S.ds, cand = antigenCandidates(), box = $('ag-cols');
+  const box = $('ag-pills'), cand = agPillCands();
   box.textContent = '';
   cand.forEach((c) => {
-    const numeric = t.numeric.has(c);
-    const cb = h('input', { type: 'checkbox', checked: S.agCols.has(c), onchange: (e) => {
-      if (e.target.checked) S.agCols.add(c); else S.agCols.delete(c);
-      if (!antigens().includes(S.antigen)) S.antigen = antigens()[0] || null;
-      filtersChanged();
-    } });
-    box.appendChild(h('label', { class: 'chip' }, cb, c, numeric ? null : h('span', { class: 'n', text: 'not numeric' })));
+    const on = S.agCols.has(c);
+    box.appendChild(h('button', { type: 'button', class: 'ag-btn' + (on ? ' on' : ''), 'aria-pressed': on ? 'true' : 'false', text: c, disabled: !!S.busy,
+      title: S.busy ? 'Wait for the current run to finish' : (on ? 'Leave ' + c + ' out' : 'Include ' + c), onclick: () => setAgIncluded([c], !on) }));
   });
+  $('ag-count').textContent = cand.length ? S.agCols.size + ' of ' + cand.length + ' selected' : '';
+  $('ag-pick-head').hidden = !cand.length;
+}
+function setAgIncluded(list, on) {
+  if (S.busy) return;
+  list.forEach((c) => { if (on) S.agCols.add(c); else S.agCols.delete(c); if (S.runOff) S.runOff.delete(c); });
+  // the fits of the other antigens stay valid; results that combine antigens are cleared
+  S.sens = null; S.sensAll = null; S.prev = null;
+  if (S.cov) S.cov.run = null;
+  if (!antigens().includes(S.antigen)) S.antigen = antigens()[0] || null;
+  renderAll();
 }
 /* ---------- antigen selectors shared by steps 2, 3 and 5 ---------- */
 function renderAntigenSelects() {
@@ -5164,15 +5535,12 @@ function addExclusions() {
   $('excl-input').value = '';
   filtersChanged();
 }
-const ADV_TABS = ['tab-ag', 'tab-excl', 'tab-req', 'tab-sub', 'tab-scale'];
+const ADV_TABS = ['tab-excl', 'tab-req', 'tab-sub', 'tab-scale'];
 function sameExclusions(a, b) { return a.length === b.length && a.every((e, i) => e.type === b[i].type && e.value === b[i].value); }
 /* Settings that differ from the defaults, by tab */
 function advChanges() {
-  const f = S.filt, t = S.ds;
-  const unticked = antigenCandidates().filter((c) => t.numeric.has(c) && !S.agCols.has(c)).length;
-  const added = antigenCandidates().filter((c) => !t.numeric.has(c) && S.agCols.has(c)).length;
+  const f = S.filt;
   return {
-    'tab-ag': unticked + added ? 1 : 0,
     'tab-excl': (sameExclusions(f.exclude, DEFAULT_EXCLUDE) ? 0 : 1) + (f.dropDup ? 0 : 1) + (S.meta && !f.requireMeta ? 1 : 0),
     'tab-req': f.required.size ? 1 : 0,
     'tab-sub': f.subsetCol ? 1 : 0,
@@ -5203,9 +5571,9 @@ function resetAdvanced() {
   const f = S.filt;
   f.exclude = DEFAULT_EXCLUDE.map((e) => Object.assign({}, e));
   f.dropDup = true; f.requireMeta = true; f.required = new Set();
-  f.subsetCol = ''; f.subsetExcluded = new Set(); f.transform = 'log';
-  S.agCols = new Set(antigenCandidates().filter((c) => S.ds.numeric.has(c)));
-  if (!antigens().includes(S.antigen)) S.antigen = antigens()[0] || null;
+  f.subsetCol = ''; f.subsetExcluded = new Set();
+  if (f.transform === 'log10') rescalePriors(Math.LN10);
+  f.transform = 'log';
   filtersChanged();
 }
 function renderSubsetValues() {
@@ -5227,9 +5595,8 @@ function renderFunnel() {
   const note = (kind, text) => notes.push([kind, text]);
   const cand = antigenCandidates();
   const nonNum = cand.filter((c) => !S.ds.numeric.has(c) && !S.agCols.has(c));
-  const unticked = cand.filter((c) => S.ds.numeric.has(c) && !S.agCols.has(c));
   if (!ags.length) {
-    el.appendChild(flagEl('crit', '!', 'No antigen columns to analyse. Tick at least one under Advanced settings › Antigens.'));
+    el.appendChild(flagEl('crit', '!', 'No antigens selected. Select at least one above.'));
     return;
   }
   // the filters are the same for every antigen; only unusable values differ
@@ -5238,7 +5605,7 @@ function renderFunnel() {
   const ns = ds.map((d) => d.y.length), nMax = Math.max(...ns);
   el.appendChild(h('b', { text: pass ? 'Ready: ' : 'No samples left: ' }));
   el.appendChild(document.createTextNode(fmtInt(pass) + ' sample' + (pass === 1 ? '' : 's') + ' × ' + ags.length + ' antigen' + (ags.length === 1 ? '' : 's') +
-    (S.filt.transform === 'log' ? ', log scale.' : ', no transform.')));
+    (S.filt.snapDiv && snapAntigens().length ? ', SNAP antigens divided by ' + snapControl() : '') + (S.filt.transform === 'log' ? ', natural log scale.' : S.filt.transform === 'log10' ? ', log10 scale.' : ', no transform.')));
   // what was left out, and anything that needs attention
   if (st.std) note('info', fmtInt(st.std) + ' row' + (st.std === 1 ? '' : 's') + ' excluded by name (standards, blanks and any other entries under Exclude samples).');
   if (st.dup) note('warn', fmtInt(st.dup) + ' row' + (st.dup === 1 ? '' : 's') + ' dropped because their sample_name appears more than once.');
@@ -5252,15 +5619,42 @@ function renderFunnel() {
   }
   if (st.missing) note('info', fmtInt(st.missing) + ' left out for missing ' + [...S.filt.required].join(', ') + '.');
   if (st.subset) note('info', fmtInt(st.subset) + ' outside the subset of ' + S.filt.subsetCol + '.');
-  const why = S.filt.transform === 'log' ? 'missing, zero or negative values' : 'missing values';
-  ags.forEach((ag, k) => { if (ns[k] < pass) note('info', ag + ' loses ' + fmtInt(pass - ns[k]) + ' sample' + (pass - ns[k] === 1 ? '' : 's') + ' with ' + why + ', so it uses ' + fmtInt(ns[k]) + '.'); });
   if (nonNum.length) note('info', nonNum.join(', ') + (nonNum.length === 1 ? ' is' : ' are') + ' not numeric and ' + (nonNum.length === 1 ? 'was' : 'were') + ' left out.');
-  if (unticked.length) note('info', 'Not analysed (unticked): ' + unticked.join(', ') + '.');
   const bad = S.filt.exclude.filter((e) => !compileExclusion(e).ok).length;
   if (bad) note('warn', bad + ' entr' + (bad === 1 ? 'y' : 'ies') + ' under Exclude samples ' + (bad === 1 ? 'is' : 'are') + ' not valid and ignored.');
   const few = ags.filter((ag, k) => ns[k] < 30);
   if (few.length) note('crit', 'Too few samples to fit a mixture reliably: ' + few.join(', ') + '.');
   notes.forEach(([kind, text]) => notesEl.appendChild(h('li', null, kind === 'info' ? h('span', { class: 'hint', text }) : flagEl(kind, '!', text))));
+  // one warning for values that cannot be used, with a choice for zero and negative values
+  const perAg = (key) => ags.map((ag, k) => [ag, ds[k].st[key]]).filter((a) => a[1] > 0);
+  const listAg = (a) => a.slice(0, 6).map(([ag, n]) => ag + ' ' + fmtInt(n)).join(', ') + (a.length > 6 ? ' and ' + (a.length - 6) + ' more' : '');
+  const sum = (a) => a.reduce((x, y) => x + y[1], 0);
+  const miss = perAg('missingVal'), np = isLogT(S.filt.transform) ? perAg('nonPos') : [];
+  if (miss.length || np.length) {
+    const parts = [];
+    if (np.length) parts.push(fmtInt(sum(np)) + ' zero or negative value' + (sum(np) === 1 ? '' : 's') + ', which cannot be log-transformed (' + listAg(np) + ')');
+    if (miss.length) parts.push(fmtInt(sum(miss)) + ' missing value' + (sum(miss) === 1 ? '' : 's') + ', always left out (' + listAg(miss) + ')');
+    const all = np.concat(miss);
+    const li = h('li', { class: 'np-warn', title: all.length > 6 ? all.map(([ag, n]) => ag + ': ' + n).join('\n') : null },
+      flagEl('warn', '!', 'Some values cannot be used: ' + listText(parts) + '.'));
+    if (np.length) {
+      const sel = h('select', { 'aria-label': 'What to do with zero or negative values' },
+        h('option', { value: 'drop', text: 'Leave them out' }),
+        h('option', { value: 'half', text: 'Replace with half the smallest positive value' }));
+      sel.value = S.filt.nonPos === 'half' ? 'half' : 'drop';
+      sel.addEventListener('change', () => { S.filt.nonPos = sel.value; filtersChanged(); });
+      li.appendChild(h('label', { class: 'inline-label' }, 'Zero or negative values:', sel));
+    }
+    notesEl.appendChild(li);
+  }
+  const snaps = snapAntigens(), ctl = snapControl();
+  if (snaps.length) {
+    const cb = h('input', { type: 'checkbox', checked: !!S.filt.snapDiv });
+    cb.addEventListener('change', () => { S.filt.snapDiv = cb.checked; filtersChanged(); });
+    notesEl.appendChild(h('li', { class: 'np-warn' }, h('label', { class: 'inline-label' }, cb,
+      'Divide the MFI of the ' + snaps.length + ' antigen' + (snaps.length === 1 ? '' : 's') + ' with SNAP in the name by ' + ctl + ' of the same sample (relative fluorescence)'),
+      h('span', { class: 'hint', title: snaps.join(', '), text: snaps.length > 4 ? snaps.slice(0, 4).join(', ') + ' and ' + (snaps.length - 4) + ' more' : snaps.join(', ') })));
+  }
   void nMax;
 }
 function filtersChanged() {
@@ -5289,7 +5683,7 @@ const WARNINGS = {
     title: 'Limitations of the EM fit',
     items: [
       'A plain mixture fit has no idea which group is which beyond “lower mean = negative”. With little separation it can split one skewed group in two, or put a long tail into a wide second group.',
-      'EM finds a local maximum, so the result can depend on the start (the prevalence side you set). The table flags antigens where the other start fits clearly better.',
+      'EM finds a local maximum, so the result can depend on the start. The table flags antigens where a start above 50% fits clearly better.',
       'Two normal groups on the log scale are assumed. Skewed or multi-peaked backgrounds pull the means and SDs.',
       'The fit uses exactly the data the model is then fitted to, so these priors centre the model on its own maximum-likelihood answer.'
     ]
@@ -5315,10 +5709,10 @@ const HOW = {
 };
 HOW.em = [
   'Fits a two-component normal mixture to the antigen’s values by maximum likelihood, with the EM algorithm (Dempster, Laird and Rubin 1977) and no priors: each step assigns every sample a probability of being positive, then re-estimates the two means, the two SDs and the mixing proportion from those probabilities, until the log-likelihood stops changing.',
-  'Start: prevalence below 50% starts with 20% of samples in the upper group (negative mean at the 40th percentile, positive at the 95th); above 50% starts with 80% (10th and 60th percentiles). EM can end in different places from different starts, so it is also run from the other start; if that gives a clearly better fit on the other side of 50%, the table says so.',
+  'Start: 20% of samples in the upper group (negative mean at the 40th percentile, positive at the 95th), as every antigen is assumed to have a prevalence below 50%. EM can end in different places from different starts, so it is also run from a start with 80% in the upper group; if that gives a clearly better fit above 50%, the table says so.',
   'The fitted negative mean, positive − negative gap and the two SDs become the locations of normal priors, with scale 0.25 for mu0, 0.75 for muR, 0.15 for sd0 and 0.4 for sd1. SDs are kept at 0.05 or more so a group cannot collapse onto one value.',
-  'Prevalence: pi ~ Beta(1, 5) when below 50%, Beta(5, 1) when above. The EM estimate of prevalence is shown in the table for comparison but is not put into the prior.',
-  'Limits as for the peak and tail rule, widened when a fitted value falls outside them.'
+  'Prevalence: pi ~ Beta(1, 5) (mean 17%). The EM estimate of prevalence is shown in the table for comparison but is not put into the prior.',
+  'Limits: mu0 between the floor of the smallest and the ceiling of the largest value; muR between 0.1 and max(1, range); sd0 and sd1 between 0.05 and max(3, range / 2), rounded up; each widened when a fitted value falls outside it.'
 ];
 const SHARED_NOTE = 'One prior for every antigen assumes they all have the same background level and signal range. That is reasonable only when all antigens are on a common, background-corrected scale, such as the log(RFI) of O’Driscoll et al. (2025). Check each antigen in the plots below.';
 const PRIOR_LEGEND = [
@@ -5345,8 +5739,9 @@ function sourceLabel(e) {
   if (!e || !e.source) return '';
   let t;
   if (e.source === 'file') t = S.priorFileName ? 'From ' + S.priorFileName : METHOD_LABEL.file;
-  else if (DATA_METHODS.includes(e.source) && S.pmode.mode === 'own') t = 'Suggested by the data: ' + METHOD_SHORT[e.source].toLowerCase();
+  else if (DATA_METHODS.includes(e.source) && S.pmode.mode === 'own') t = 'Suggested by the data: ' + (e.source === 'em' ? 'EM fit' : METHOD_SHORT[e.source].toLowerCase());
   else t = METHOD_LABEL[e.source];
+  if (e.sharedData) t += ', median over ' + e.sharedData + ' antigen' + (e.sharedData === 1 ? '' : 's');
   return t + (e.edited ? ' (edited)' : '');
 }
 /* The entry the editor shows: the shared prior, or the selected antigen's */
@@ -5355,12 +5750,12 @@ function resetScenarios() { S.scenAntigen = null; S.scenariosEdited = false; }
 
 /* ---------- messages with a one-step undo for bulk changes ---------- */
 function setPriorMsg(text, undoable) { S.priorMsg = { text, undo: !!undoable }; }
-function snapshotPriors() { S.undo = structuredClone({ pmode: S.pmode, shared: S.shared, priEach: S.priEach, priorFileName: S.priorFileName }); }
+function snapshotPriors() { S.undo = structuredClone({ pmode: S.pmode, shared: S.shared, priEach: S.priEach, priFile: S.priFile || {}, priorFileName: S.priorFileName }); }
 function undoPriors() {
   const u = S.undo;
   if (!u) return;
   S.undo = null;
-  S.pmode = u.pmode; S.shared = u.shared; S.priEach = u.priEach; S.priorFileName = u.priorFileName;
+  S.pmode = u.pmode; S.shared = u.shared; S.priEach = u.priEach; S.priFile = u.priFile; S.priorFileName = u.priorFileName;
   setPriorMsg('Undone.');
   resetScenarios();
   priorsChanged();
@@ -5387,19 +5782,8 @@ function setPriorMode(mode, own) {
   m.mode = mode;
   if (own) m.own = own;
   S.undo = null; S.priorMsg = null;
-  // Each mode keeps its own values. A mode that is still empty starts from what was in use before.
-  if (mode === 'own' && m.own === 'shared') {
-    if (!entryFilled(S.shared) && cur && entryFilled(cur)) {
-      S.shared = cloneEntry(cur);
-      if (S.shared.source === 'file') S.shared.source = 'manual';
-      setPriorMsg('Started from the prior ' + S.antigen + ' had. Any change below applies to all antigens.');
-    }
-  } else if (mode === 'own' && !ags.some((ag) => entryFilled(S.priEach[ag]))) {
-    let n = 0;
-    before.forEach((e, ag) => { if (entryFilled(e)) { S.priEach[ag] = cloneEntry(e); n++; } });
-    if (n) setPriorMsg(n === ags.length ? 'Each antigen starts from the prior it had before. Edit any of them below.'
-      : n + ' of ' + ags.length + ' antigens start from the prior they had before. Edit any of them below.');
-  }
+  // Each mode keeps its own values and starts empty: use "Fill from the data" or type values in
+  void ags; void before; void cur;
   resetScenarios();
   priorsChanged();
 }
@@ -5407,15 +5791,45 @@ function clearPrior() {
   const shared = isShared();
   if (!shared && !S.antigen) return;
   snapshotPriors();
-  if (shared) S.shared = emptyEntry(); else S.priEach[S.antigen] = emptyEntry();
+  if (shared) S.shared = emptyEntry(); else ownStore()[S.antigen] = emptyEntry();
   setPriorMsg('Cleared the prior' + (shared ? '.' : ' for ' + S.antigen + '.'), true);
+  resetScenarios();
+  priorsChanged();
+}
+/* Fill "One prior per antigen" (every antigen) or "Same prior for all antigens" (the median of the
+ * per-antigen suggestions) with priors suggested by the data, using the rule chosen under that mode */
+function fillFromData() {
+  if (S.emJob || emMissing().length) { $('btn-fill-data').disabled = true; runEMJob(() => { $('btn-fill-data').disabled = false; fillFromData(); }); return; }
+  const shared = isShared(), ags = antigens(), mth = 'em';
+  const sug = ags.map((ag) => [ag, rawDataEntry(ag)]).filter(([, e]) => e.source);
+  if (!sug.length) { setPriorMsg('Too few samples to suggest priors from the data.'); renderPriorMsg(); return; }
+  snapshotPriors();
+  if (shared) {
+    const e = medianEntry(sug.map(([, x]) => x));
+    e.source = mth;
+    S.shared = e;
+    setPriorMsg('Filled with the median of the priors suggested by the data (' + METHOD_SHORT[mth] + ') over ' + sug.length + ' antigen' + (sug.length === 1 ? '' : 's') + '. Check them against what you know about the assay.', true);
+  } else {
+    sug.forEach(([ag, e]) => { S.priEach[ag] = cloneEntry(e); });
+    setPriorMsg('Filled ' + sug.length + ' of ' + ags.length + ' antigens with priors suggested by the data (' + METHOD_SHORT[mth] + '). Check each one against what you know about the assay.', true);
+  }
   resetScenarios();
   priorsChanged();
 }
 function dataToOwn() {
   snapshotPriors();
+  if (S.pmode.dataShared) {
+    const e = sharedDataEntry();
+    if (!e.source) return;
+    S.shared = cloneEntry(e); S.shared.sharedData = e.sharedData;
+    S.pmode.mode = 'own'; S.pmode.own = 'shared';
+    setPriorMsg('Copied the suggested prior to “Same prior for all antigens”. It is now yours to change.', true);
+    resetScenarios();
+    priorsChanged();
+    return;
+  }
   let n = 0;
-  antigens().forEach((ag) => { const e = dataEntry(ag); if (e.source) { S.priEach[ag] = cloneEntry(e); n++; } });
+  antigens().forEach((ag) => { const e = rawDataEntry(ag); if (e.source) { S.priEach[ag] = cloneEntry(e); n++; } });
   S.pmode.mode = 'own'; S.pmode.own = 'each';
   setPriorMsg('Copied the suggested values for ' + n + ' antigen' + (n === 1 ? '' : 's') + ' to “One prior per antigen”. They are now yours to change.', true);
   resetScenarios();
@@ -5425,6 +5839,7 @@ function dataToOwn() {
 /* ---------- rendering ---------- */
 function renderPriors(fromEdit) {
   const m = S.pmode;
+  if (m.mode === 'data' && S.ds && !S.emJob && emMissing().length) runEMJob();
   document.querySelectorAll('input[name=pmode]').forEach((r) => { r.checked = r.value === m.mode; r.closest('.mode-card').classList.toggle('on', r.checked); });
   document.querySelectorAll('input[name=pown]').forEach((r) => { r.checked = r.value === m.own; r.closest('.seg-opt').classList.toggle('on', r.checked); });
   $('panel-own').hidden = m.mode !== 'own';
@@ -5445,6 +5860,8 @@ function renderOwnPanel(fromEdit) {
   $('editor-shared-title').hidden = !shared;
   $('editor-shared-title').textContent = 'Prior for all ' + (ags.length === 1 ? '' : ags.length + ' ') + 'antigens';
   $('btn-clear-prior').disabled = !e || !FAMILY_KEYS[e.prior.family].some((k) => Number.isFinite(e.prior[k]));
+  $('btn-fill-data').hidden = m.own === 'file';
+  $('btn-fill-data').textContent = shared ? 'Fill from the data' : 'Fill all antigens from the data';
   // where the values come from
   const src = $('prior-source');
   src.textContent = '';
@@ -5454,8 +5871,9 @@ function renderOwnPanel(fromEdit) {
       if (S.ds.isExample && shared) src.appendChild(h('span', { class: 'hint', text: 'Applied to every antigen, as in the paper.' }));
     } else if (e.source) src.appendChild(h('span', { class: 'badge' }, sourceLabel(e)));
     else src.appendChild(h('span', { class: 'hint', text: shared
-      ? 'No prior set yet. Type values into the table below.'
-      : 'No prior set for ' + S.antigen + ' yet. Type values into the table below' + (m.own === 'file' ? ', or upload a prior table above.' : '.') }));
+      ? 'No prior set yet. Type values into the table below, or use “Fill from the data”.'
+      : m.own === 'file' ? 'No prior set for ' + S.antigen + ' yet. Upload a prior table above, or type values into the table below.'
+      : 'No prior set for ' + S.antigen + ' yet. Type values into the table below, or use “Fill all antigens from the data”.' }));
   }
   const wbox = $('prior-warning');
   wbox.textContent = '';
@@ -5495,21 +5913,45 @@ function renderPriorTable(e) {
   const P = e.prior, B = e.bounds, lim = true;
   if (P.family === 'normal') {
     const cols = ['Parameter', 'Prior', 'Location / a', 'Scale / b'].concat(lim ? ['Lower limit', 'Upper limit'] : []);
-    tbl.appendChild(h('thead', null, h('tr', null, cols.map((c) => h('th', { text: c })), h('th', { class: 'num', text: 'Prior mean ± SD' }))));
+    tbl.appendChild(h('thead', null, h('tr', null, cols.map((c) => h('th', { text: c })),
+      h('th', { class: 'fix-cell', title: 'Hold the parameter at a value instead of sampling it' }, 'Fix'), h('th', { class: 'num', text: 'Prior mean ± SD' }))));
     const tb = h('tbody');
+    const fixBox = (p) => {
+      const cb = h('input', { type: 'checkbox', checked: isFixed(P, p), 'aria-label': 'Fix ' + p, title: 'Hold ' + p + ' at a value instead of sampling it' });
+      cb.addEventListener('change', () => {
+        P.fix = Object.assign({}, P.fix || {});
+        if (cb.checked) P.fix[p] = true; else delete P.fix[p];
+        if (cb.checked && p === 'pi' && !(P.pi_fix > 0 && P.pi_fix < 1)) { const m = P.pi_a / (P.pi_a + P.pi_b); P.pi_fix = m > 0 && m < 1 ? round4(m) : NaN; }
+        if (!e.source) e.source = 'manual'; else if (e.source !== 'manual') e.edited = true;
+        S.undo = null; S.priorMsg = null;
+        resetScenarios();
+        priorsChanged();
+      });
+      return h('td', { class: 'fix-cell' }, cb);
+    };
+    const dash = () => h('td', { class: 'fixed', text: '—' });
     PRIOR_ROWS.forEach(([p, label]) => {
-      const tr = h('tr', null, parCell(p, label));
+      const tr = h('tr', { class: isFixed(P, p) ? 'is-fixed' : null }, parCell(p, label));
       if (p === 'pi') {
-        tr.appendChild(h('td', { text: 'Beta(a, b)' }));
-        tr.appendChild(h('td', null, priorInput(e, P, 'pi_a')));
-        tr.appendChild(h('td', null, priorInput(e, P, 'pi_b')));
+        if (isFixed(P, 'pi')) {
+          tr.appendChild(h('td', { text: 'Fixed' }));
+          const inp = priorInput(e, P, 'pi_fix'); inp.placeholder = 'e.g. 0.15'; inp.setAttribute('aria-label', 'Fixed prevalence, between 0 and 1');
+          tr.appendChild(h('td', null, inp));
+          tr.appendChild(dash());
+        } else {
+          tr.appendChild(h('td', { text: 'Beta(a, b)' }));
+          tr.appendChild(h('td', null, priorInput(e, P, 'pi_a')));
+          tr.appendChild(h('td', null, priorInput(e, P, 'pi_b')));
+        }
         if (lim) { tr.appendChild(h('td', { class: 'fixed', text: '0' })); tr.appendChild(h('td', { class: 'fixed', text: '1' })); }
       } else {
-        tr.appendChild(h('td', { text: 'Normal' }));
+        tr.appendChild(h('td', { text: isFixed(P, p) ? 'Fixed' : 'Normal' }));
         tr.appendChild(h('td', null, priorInput(e, P, p + '_loc')));
-        tr.appendChild(h('td', null, priorInput(e, P, p + '_scale')));
-        if (lim) { tr.appendChild(h('td', null, priorInput(e, B, p + '_lower', true))); tr.appendChild(h('td', null, priorInput(e, B, p + '_upper', true))); }
+        tr.appendChild(isFixed(P, p) ? dash() : h('td', null, priorInput(e, P, p + '_scale')));
+        if (lim && isFixed(P, p)) { tr.appendChild(dash()); tr.appendChild(dash()); }
+        else if (lim) { tr.appendChild(h('td', null, priorInput(e, B, p + '_lower', true))); tr.appendChild(h('td', null, priorInput(e, B, p + '_upper', true))); }
       }
+      tr.appendChild(fixBox(p));
       tr.appendChild(h('td', { class: 'num' }));
       tb.appendChild(tr);
     });
@@ -5526,6 +5968,7 @@ function refreshPriorMoments(e) {
   PRIOR_ROWS.forEach(([p], i) => {
     const cell = rows[i] && rows[i].lastChild;
     if (!cell) return;
+    if (isFixed(P, p)) { const v = fixedValue(P, p); cell.textContent = Number.isFinite(v) ? 'Fixed at ' + (p === 'pi' ? (v * 100).toFixed(1) + '%' : num(v, 2)) : '–'; return; }
     const keys = p === 'pi' ? ['pi_a', 'pi_b'] : [p + '_loc', p + '_scale'];
     if (!keys.every((k) => Number.isFinite(P[k]) && (k.endsWith('_loc') || P[k] > 0))) { cell.textContent = '–'; return; }
     try {
@@ -5543,40 +5986,51 @@ function renderPriorImplied(e) {
   if (errs.length) { if (anyFilled) errBox.appendChild(h('div', { class: 'error', text: 'Not ready to fit: ' + errs.join('; ') + '.' })); return; }
 }
 function renderDataPanel() {
-  const mth = S.pmode.dataMethod;
-  document.querySelectorAll('input[name=pdata]').forEach((r) => { r.checked = r.value === mth; r.closest('.seg-opt').classList.toggle('on', r.checked); });
+  const mth = 'em', shared = !!S.pmode.dataShared;
+  document.querySelectorAll('input[name=pdshare]').forEach((r) => { r.checked = r.value === (shared ? 'shared' : 'each'); r.closest('.seg-opt').classList.toggle('on', r.checked); });
+  $('data-share-hint').textContent = shared
+    ? 'A two-group mixture is fitted to each antigen’s values by maximum likelihood (EM). Every antigen then gets the same prior: the median of the fitted values over the antigens. That only makes sense if all antigens are on a common, background-corrected scale.'
+    : 'A two-group mixture is fitted to each antigen’s values by maximum likelihood (EM), and each antigen’s fitted values become the centres of its own prior.';
+  $('data-edit-hint').textContent = shared ? 'Copies it to “Same prior for all antigens”, where you can change it.' : 'Copies them to “One prior per antigen”, where you can change them.';
   const box = $('data-caution');
   box.textContent = '';
   box.appendChild(dataCautionBox(mth));
   const how = $('data-how');
   how.textContent = '';
   how.appendChild(h('ul', null, HOW[mth].map((t) => h('li', { text: t }))));
+  const open = !!S.dataTableShown;
+  $('data-table-wrap').hidden = !open;
+  $('data-table-btn').textContent = open ? 'Hide the table of suggested priors' : 'Show the table of suggested priors';
+  $('data-table-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
   renderDataTable();
 }
 function renderDataTable() {
-  const mth = S.pmode.dataMethod, tbl = $('data-table');
+  const mth = 'em', tbl = $('data-table');
   tbl.textContent = '';
   const f4 = (v) => String(Number(Number(v).toPrecision(3))).replace('-', MINUS);
   const cols = [['mu0', 'Negative mean'], ['muR', 'Positive − negative'], ['sd0', 'Negative SD'], ['sd1', 'Positive SD'], ['pi', 'Prevalence']];
-  tbl.appendChild(h('thead', null, h('tr', null, h('th', { text: 'Antigen' }), h('th', { class: 'num', text: 'N' }), h('th', { text: 'Prevalence is' }), cols.map(([, l]) => h('th', { text: l })))));
+  tbl.appendChild(h('thead', null, h('tr', null, h('th', { text: 'Antigen' }), h('th', { class: 'num', text: 'N' }), cols.map(([, l]) => h('th', { text: l })))));
   const tb = h('tbody');
+  const shared = !!S.pmode.dataShared;
+  if (shared) {
+    const e = sharedDataEntry(), P = e.prior;
+    const tr = h('tr', { class: 'shared-row' }, h('td', null, h('b', { text: 'Used for all' })), h('td', { class: 'num', text: '' }));
+    if (e.pending) tr.appendChild(h('td', { colspan: cols.length, class: 'hint', text: 'Fitting…' }));
+    else if (!e.source) tr.appendChild(h('td', { colspan: cols.length, class: 'hint', text: 'Too few samples to suggest a prior' }));
+    else cols.forEach(([k]) => tr.appendChild(h('td', null, h('b', { text: k === 'pi' ? 'Beta(' + P.pi_a + ', ' + P.pi_b + ')' : 'N(' + f4(P[k + '_loc']) + ', ' + f4(P[k + '_scale']) + ')' }),
+      k === 'pi' ? h('span', { class: 'hint', text: ' · median over ' + e.sharedData }) : null)));
+    tb.appendChild(tr);
+  }
   antigens().forEach((ag) => {
-    const e = entry(ag), P = e.prior, n = getData(ag).y.length;
+    const e = rawDataEntry(ag), P = e.prior, n = getData(ag).y.length;
     const tr = h('tr', { class: ag === S.antigen ? 'sel' : null, tabindex: 0 });
     tr.addEventListener('click', () => setAntigen(ag));
     tr.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') setAntigen(ag); });
     tr.appendChild(h('td', null, h('b', { text: ag })));
     tr.appendChild(h('td', { class: 'num', text: fmtInt(n) }));
-    const side = prevSide(ag);
-    const sel = h('select', { class: 'side-select', 'aria-label': 'Expected prevalence of ' + ag });
-    sel.appendChild(h('option', { value: 'low', text: 'below 50%' }));
-    sel.appendChild(h('option', { value: 'high', text: 'above 50%' }));
-    sel.value = side;
-    sel.addEventListener('click', (ev) => ev.stopPropagation());
-    sel.addEventListener('keydown', (ev) => ev.stopPropagation());
-    sel.addEventListener('change', () => { if (!S.prevSide) S.prevSide = {}; S.prevSide[ag] = sel.value; resetScenarios(); priorsChanged(); });
-    tr.appendChild(h('td', null, sel));
-    if (!e.source) tr.appendChild(h('td', { colspan: cols.length, class: 'hint', text: 'Too few samples to suggest a prior' }));
+    const side = 'low';
+    if (e.pending) tr.appendChild(h('td', { colspan: cols.length, class: 'hint', text: 'Fitting…' }));
+    else if (!e.source) tr.appendChild(h('td', { colspan: cols.length, class: 'hint', text: 'Too few samples to suggest a prior' }));
     else cols.forEach(([k]) => {
       if (k !== 'pi') { tr.appendChild(h('td', { text: 'N(' + f4(P[k + '_loc']) + ', ' + f4(P[k + '_scale']) + ')' })); return; }
       const td = h('td', { class: 'em-cell' }, h('span', { text: 'Beta(' + P.pi_a + ', ' + P.pi_b + ')' }));
@@ -5587,8 +6041,8 @@ function renderDataTable() {
         const altBetter = alt && alt.ll > f.ll + 1 && ((alt.pi > 0.5) !== (f.pi > 0.5));
         const sep = (f.mu1 - f.mu0) / ((f.sd0 + f.sd1) / 2);
         if (sep < 1) td.appendChild(h('div', null, flagEl('warn', '!', 'Groups barely separate (' + sep.toFixed(1) + ' SD apart): EM probably split one group in two')));
-        else if (wrongSide) td.appendChild(h('div', null, flagEl('warn', '!', 'EM puts prevalence ' + (f.pi > 0.5 ? 'above' : 'below') + ' 50%: check the side')));
-        else if (altBetter) td.appendChild(h('div', null, flagEl('warn', '!', 'The other start fits better (' + pct(alt.pi) + ', log-lik +' + (alt.ll - f.ll).toFixed(1) + ')')));
+        else if (wrongSide) td.appendChild(h('div', null, flagEl('warn', '!', 'EM puts prevalence above 50%: the groups may be swapped, check the plot')));
+        else if (altBetter) td.appendChild(h('div', null, flagEl('warn', '!', 'A start above 50% fits better (' + pct(alt.pi) + ', log-lik +' + (alt.ll - f.ll).toFixed(1) + '): check the plot')));
         if (!f.converged) td.appendChild(h('div', null, flagEl('warn', '!', 'EM did not converge in ' + f.iter + ' steps')));
         else if (f.atFloor) td.appendChild(h('div', null, flagEl('warn', '!', 'An SD hit the 0.05 floor: a few values may have been split off')));
       }
@@ -5620,8 +6074,8 @@ function priorPlot(ag, mini) {
 }
 function priorSummary(e) {
   const P = e.prior, f = (v) => String(round4(v)).replace('-', MINUS);
-  const pi = 'pi ~ Beta(' + f(P.pi_a) + ', ' + f(P.pi_b) + ')';
-  return [pi].concat(['mu0', 'muR', 'sd0', 'sd1'].map((p) => p + ' ~ N(' + f(P[p + '_loc']) + ', ' + f(P[p + '_scale']) + ')')).join(' · ');
+  const pi = isFixed(P, 'pi') ? 'pi fixed at ' + f(P.pi_fix) : 'pi ~ Beta(' + f(P.pi_a) + ', ' + f(P.pi_b) + ')';
+  return [pi].concat(['mu0', 'muR', 'sd0', 'sd1'].map((p) => isFixed(P, p) ? p + ' fixed at ' + f(P[p + '_loc']) : p + ' ~ N(' + f(P[p + '_loc']) + ', ' + f(P[p + '_scale']) + ')')).join(' · ');
 }
 let gridSig = null, popTimer = null, popCell = null;
 function renderPriorGrid(force) {
@@ -5644,12 +6098,7 @@ function renderPriorGrid(force) {
     else if (!r.ready) status = h('span', { class: 'pg-none', text: 'No prior' });
     const cell = h('div', { class: 'pg-cell' + (on ? ' sel' : '') + (r.ready ? '' : ' empty'), tabindex: 0, role: 'button', 'aria-pressed': on ? 'true' : 'false',
       'aria-label': ag + (r.ready ? ': prior over the data' : ': no complete prior') + '. Select this antigen.', 'data-ag': ag });
-    const picked = !(S.runOff && S.runOff.has(ag));
-    if (!picked) cell.classList.add('off');
-    const cb = h('input', { type: 'checkbox', class: 'pg-pick', checked: picked, 'aria-label': 'Include ' + ag + ' when fitting', title: 'Include ' + ag + ' when fitting all antigens',
-      onchange: (ev) => setRunPick(ag, ev.target.checked) });
-    ['click', 'keydown', 'pointerdown'].forEach((t) => cb.addEventListener(t, (ev) => ev.stopPropagation()));
-    cell.appendChild(h('div', { class: 'pg-head' }, h('span', { class: 'pg-left' }, cb, h('span', { class: 'pg-name', text: ag })), status));
+    cell.appendChild(h('div', { class: 'pg-head' }, h('span', { class: 'pg-left' }, h('span', { class: 'pg-name', text: ag })), status));
     const box = h('div', { class: 'pg-chart' });
     cell.appendChild(box);
     grid.appendChild(cell);
@@ -5661,11 +6110,11 @@ function renderPriorGrid(force) {
   px.textContent = '';
   if (ags.length) px.appendChild(exportButtons(priorGridSVG, 'priors_over_the_data'));
   $('grid-hint').textContent = matchMedia('(hover: hover)').matches
-    ? 'One plot per antigen. Hover over a plot to enlarge it, and click it to select that antigen. Untick an antigen to leave it out of the fits.'
-    : 'One plot per antigen. Tap a plot to enlarge it and select that antigen. Untick an antigen to leave it out of the fits.';
+    ? 'One plot per antigen selected in step 1. Hover over a plot to enlarge it, and click it to select that antigen.'
+    : 'One plot per antigen selected in step 1. Tap a plot to enlarge it and select that antigen.';
   const nRun = runAgs().length;
   $('run-count').textContent = ags.length ? nRun + ' of ' + ags.length + ' selected' : '';
-  $('run-pick').hidden = !ags.length;
+  $('run-pick').hidden = true;
   $('prior-caption').textContent = !ags.length ? '' : !anyReady ? 'Set a prior to see it over the data.'
     : 'Prior component curves at the prior locations, scaled to the tallest bar, so their areas carry no information. Dashed line: the midpoint (mu0 + mu1) / 2. sep in the enlarged plot = muR / mean(sd0, sd1).';
 }
@@ -5810,7 +6259,8 @@ function applyPriorFile(text, name) {
   const msg = [];
   if (found.size) {
     snapshotPriors();
-    found.forEach((v, ag) => { S.priEach[ag] = { prior: v.P, bounds: v.B, source: 'file', edited: false }; });
+    if (!S.priFile) S.priFile = {};
+    found.forEach((v, ag) => { S.priFile[ag] = { prior: v.P, bounds: v.B, source: 'file', edited: false }; });
     S.priorFileName = name;
     msg.push('From ' + name + ': priors set for ' + found.size + ' of ' + ags.length + ' antigens.');
   } else msg.push('No usable rows in ' + name + '. Nothing was changed.');
@@ -5920,7 +6370,7 @@ async function fitAllAntigens() {
   const t0 = performance.now(), total = Math.max(1, work.length * st.chains), prog = new Map();
   const tick = () => { let d = 0; prog.forEach((v) => { d += v; }); progressUI(el, d, total, t0); };
   tick();
-  const rerender = debounce(renderOverview, 150);
+  const rerender = debounce(() => { renderOverview(); renderFitGrid(); }, 150);
   let cancelled = false, failed = 0;
   await Promise.all(jobs.map(async (j) => {
     let fit = S.fitCache.get(j.key);
@@ -5993,7 +6443,78 @@ function renderConvNav() {
 }
 function renderInspect() {
   renderConvNav();
-  renderConvergence(inspectTarget());
+  renderFitGrid();
+  $('fit-dash').hidden = !S.dashOpen;
+  if (S.dashOpen) renderConvergence(inspectTarget());
+  else $('conv-body').textContent = '';
+}
+const FIT_LEGEND = [
+  { type: 'line', color: 'var(--s1)', label: 'Negative component' },
+  { type: 'line', color: 'var(--s2)', label: 'Positive component' },
+  { type: 'line', color: 'var(--text)', label: 'Mixture' },
+  { type: 'dash', color: 'var(--text-2)', label: 'Midpoint cutoff' }
+];
+/* Step 3: one small plot per antigen with its fitted mixture; a click opens the fit report below */
+let fitGridSig = null;
+function renderFitGrid(force) {
+  const grid = $('fit-grid'), ags = runAgs(), stats = ags.map((ag) => baselineStatus(ag));
+  const sig = [S.dataVersion, ags.join('\u0001'), stats.map((s) => s.state + ':' + (s.key || '')).join('|'), grid.clientWidth, S.dashOpen ? S.antigen : ''].join('#');
+  const nDone = stats.filter((s) => s.state === 'done').length;
+  const todo = ags.filter((ag, i) => stats[i].state === 'todo' || stats[i].state === 'stale').length;
+  const fb = $('fg-fit');
+  fb.hidden = !todo || !!S.busy;
+  fb.textContent = 'Fit ' + (todo === ags.length ? (todo === 1 ? 'this antigen' : 'all ' + todo + ' antigens') : 'the other ' + todo + ' antigen' + (todo === 1 ? '' : 's'));
+  $('dl-post-all').disabled = !nDone;
+  setLegend($('lg-fitgrid'), nDone ? FIT_LEGEND : []);
+  if (!force && sig === fitGridSig) return;
+  fitGridSig = sig;
+  grid.textContent = '';
+  if (!ags.length) { grid.appendChild(placeholder('Select at least one antigen in step 1.')); return; }
+  ags.forEach((ag, i) => {
+    const st = stats[i], done = st.state === 'done', on = !!S.dashOpen && ag === S.antigen;
+    const right = done ? h('span', { class: 'fg-est', title: 'Median prevalence' }, h('span', { text: fmtPar('pi', st.fit.s.pi.med) }), statusIcon(st.fit))
+      : h('span', { class: 'pg-none', text: FIT_STATE[st.state] || '' });
+    const cell = h('div', { class: 'pg-cell fg-cell' + (on ? ' sel' : '') + (done ? '' : ' empty'), tabindex: 0, role: 'button', 'aria-pressed': on ? 'true' : 'false', 'data-ag': ag,
+      'aria-label': ag + (done ? ': fitted mixture, prevalence ' + fmtPar('pi', st.fit.s.pi.med) + '. Open the fit report.' : ': ' + (FIT_STATE[st.state] || '')) });
+    cell.appendChild(h('div', { class: 'pg-head' }, h('span', { class: 'pg-name', text: ag }), right));
+    const box = h('div', { class: 'pg-chart' });
+    cell.appendChild(box);
+    grid.appendChild(cell);
+    if (done) {
+      const f = mixtureFns(st.fit);
+      drawHistogram(box, { y: st.fit.y, mini: true, aria: 'Histogram of ' + ag + ' with the fitted mixture', vlines: [{ x: st.fit.s.cutoff.med }],
+        curves: [{ f: f.tot, scale: 'density', cls: 'c-tot thin' }, { f: f.neg, scale: 'density', cls: 'c-neg' }, { f: f.pos, scale: 'density', cls: 'c-pos' }] });
+    } else {
+      const d = getData(ag);
+      if (d.y.length >= 2) drawHistogram(box, { y: d.y, mini: true, aria: 'Histogram of ' + ag });
+    }
+    const open = () => openFitDash(ag);
+    cell.addEventListener('click', open);
+    cell.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
+  });
+}
+function openFitDash(ag) {
+  S.dashOpen = true;
+  S.convGroup = null;
+  if (ag !== S.antigen) setAntigen(ag); else renderInspect();
+  $('fit-dash').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* Posterior estimates of every fitted antigen (baseline prior), one row per parameter */
+function posteriorCSV() {
+  const head = ['antigen', 'N', 'parameter', 'median', 'lower_95', 'upper_95', 'mean', 'sd', 'rhat', 'ess_bulk', 'ess_tail', 'mcse_median', 'divergences', 'sampler_check', 'prior'];
+  const L = [head.join(',')];
+  runAgs().forEach((ag) => {
+    const st = baselineStatus(ag);
+    if (st.state !== 'done') return;
+    const fit = st.fit, c = fitChecks(fit), ex = (c.sampler && c.sampler.extra) || {};
+    ALL_PARS.forEach((p) => {
+      const s = fit.s[p];
+      if (!s) return;
+      const x = ex[p];
+      L.push([ag, fit.N, p, s.med, s.lo, s.hi, s.mean, s.sd, s.rhat, s.ess, x ? x.tailEss : '', x ? x.mcse : '', fit.divergences, c.overall, sourceLabel(entry(ag))].map(csvCell).join(','));
+    });
+  });
+  return L.join('\n') + '\n';
 }
 function placeholder(text) { return h('div', { class: 'placeholder', text }); }
 const PAR_NAME = { pi: 'Prevalence', mu0: 'Negative mean', muR: 'Positive − negative mean', sd0: 'Negative SD', sd1: 'Positive SD' };
@@ -6059,12 +6580,17 @@ function renderConvergence(t) {
   card.appendChild(body);
   body.appendChild(h('p', { class: 'rr-a', text: sp.text }));
   // R-hat, bulk and tail ESS, MCSE per parameter; divergent transitions
-  const th = (label, target) => h('th', { class: 'num' }, label, h('span', { class: 'th-sub', text: target }));
+  const th = (key, target) => h('th', { class: 'num' }, defTerm(key), h('span', { class: 'th-sub', text: target }));
   const t1 = h('table', { class: 'diag-table' });
-  t1.appendChild(h('thead', null, h('tr', null, h('th', { text: 'Parameter' }), th('R-hat', 'below 1.01'), th('Bulk ESS', '400 or more'), th('Tail ESS', '400 or more'), th('MCSE of the median', 'sampler noise'))));
+  t1.appendChild(h('thead', null, h('tr', null, h('th', { text: 'Parameter' }), th('rhat', 'below 1.01'), th('essBulk', '400 or more'), th('essTail', '400 or more'), th('mcse', 'sampler noise'))));
   const tb1 = h('tbody');
   BASE_PARS.forEach((p) => {
     const s = fit.s[p], x = sp.extra[p];
+    if (x && x.fixed) {
+      tb1.appendChild(h('tr', null, h('td', null, h('span', { class: 'pname', text: PAR_NAME[p] }), ' ', h('span', { class: 'psym', text: p })),
+        h('td', { colspan: 4, class: 'hint', text: 'Fixed at ' + fmtPar(p, s.med) + ' in the prior, so not sampled' })));
+      return;
+    }
     tb1.appendChild(h('tr', null,
       h('td', null, h('span', { class: 'pname', text: PAR_NAME[p] }), ' ', h('span', { class: 'psym', text: p })),
       h('td', { class: 'num' }, num(s.rhat, 3), checkMark(s.rhat < 1.01)),
@@ -6074,16 +6600,20 @@ function renderConvergence(t) {
   });
   t1.appendChild(tb1);
   body.appendChild(h('div', { class: 'table-wrap fit-width' }, t1));
-  body.appendChild(h('p', { class: 'div-line' }, 'Divergent transitions: ', h('b', { text: fmtInt(fit.divergences) }), checkMark(fit.divergences === 0),
-    fit.treedepth ? h('span', { class: 'hint', text: ' · ' + fmtInt(fit.treedepth) + ' iterations hit the maximum tree depth (slower, not biased)' }) : null));
-  body.appendChild(h('p', { class: 'caption', text: 'R-hat compares the chains: near 1 means they agree. Bulk ESS covers the median and the middle of the posterior, tail ESS the ends of the 95% interval. MCSE is how much the median would move from sampler noise alone. Divergent transitions mean the sampler could not explore part of the posterior, so the estimates may be biased.' }));
+  body.appendChild(h('p', { class: 'div-line' }, h('span', null, defTerm('div'), ':'), h('b', { text: fmtInt(fit.divergences) }), checkMark(fit.divergences === 0),
+    fit.treedepth ? h('span', { class: 'hint' }, ' · ' + fmtInt(fit.treedepth) + ' iterations hit the ', defTerm('treedepth', 'maximum tree depth'), ' (slower, not biased)') : null));
+  body.appendChild(h('p', { class: 'hint', style: 'margin-top:6px', text: 'Hover over an underlined term to see what it means.' }));
+  body.insertBefore(h('h4', { class: 'dash-h', text: 'Sampler checks' }), body.firstChild);
+  // the report: fitted mixture first, then the sampler checks, trace plots and posterior estimates
+  const sec = (title) => { const body2 = h('div'); return { el: h('div', { class: 'rr-panel dash-sec' }, h('h4', { text: title }), body2), body: body2 }; };
+  const mix = sec('Fitted mixture'), tr = sec('Trace plots'), est = sec('Posterior estimates');
+  card.insertBefore(mix.el, body);
+  card.appendChild(tr.el);
+  card.appendChild(est.el);
   box.appendChild(card);
-  // trace plots, posterior estimates and fitted mixture, each behind its own button on one line
-  const panels = [panelToggle('trace', 'trace plots', (panel) => fillTracePanel(panel, fit)),
-    panelToggle('est', 'posterior estimates', (panel) => fillEstimatesPanel(panel, fit, c)),
-    panelToggle('mix', 'fitted mixture', (panel) => fillMixturePanel(panel, fit))];
-  box.appendChild(h('div', { class: 'toggle-row' }, panels.map((t) => t.btn)));
-  panels.forEach((t) => { box.appendChild(t.panel); if (t.open) t.fill(t.panel); });
+  fillMixturePanel(mix.body, fit);
+  fillTracePanel(tr.body, fit);
+  fillEstimatesPanel(est.body, fit, c);
 }
 function fillEstimatesPanel(panel, fit, c) {
   panel.textContent = '';
@@ -6253,7 +6783,11 @@ function ensureScenarios() {
 function buildScenarios(ag) {
   const e = entry(ag), b = e.prior, B = e.bounds, cfg = S.cfg, y = getData(ag).y;
   const out = [{ id: 'base', group: 'Baseline', label: 'Baseline', include: true, isBase: true }];
-  const mk = (group, label, ch) => out.push({ id: 'sc' + (++S.scSeq), group, label, include: true, isBase: false, prior: Object.assign({}, b, ch) });
+  const mk = (group, label, ch) => {
+    // a fixed parameter has no spread: skip changes that only touch the scale or Beta shape of fixed parameters
+    if (Object.keys(ch).every((k) => isFixed(b, k.split('_')[0]) && !k.endsWith('_loc'))) return;
+    out.push({ id: 'sc' + (++S.scSeq), group, label: label + (Object.keys(ch).some((k) => k.endsWith('_loc') && isFixed(b, k.split('_')[0])) ? ' (fixed value)' : ''), include: true, isBase: false, prior: Object.assign({}, b, ch) });
+  };
   const clip = (p, v) => {
     const lo = B[p + '_lower'], hi = B[p + '_upper'];
     let c = v;
@@ -6295,7 +6829,7 @@ function buildScenarios(ag) {
   }
   const methods = [];
   if (S.ds.isExample) methods.push('paper');
-  methods.push('data', 'em');
+  methods.push('em');
   methods.forEach((mth) => {
     if (mth === e.source && !e.edited) return;
     if (y.length < 10) return;
@@ -6327,15 +6861,14 @@ function renderResToggle() {
   $('res-toggle').textContent = open ? 'Hide all scenarios' : 'Show all scenarios';
   $('res-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
 }
-/* Highest ELPD-LOO for the current antigen in the last step 5 run, if any */
+/* Model selected for the current antigen in the last step 5 run, if any */
 function sensBestModel() {
   const C = S.cov, run = C && C.run;
   if (!run || run.dataVersion !== S.dataVersion) return null;
   const rec = run.byAg.get(S.antigen);
   if (!rec) return null;
-  let best = null;
-  rec.rows.forEach((r) => { if (r.fit && r.fit.loo && (!best || r.fit.loo.elpd > best.fit.loo.elpd)) best = r; });
-  return best ? best.model.id : null;
+  const pick = covSelect(rec);
+  return pick ? pick.sel.model.id : null;
 }
 function renderSensModel() {
   const row = $('sens-model-row'), note = $('sens-model-note'), sel = $('sens-model');
@@ -6347,7 +6880,7 @@ function renderSensModel() {
   const best = sensBestModel();
   sel.textContent = '';
   models.forEach((m, i) => sel.appendChild(h('option', { value: m.id,
-    text: (m.id === 'base' ? 'Base: one prevalence for all samples' : 'Model ' + (i + 1) + ': ' + m.label) + (best === m.id ? ' (highest ELPD-LOO in step 5)' : '') })));
+    text: (m.id === 'base' ? 'Base: one prevalence for all samples' : 'Model ' + (i + 1) + ': ' + m.label) + (best === m.id ? ' (selected in step 5)' : '') })));
   sel.value = S.sensModel;
   sel.disabled = !!S.busy;
   sel.onchange = () => { S.sensModel = sel.value; renderSensSection(); };
@@ -6441,6 +6974,8 @@ function updateBusyButtons() {
   $('btn-prev-cancel').hidden = S.busy !== 'prev';
   if ($('btn-cov')) { $('btn-cov').disabled = !!S.busy; $('btn-cov-cancel').hidden = S.busy !== 'cov'; }
   if ($('sens-model')) $('sens-model').disabled = !!S.busy;
+  document.querySelectorAll('#ag-pills button').forEach((b) => { b.disabled = !!S.busy; });
+  if ($('m-measure') && S.measureSets) $('m-measure').disabled = S.measureSets.length < 2 || !!S.busy;
 }
 function renderSensButtons() { updateBusyButtons(); }
 function renderScenTable() {
@@ -7036,6 +7571,14 @@ function rString(s) {
   return '"' + a.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"';
 }
 function rNum(v) { return v === Infinity ? 'Inf' : v === -Infinity ? '-Inf' : Number.isFinite(v) ? String(v) : 'NA'; }
+/* Stan model files take a prior for every parameter: a fixed one becomes a very narrow prior at its value */
+function stanPrior(P) {
+  if (!anyFixed(P)) return P;
+  const Q = Object.assign({}, P);
+  ['mu0', 'muR', 'sd0', 'sd1'].forEach((p) => { if (isFixed(P, p)) Q[p + '_scale'] = 1e-6; });
+  if (isFixed(P, 'pi')) { Q.pi_a = round4(P.pi_fix * 1e6); Q.pi_b = round4((1 - P.pi_fix) * 1e6); }
+  return Q;
+}
 function rScript() {
   const sens = S.sens, st = sens.settings, ag = sens.antigen, N = getData(ag).y.length;
   const dataFile = safeName(ag) + '_analysed_data.csv';
@@ -7048,7 +7591,8 @@ function rScript() {
   L.push('# and "Mixture1D_priors.stan" (the "Stan model" download): Mixture1D.stan with the prior');
   L.push('# hyperparameters and limits passed as data.');
   L.push('# Infinite bounds are passed as Inf: cmdstanr writes them to JSON as "Inf", which');
-  L.push('# CmdStan reads as infinity.');
+  L.push('# CmdStan reads as infinity. A parameter fixed on the page is passed as a very narrow prior');
+  L.push('# at its value (normal scale 1e-6; for prevalence, Beta(v * 1e6, (1 - v) * 1e6)).');
   L.push('');
   L.push('library(cmdstanr)');
   L.push('');
@@ -7059,8 +7603,8 @@ function rScript() {
   cols.forEach((c, i) => {
     const vals = sens.rows.map((r) => {
       if (c === 'label') return rString(r.scen.isBase ? 'Baseline' : scenLabel(r.scen));
-      if (BOUND_KEYS.includes(c)) return rNum(r.bounds[c]);
-      return rNum(r.prior[c]);
+      if (BOUND_KEYS.includes(c)) { const p = c.split('_')[0]; return rNum(isFixed(r.prior, p) ? (c.endsWith('_upper') ? Infinity : p === 'mu0' ? -Infinity : 0) : r.bounds[c]); }
+      return rNum(stanPrior(r.prior)[c]);
     });
     L.push('  ' + c + ' = c(' + vals.join(', ') + ')' + (i < cols.length - 1 ? ',' : ''));
   });
@@ -7620,7 +8164,7 @@ function covSummarise(res, per) {
   names.forEach((n) => { ch[n] = res.map((r) => r.draws[n]); });
   const summ = (arrs) => {
     const a = Stats.concat(arrs), s = Float64Array.from(a).sort(), dg = Stats.diagnostics(arrs);
-    return { med: Stats.quantileSorted(s, 0.5), lo: Stats.quantileSorted(s, 0.025), hi: Stats.quantileSorted(s, 0.975), mean: Stats.mean(a), sd: Stats.sd(a),
+    return { fixed: s[0] === s[s.length - 1], med: Stats.quantileSorted(s, 0.5), lo: Stats.quantileSorted(s, 0.025), hi: Stats.quantileSorted(s, 0.975), mean: Stats.mean(a), sd: Stats.sd(a),
       rhat: dg.rhat, ess: dg.ess, tail: Stats.essTail(arrs) };
   };
   const f = { pis: [], comp: {}, nChains: res.length };
@@ -7628,6 +8172,7 @@ function covSummarise(res, per) {
   const all = f.pis.concat(Object.values(f.comp));
   f.maxRhat = 0; f.minEss = Infinity; f.minTail = Infinity;
   all.forEach((x) => {
+    if (x.fixed) return;   // fixed, not sampled
     if (x.rhat > f.maxRhat || !Number.isFinite(x.rhat)) { f.maxRhat = Number.isFinite(x.rhat) ? x.rhat : Infinity; f.rhatPar = x.name; }
     if (x.ess < f.minEss) { f.minEss = x.ess; f.essPar = x.name; }
     if (x.tail < f.minTail) { f.minTail = x.tail; f.tailPar = x.name; }
@@ -7636,6 +8181,16 @@ function covSummarise(res, per) {
   f.treedepth = res.reduce((a, r) => a + r.maxTreedepthHits, 0);
   f.level = covLevel(f);
   f.check = covCheckText(f);
+  // overall prevalence of the samples in the model: cell prevalences weighted by cell size, draw by draw
+  const nTot = per.cells.reduce((a, c) => a + c.n, 0);
+  if (nTot > 0) {
+    const ov = res.map((_, c) => {
+      const L = ch[names[0]][c].length, o = new Float64Array(L);
+      for (let g = 0; g < G; g++) { const w = per.cells[g].n / nTot, d = ch[names[g]][c]; for (let i = 0; i < L; i++) o[i] += w * d[i]; }
+      return o;
+    });
+    f.overall = summ(ov);
+  }
   // draws for the leave-one-out step
   const S2 = ch[names[0]].reduce((a, c) => a + c.length, 0), pis = new Float64Array(G * S2);
   for (let g = 0; g < G; g++) pis.set(Stats.concat(ch[names[g]]), g * S2);
@@ -7667,12 +8222,13 @@ async function runCov() {
     const rec = { ag, N: des.N, dropped: des.dropped, rows: [] };
     run.byAg.set(ag, rec);
     if (des.N < 20) { rec.skipped = 'only ' + des.N + ' samples'; return; }
+    if (isFixed(e.prior, 'pi')) { rec.skipped = 'its prevalence is fixed in the baseline prior'; return; }
     const usedSig = JSON.stringify(des.used.map((c) => [c, covCfg(c)]));
     des.per.forEach((per) => {
       const row = { model: per.model, cells: per.cells, G: per.G, status: 'queued', fit: null };
       rec.rows.push(row);
       if (per.G > COV_MAX_CELLS) { row.status = 'skipped'; row.error = per.G + ' cells, more than ' + COV_MAX_CELLS; return; }
-      const key = JSON.stringify([S.dataVersion, ag, usedSig, per.model.sig, e.prior.family, FAMILY_KEYS[e.prior.family].map((k) => e.prior[k]), BOUND_KEYS.map((k) => boundText(e.bounds[k])), st.chains, st.warmup, st.iter, st.seed]);
+      const key = JSON.stringify([S.dataVersion, ag, usedSig, per.model.sig, e.prior.family, FAMILY_KEYS[e.prior.family].map((k) => e.prior[k]), BOUND_KEYS.map((k) => boundText(e.bounds[k])), st.chains, st.warmup, st.iter, st.seed, fixSig(e.prior)]);
       jobs.push({ ag, des, per, row, key, P: Object.assign({}, e.prior), B: Object.assign({}, e.bounds) });
     });
   });
@@ -7748,47 +8304,203 @@ function renderCovResults() {
   if (!run || run.dataVersion !== S.dataVersion) { box.hidden = true; return; }
   box.hidden = false;
   $('cov-stale').hidden = !covStale(run);
-  renderCovCompare(run);
+  renderCovSummary(run);
+  renderCovOverall(run);
   renderCovView(run);
+  renderCovCorr(run);
 }
-function renderCovCompare(run) {
-  const tbl = $('cov-cmp');
-  tbl.textContent = '';
-  const cols = ['Model', 'Cells', 'Parameters', 'Mean log-lik', 'ELPD-LOO (SE)', 'ΔELPD (SE)', 'p_loo', 'Pareto k > 0.7', 'Sampler check'];
-  tbl.appendChild(h('thead', null, h('tr', null, cols.map((c, i) => h('th', { class: i && i < 8 ? 'num' : null, text: c })))));
-  const tb = h('tbody');
+/* Selected model for one antigen: the simplest model (fewest cells) within COV_TIE_SE standard errors of the best ELPD-LOO */
+const COV_TIE_SE = 2;
+function covSelect(rec) {
+  if (!rec || rec.skipped) return null;
+  const cmp = covCompare(rec.rows);
+  if (!cmp) return null;
+  const done = rec.rows.filter((r) => cmp.has(r));
+  const best = done.find((r) => cmp.get(r).best);
+  const ties = done.filter((r) => { const c = cmp.get(r); return c.best || -c.delta <= COV_TIE_SE * Math.sqrt(c.seVar); });
+  const sel = ties.reduce((a, b) => (b.G < a.G || (b.G === a.G && b.fit.loo.elpd > a.fit.loo.elpd) ? b : a));
+  const pending = rec.rows.filter((r) => !r.fit && r.status !== 'skipped' && r.status !== 'error').length;
+  let kind, text;
+  if (done.length === 1) { kind = 'only'; text = 'Only this model was fitted.'; }
+  else if (sel === best && ties.length === 1) {
+    const next = done.filter((r) => r !== sel).reduce((a, b) => (b.fit.loo.elpd > a.fit.loo.elpd ? b : a));
+    kind = 'clear';
+    text = 'Ahead of ' + next.model.label + ' by ' + num(sel.fit.loo.elpd - next.fit.loo.elpd, 1) + ' (SE ' + num(Math.sqrt(covCompareTo(next, sel)), 1) + ').';
+  } else if (sel === best) {
+    const n = ties.length - 1;
+    kind = 'best';
+    text = n + ' more complex model' + (n === 1 ? '' : 's') + ' within 2 SE: ' + listText(ties.filter((r) => r !== sel).map((r) => r.model.label)) + '.';
+  } else {
+    const c = cmp.get(sel);
+    kind = 'tie';
+    text = best.model.label + ' scores ' + num(-c.delta, 1) + ' higher (SE ' + num(Math.sqrt(c.seVar), 1) + '), less than 2 SE, so the simpler model is kept.';
+  }
+  if (pending) text += ' ' + pending + ' model' + (pending === 1 ? '' : 's') + ' still fitting.';
+  return { sel, best, cmp, kind, text };
+}
+function covOpenCells(ag, modelId) {
   const C = covState();
-  // sum over antigens when every selected antigen has every model
+  C.view.ag = ag; C.view.model = modelId; C.cellsShown = true;
+  renderCovResults();
+  $('cov-view-head').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* Totals over antigens, per model, when every antigen has every model fitted; selection as for one antigen */
+function covSumSelect(run) {
   const recs = [...run.byAg.values()].filter((r) => !r.skipped);
   const complete = recs.length > 1 && recs.every((r) => r.rows.length === run.models.length && r.rows.every((x) => x.fit && x.fit.loo));
-  if (complete) {
-    tb.appendChild(h('tr', { class: 'group' }, h('td', { colspan: cols.length, text: 'All ' + recs.length + ' antigens (sum)' })));
-    const tot = run.models.map((m, k) => {
-      let elpd = 0, se2 = 0, ll = 0, pl = 0, kb = 0, par = 0, cells = 0, lv = 'ok';
-      recs.forEach((r) => { const f = r.rows[k].fit; elpd += f.loo.elpd; se2 += f.loo.se * f.loo.se; ll += f.loo.meanLL; pl += f.loo.p_loo; kb += f.loo.kBad; par += r.rows[k].G + 4; cells += r.rows[k].G; if (SEV[f.level] > SEV[lv]) lv = f.level; });
-      return { m, k, elpd, se: Math.sqrt(se2), ll, pl, kb, par, cells, lv };
-    });
-    const bestK = tot.reduce((a, b) => (b.elpd > a.elpd ? b : a)).k;
-    tot.forEach((t) => {
-      let v = 0;
-      recs.forEach((r) => { v += covCompareTo(r.rows[t.k], r.rows[bestK]); });
-      const best = t.k === bestK;
-      tb.appendChild(h('tr', { class: best ? 'best' : null },
-        h('td', { text: t.m.label }), h('td', { class: 'num', text: fmtInt(t.cells) }), h('td', { class: 'num', text: fmtInt(t.par) }),
-        h('td', { class: 'num', text: num(t.ll, 1) }), h('td', { class: 'num', text: num(t.elpd, 1) + ' (' + num(t.se, 1) + ')' }),
-        h('td', { class: 'num', text: best ? '0' : signed(t.elpd - tot[bestK].elpd, 1) + ' (' + num(Math.sqrt(v), 1) + ')' }),
-        h('td', { class: 'num', text: num(t.pl, 1) }), h('td', { class: 'num', text: fmtInt(t.kb) }),
-        h('td', null, levelIcon(t.lv), ' ', h('span', { class: 'hint', text: capFirst(LEVEL_WORD[t.lv]) }))));
-    });
+  if (!complete) return null;
+  const tot = run.models.map((m, k) => {
+    let elpd = 0, se2 = 0, ll = 0, pl = 0, kb = 0, par = 0, cells = 0, lv = 'ok';
+    recs.forEach((r) => { const f = r.rows[k].fit; elpd += f.loo.elpd; se2 += f.loo.se * f.loo.se; ll += f.loo.meanLL; pl += f.loo.p_loo; kb += f.loo.kBad; par += r.rows[k].G + 4; cells += r.rows[k].G; if (SEV[f.level] > SEV[lv]) lv = f.level; });
+    return { m, k, elpd, se: Math.sqrt(se2), ll, pl, kb, par, cells, lv };
+  });
+  const seDiff = (a, b) => { let v = 0; recs.forEach((r) => { v += covCompareTo(r.rows[a.k], r.rows[b.k]); }); return Math.sqrt(v); };
+  const best = tot.reduce((a, b) => (b.elpd > a.elpd ? b : a));
+  tot.forEach((t) => { t.delta = t.elpd - best.elpd; t.seD = t === best ? 0 : seDiff(t, best); });
+  const ties = tot.filter((t) => t === best || -t.delta <= COV_TIE_SE * t.seD);
+  const sel = ties.reduce((a, b) => (b.cells < a.cells || (b.cells === a.cells && b.elpd > a.elpd) ? b : a));
+  let kind, text;
+  if (sel === best && ties.length === 1) {
+    const next = tot.filter((t) => t !== sel).reduce((a, b) => (b.elpd > a.elpd ? b : a));
+    kind = 'clear'; text = 'Ahead of ' + next.m.label + ' by ' + num(sel.elpd - next.elpd, 1) + ' (SE ' + num(seDiff(next, sel), 1) + ').';
+  } else if (sel === best) {
+    kind = 'best'; text = (ties.length - 1) + ' more complex model' + (ties.length === 2 ? '' : 's') + ' within 2 SE.';
+  } else {
+    kind = 'tie'; text = best.m.label + ' scores ' + num(-sel.delta, 1) + ' higher (SE ' + num(sel.seD, 1) + '), less than 2 SE, so the simpler model is kept.';
   }
+  return { recs, tot, best, sel, kind, text };
+}
+function covOpenSet() { const C = covState(); if (!(C.cmpOpen instanceof Set)) C.cmpOpen = new Set(); return C.cmpOpen; }
+function renderCovSummary(run) {
+  const tbl = $('cov-sum'), open = covOpenSet();
+  tbl.textContent = '';
+  const cols = ['Antigen', 'Selected model', 'Overall prevalence (95% CrI)', 'Evidence', 'Checks'];
+  tbl.appendChild(h('thead', null, h('tr', null, cols.map((c) => h('th', null, c === 'Evidence' ? defTerm('evidence', c) : c === 'Checks' ? defTerm('sampler', c) : c)))));
+  const tb = h('tbody');
+  const EV = { clear: 'Clear', best: 'Best', tie: 'Tie', only: '' };
+  const checks = (lv, kb, title) => {
+    const td = h('td', { title: title || null }, levelIcon(lv), ' ', h('span', { class: 'hint', text: capFirst(LEVEL_WORD[lv]) }));
+    if (kb) td.appendChild(h('span', { class: 'unrel-note', text: ' · ' + fmtInt(kb) + ' with k > 0.7' }));
+    return td;
+  };
+  const addRow = (key, label, cells) => {
+    const isOpen = open.has(key);
+    const tr = h('tr', { class: 'cs-row' + (key === '__sum' ? ' cs-sum' : ''), tabindex: 0, 'aria-expanded': isOpen ? 'true' : 'false',
+      title: (isOpen ? 'Hide' : 'Show') + ' the full likelihood comparison' },
+      h('td', null, h('span', { class: 'chev', 'aria-hidden': 'true', text: '›' }), label), cells);
+    const toggle = () => { if (open.has(key)) open.delete(key); else open.add(key); renderCovSummary(run); };
+    tr.addEventListener('click', toggle);
+    tr.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
+    tb.appendChild(tr);
+    if (isOpen) tb.appendChild(h('tr', { class: 'cmp-detail' }, h('td', { colspan: cols.length },
+      h('p', { class: 'hint', text: 'Bold: highest ELPD-LOO; the others are compared with it.' + (key === '__sum' ? ' Each value is summed over the antigens.' : ' Click a model to see its prevalence by cell.') }),
+      h('div', { class: 'table-wrap' }, covCmpTable(run, key)))));
+  };
   run.ags.forEach((ag) => {
     const rec = run.byAg.get(ag);
-    tb.appendChild(h('tr', { class: 'group' }, h('td', { colspan: cols.length, text: ag + (rec.skipped ? ' · skipped: ' + rec.skipped : ' · N = ' + fmtInt(rec.N)) })));
-    if (rec.skipped) return;
-    const cmp = covCompare(rec.rows);
+    if (rec.skipped) { tb.appendChild(h('tr', null, h('td', { text: ag }), h('td', { colspan: 4, class: 'hint', text: 'Skipped: ' + rec.skipped }))); return; }
+    const s = covSelect(rec);
+    if (!s) {
+      const busy = rec.rows.some((r) => r.status === 'queued' || r.status === 'running');
+      tb.appendChild(h('tr', null, h('td', { text: ag }), h('td', { colspan: 4, class: 'hint', text: busy ? 'Fitting…' : 'No model could be fitted.' })));
+      return;
+    }
+    const f = s.sel.fit, ov = f.overall;
+    addRow(ag, ag + ' · N = ' + fmtInt(rec.N), [
+      h('td', { class: 'sel-model', text: s.sel.model.label + (s.sel.G > 1 ? ' (' + fmtInt(s.sel.G) + ' cells)' : '') }),
+      h('td', { class: 'num', text: ov ? fmtPar('pi', ov.med) + ' ' + fmtCI('pi', ov) : 'Fit again to see' }),
+      h('td', { class: 'ev-cell' }, EV[s.kind] ? h('span', { class: 'ev ev-' + s.kind, text: EV[s.kind] }) : null, ' ', h('span', { class: 'hint', text: s.text })),
+      checks(f.level, f.loo.kBad, f.check)]);
+  });
+  const sum = covSumSelect(run);
+  if (sum) addRow('__sum', 'All ' + sum.recs.length + ' antigens (sum)', [
+    h('td', { class: 'sel-model', text: sum.sel.m.label }),
+    h('td', { class: 'num hint', text: '–' }),
+    h('td', { class: 'ev-cell' }, h('span', { class: 'ev ev-' + sum.kind, text: EV[sum.kind] }), ' ', h('span', { class: 'hint', text: sum.text })),
+    checks(sum.sel.lv, sum.sel.kb)]);
+  tbl.appendChild(tb);
+}
+function renderCovOverall(run) {
+  const box = $('cov-overall-chart'), lg = $('lg-cov-overall'), ex = $('cov-overall-export');
+  box.textContent = ''; ex.textContent = ''; setLegend(lg, []);
+  const ags = run.ags.filter((ag) => { const rec = run.byAg.get(ag); return !rec.skipped && rec.rows.some((r) => r.fit && r.fit.overall); });
+  if (!ags.length) {
+    const any = run.ags.some((ag) => (run.byAg.get(ag).rows || []).some((r) => r.fit));
+    box.appendChild(placeholder(any ? 'Fit the models again to see the overall prevalence by model.' : 'Not fitted yet.'));
+    return;
+  }
+  drawCovOverall(box, run, ags, lg);
+  ex.appendChild(exportButtons(() => svgExport(box.querySelector('svg'), lg, 'Overall prevalence by model'), 'overall_prevalence_by_model'));
+}
+function drawCovOverall(box, run, ags, lg) {
+  const models = run.models, K = models.length;
+  const W = Math.max(300, Math.round(box.clientWidth || 700)), narrow = W < 560;
+  const labelW = narrow ? 80 : 120, m = { t: 8, b: 40, r: 14 };
+  const rowH = Math.max(30, K * 12 + 14), H = m.t + ags.length * rowH + m.b;
+  let hi = 0;
+  ags.forEach((ag) => run.byAg.get(ag).rows.forEach((r) => { if (r.fit && r.fit.overall) hi = Math.max(hi, r.fit.overall.hi); }));
+  hi = Math.min(1, Math.max(0.05, hi * 1.08));
+  const x0 = labelW, x1 = W - m.r, X = (v) => x0 + v / hi * (x1 - x0);
+  const svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', 'aria-label': 'Overall prevalence by antigen and model' });
+  const xt = niceTicks(0, hi * 100, narrow ? 4 : 6);
+  xt.ticks.forEach((t) => {
+    sv('line', { x1: X(t / 100), x2: X(t / 100), y1: m.t, y2: H - m.b, class: 'grid' }, svg);
+    sv('text', { x: X(t / 100), y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick-label', text: num(t, xt.dec) + '%' }, svg);
+  });
+  sv('line', { x1: x0, x2: x1, y1: H - m.b, y2: H - m.b, class: 'axis' }, svg);
+  sv('text', { x: (x0 + x1) / 2, y: H - 6, 'text-anchor': 'middle', class: 'axis-title', text: 'Overall prevalence (cells weighted by number of samples)' }, svg);
+  const maxCh = Math.floor(labelW / 7);
+  ags.forEach((ag, i) => {
+    const rec = run.byAg.get(ag), s = covSelect(rec), top = m.t + i * rowH;
+    if (i) sv('line', { x1: 0, x2: W, y1: top, y2: top, class: 'grid' }, svg);
+    sv('text', { x: 4, y: top + rowH / 2 + 4, class: 'row-label', text: ag.length > maxCh ? ag.slice(0, maxCh - 1) + '…' : ag }, svg);
+    models.forEach((mod, k) => {
+      const r = rec.rows.find((x) => x.model.id === mod.id);
+      if (!r || !r.fit || !r.fit.overall) return;
+      const o = r.fit.overall, color = CHAIN_VARS[k % 8], isSel = s && s.sel === r;
+      const cy = top + 7 + k * 12 + (rowH - 14 - (K - 1) * 12) / 2;
+      const ci = sv('line', { x1: X(o.lo), x2: X(o.hi), y1: cy, y2: cy, class: 'grp-ci' }, svg); ci.style.stroke = color;
+      if (r.fit.level === 'bad') ci.style.strokeDasharray = '3 3';
+      const dot = sv('circle', { cx: X(o.med), cy, r: isSel ? 5.5 : 4, class: 'grp-dot' }, svg);
+      dot.style.fill = color;
+      if (isSel) { dot.style.stroke = 'var(--text)'; dot.style.strokeWidth = '2'; }
+      const hit = sv('rect', { x: x0, y: cy - 6, width: x1 - x0, height: 12, class: 'hit', tabindex: 0 }, svg);
+      hoverable(hit, ag + ' · ' + mod.label, () => {
+        const c = s && s.cmp.get(r);
+        const rows = [['Overall median', fmtPar('pi', o.med)], ['95% CrI', fmtCI('pi', o)], ['Cells', fmtInt(r.G)]];
+        if (c) rows.push(['ΔELPD (SE)', c.best ? '0 (best)' : signed(c.delta, 1) + ' (' + num(Math.sqrt(c.seVar), 1) + ')']);
+        rows.push(['Sampler check', LEVEL_WORD[r.fit.level]]);
+        if (isSel) rows.push(['', 'Selected model']);
+        return rows;
+      });
+      hit.addEventListener('click', () => covOpenCells(ag, mod.id));
+    });
+  });
+  box.appendChild(svg);
+  setLegend(lg, models.map((mod, k) => ({ type: 'dot', color: CHAIN_VARS[k % 8], label: mod.label })));
+}
+function covCmpTable(run, key) {
+  const tbl = h('table', { class: 'res-table cov-cmp' });
+  const cols = ['Model', 'Cells', 'Parameters', 'Mean log-lik', 'ELPD-LOO (SE)', 'ΔELPD (SE)', 'p_loo', 'Pareto k > 0.7', 'Sampler check'];
+  const keys = [null, 'cells', 'params', 'meanLL', 'elpd', 'dElpd', 'ploo', 'pareto', 'sampler'];
+  tbl.appendChild(h('thead', null, h('tr', null, cols.map((c, i) => h('th', { class: i && i < 8 ? 'num' : null }, keys[i] ? defTerm(keys[i], c) : c)))));
+  const tb = h('tbody'), C = covState();
+  const status = (lv, title) => { const ic = levelIcon(lv); if (title) ic.setAttribute('title', title); return h('td', { title: title || null }, ic, ' ', h('span', { class: 'hint', text: capFirst(LEVEL_WORD[lv]) })); };
+  if (key === '__sum') {
+    const sum = covSumSelect(run);
+    if (sum) sum.tot.forEach((t) => {
+      const best = t === sum.best;
+      tb.appendChild(h('tr', { class: best ? 'best' : null, style: 'cursor:default' },
+        h('td', { text: t.m.label }), h('td', { class: 'num', text: fmtInt(t.cells) }), h('td', { class: 'num', text: fmtInt(t.par) }),
+        h('td', { class: 'num', text: num(t.ll, 1) }), h('td', { class: 'num', text: num(t.elpd, 1) + ' (' + num(t.se, 1) + ')' }),
+        h('td', { class: 'num', text: best ? '0' : signed(t.delta, 1) + ' (' + num(t.seD, 1) + ')' }),
+        h('td', { class: 'num', text: num(t.pl, 1) }), h('td', { class: 'num' + (t.kb ? ' warn-cell' : ''), text: fmtInt(t.kb) }), status(t.lv)));
+    });
+  } else {
+    const ag = key, rec = run.byAg.get(ag), cmp = covCompare(rec.rows);
     rec.rows.forEach((r) => {
-      const on = C.view.ag === ag && C.view.model === r.model.id;
-      const tr = h('tr', { class: (on ? 'sel' : '') + (cmp && cmp.get(r) && cmp.get(r).best ? ' best' : ''), tabindex: 0 });
+      const on = C.cellsShown && C.view.ag === ag && C.view.model === r.model.id;
+      const tr = h('tr', { class: (on ? 'sel' : '') + (cmp && cmp.get(r) && cmp.get(r).best ? ' best' : ''), tabindex: 0, title: 'Show the prevalence by cell for this model' });
       tr.appendChild(h('td', { text: r.model.label }));
       tr.appendChild(h('td', { class: 'num', text: fmtInt(r.G) }));
       tr.appendChild(h('td', { class: 'num', text: fmtInt(r.G + 4) }));
@@ -7801,16 +8513,16 @@ function renderCovCompare(run) {
         tr.appendChild(h('td', { class: 'num', text: c.best ? '0' : signed(c.delta, 1) + ' (' + num(Math.sqrt(c.seVar), 1) + ')' }));
         tr.appendChild(h('td', { class: 'num', text: num(L.p_loo, 1) }));
         tr.appendChild(h('td', { class: 'num' + (L.kBad ? ' warn-cell' : ''), text: fmtInt(L.kBad) }));
-        const ic = levelIcon(r.fit.level); ic.setAttribute('title', r.fit.check);
-        tr.appendChild(h('td', { title: r.fit.check }, ic, ' ', h('span', { class: 'hint', text: capFirst(LEVEL_WORD[r.fit.level]) })));
+        tr.appendChild(status(r.fit.level, r.fit.check));
       }
-      const open = () => { C.view.ag = ag; C.view.model = r.model.id; C.cellsShown = true; renderCovResults(); $('cov-view-head').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      const open = (ev) => { ev.stopPropagation(); covOpenCells(ag, r.model.id); };
       tr.addEventListener('click', open);
-      tr.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') open(); });
+      tr.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') open(ev); });
       tb.appendChild(tr);
     });
-  });
+  }
   tbl.appendChild(tb);
+  return tbl;
 }
 /* N * var of the pointwise ELPD differences between two rows of the same antigen */
 function covCompareTo(a, b) {
@@ -7834,6 +8546,138 @@ function renderCovCellsToggle() {
   $('cov-cells-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
   return open;
 }
+/* ---------- step 5: correlation of cell prevalences between antigens ---------- */
+function pearson(x, y) {
+  const n = x.length;
+  if (n < 3) return NaN;
+  let mx = 0, my = 0;
+  for (let i = 0; i < n; i++) { mx += x[i]; my += y[i]; }
+  mx /= n; my /= n;
+  let sxy = 0, sxx = 0, syy = 0;
+  for (let i = 0; i < n; i++) { const a = x[i] - mx, b = y[i] - my; sxy += a * b; sxx += a * a; syy += b * b; }
+  return sxx > 0 && syy > 0 ? sxy / Math.sqrt(sxx * syy) : NaN;
+}
+function covCorrModels(run) { return run.models.filter((m) => m.cols.length && run.ags.some((ag) => { const rec = run.byAg.get(ag); const r = !rec.skipped && rec.rows.find((x) => x.model.id === m.id); return r && r.fit && r.G >= 3; })); }
+function covCorrData(run, modelId) {
+  const ags = [], cells = new Map();
+  run.ags.forEach((ag) => {
+    const rec = run.byAg.get(ag), r = !rec.skipped && rec.rows.find((x) => x.model.id === modelId);
+    if (!r || !r.fit) return;
+    ags.push(ag);
+    const m = new Map();
+    r.cells.forEach((c, g) => m.set(c.labels.join('\u0001'), { c, s: r.fit.pis[g] }));
+    cells.set(ag, { m, row: r });
+  });
+  const pair = (a, b) => {
+    const A = cells.get(a).m, B = cells.get(b).m, pts = [];
+    A.forEach((va, k) => { const vb = B.get(k); if (vb) pts.push({ k, a: va, b: vb, big: va.c.n >= COV_SMALL && vb.c.n >= COV_SMALL }); });
+    const big = pts.filter((p) => p.big);
+    return { pts, n: big.length, r: pearson(big.map((p) => p.a.s.med), big.map((p) => p.b.s.med)) };
+  };
+  return { ags, cells, pair };
+}
+function renderCovCorr(run) {
+  const C = covState(), open = !!C.corrShown, btn = $('cov-corr-btn');
+  $('cov-corr-wrap').hidden = !open;
+  btn.textContent = open ? 'Hide correlation of prevalence by cell' : 'Show correlation of prevalence by cell';
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (!open) return;
+  const heat = $('cov-corr-heat'), sc = $('cov-corr-scatter'), hx = $('cov-corr-export'), sx = $('cov-corr-sc-export'), lg = $('lg-cov-corr');
+  heat.textContent = ''; sc.textContent = ''; hx.textContent = ''; sx.textContent = ''; setLegend(lg, []); $('cov-corr-title').textContent = '';
+  const models = covCorrModels(run), msel = $('cov-corr-model');
+  if (!models.length) { msel.closest('label').hidden = true; heat.appendChild(placeholder('Fit a model with at least 3 cells to see how prevalence correlates between antigens.')); return; }
+  msel.closest('label').hidden = false;
+  if (!models.some((m) => m.id === C.corrModel)) C.corrModel = models[models.length - 1].id;
+  fillSelect(msel, models.map((m) => m.id), C.corrModel, Object.fromEntries(models.map((m) => [m.id, m.label])));
+  const D = covCorrData(run, C.corrModel), ags = D.ags;
+  if (ags.length < 2) { heat.appendChild(placeholder('Fit at least two antigens with this model to compare them.')); return; }
+  if (!C.corrPair || !ags.includes(C.corrPair[0]) || !ags.includes(C.corrPair[1]) || C.corrPair[0] === C.corrPair[1]) {
+    let best = null;   // start from the strongest correlation
+    ags.forEach((a, i) => ags.slice(i + 1).forEach((b) => { const p = D.pair(a, b); if (Number.isFinite(p.r) && (!best || Math.abs(p.r) > Math.abs(best.r))) best = { a, b, r: p.r }; }));
+    C.corrPair = best ? [best.a, best.b] : [ags[0], ags[1]];
+  }
+  const modLabel = (models.find((m) => m.id === C.corrModel) || {}).label || '';
+  drawCorrHeat(heat, D, C.corrPair, (a, b) => { C.corrPair = [a, b]; renderCovCorr(run); });
+  hx.appendChild(exportButtons(() => svgExport(heat.querySelector('svg'), null, 'Correlation of prevalence by cell · ' + modLabel), 'prevalence_correlation_' + safeName(modLabel)));
+  const [a, b] = C.corrPair, p = D.pair(a, b);
+  $('cov-corr-title').textContent = b + ' against ' + a + ' · ' + modLabel + ' · ' + (Number.isFinite(p.r) ? 'r = ' + num(p.r, 2).replace('-', MINUS) + ' over ' + p.n + ' cells' : 'too few cells with 10 or more samples for r');
+  drawCorrScatter(sc, D, a, b, p);
+  setLegend(lg, [{ type: 'dot', color: 'var(--text)', label: 'Cell (median, 95% CrI)' }, { type: 'dash', color: 'var(--text-2)', label: 'Equal prevalence' }]);
+  sx.appendChild(exportButtons(() => svgExport(sc.querySelector('svg'), lg, $('cov-corr-title').textContent), 'prevalence_by_cell_' + safeName(a) + '_vs_' + safeName(b) + '_' + safeName(modLabel)));
+}
+function drawCorrHeat(box, D, sel, onPick) {
+  // symmetric: only the lower half, so rows start at the 2nd antigen and columns stop at the next to last
+  const ags = D.ags, rows = ags.slice(1), cols = ags.slice(0, -1), K = cols.length;
+  const avail = Math.max(300, Math.round(box.clientWidth || 700)), labelW = avail < 560 ? 72 : 100;
+  const maxLen = Math.max(4, ...cols.map((a) => a.length)), hh = Math.min(140, 22 + maxLen * 5.4);
+  const cw = Math.max(34, Math.min(58, Math.floor((avail - labelW - 70) / K))), W = labelW + K * cw + 70, H = hh + rows.length * cw + 6;
+  const svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', style: 'max-width:' + W + 'px', 'aria-label': 'Correlation of cell prevalences between antigens' });
+  cols.forEach((ag, j) => { const x = labelW + j * cw + cw / 2; sv('text', { x, y: hh - 6, transform: 'rotate(-55 ' + x + ' ' + (hh - 6) + ')', class: 'heat-col', text: ag }, svg); });
+  // key
+  const kx = labelW + K * cw + 12, ky = hh + 4;
+  sv('text', { x: kx, y: ky, class: 'heat-key', text: 'r' }, svg);
+  [1, 0.5, 0, -0.5, -1].forEach((v, i) => {
+    const r = sv('rect', { x: kx, y: ky + 6 + i * 14, width: 12, height: 12 }, svg);
+    r.style.fill = v >= 0 ? 'var(--s2)' : 'var(--s1)'; r.style.fillOpacity = String(0.06 + 0.84 * Math.abs(v));
+    sv('text', { x: kx + 16, y: ky + 16 + i * 14, class: 'heat-key', text: (v > 0 ? '+' : v < 0 ? MINUS : '') + Math.abs(v) }, svg);
+  });
+  rows.forEach((a, i) => {
+    const y = hh + i * cw;
+    sv('text', { x: 4, y: y + cw / 2 + 4, class: 'row-label', text: a.length > labelW / 7 ? a.slice(0, Math.floor(labelW / 7) - 1) + '…' : a }, svg);
+    cols.forEach((b, j) => {
+      const x = labelW + j * cw;
+      if (j > i) return;   // upper half and diagonal: left empty
+      const p = D.pair(a, b), cell = sv('rect', { x: x + 1, y: y + 1, width: cw - 2, height: cw - 2, rx: 2, class: 'heat-cell' }, svg);
+      let txt = '–';
+      if (Number.isFinite(p.r)) {
+        cell.style.fill = p.r >= 0 ? 'var(--s2)' : 'var(--s1)'; cell.style.fillOpacity = String(0.06 + 0.84 * Math.abs(p.r));
+        txt = (p.r < 0 ? MINUS : '') + Math.abs(p.r).toFixed(2).replace(/^0/, '');
+      } else { cell.style.fill = 'none'; cell.style.stroke = 'var(--border)'; }
+      const dark = Number.isFinite(p.r) && Math.abs(p.r) > 0.6;
+      sv('text', { x: x + cw / 2, y: y + cw / 2 + (cw >= 44 ? 0 : 3.5), 'text-anchor': 'middle', class: 'heat-val' + (dark ? ' on-dark' : ''), text: txt }, svg);
+      if (cw >= 44) sv('text', { x: x + cw / 2, y: y + cw / 2 + 12, 'text-anchor': 'middle', class: 'heat-val' + (dark ? ' on-dark' : ''), style: 'font-size:9px;opacity:0.8', text: 'n ' + p.n }, svg);
+      const on = (sel[0] === a && sel[1] === b) || (sel[0] === b && sel[1] === a);
+      if (on) sv('rect', { x: x + 1, y: y + 1, width: cw - 2, height: cw - 2, rx: 2, class: 'corr-sel' }, svg);
+      const hit = sv('rect', { x, y, width: cw, height: cw, class: 'hit', tabindex: 0, style: 'cursor:pointer' }, svg);
+      hoverable(hit, a + ' and ' + b, () => [['r', Number.isFinite(p.r) ? num(p.r, 2) : 'too few cells'], ['Cells used', fmtInt(p.n) + ' of ' + fmtInt(p.pts.length)]]);
+      hit.addEventListener('click', () => onPick(b, a));   // column antigen on x, row antigen on y
+      hit.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') onPick(b, a); });
+    });
+  });
+  box.appendChild(svg);
+}
+function drawCorrScatter(box, D, a, b, p) {
+  const W = Math.max(300, Math.min(560, Math.round(box.clientWidth || 520))), m = { l: 54, r: 14, t: 10, b: 44 }, H = Math.round((W - m.l - m.r) * 0.85) + m.t + m.b;
+  let hiX = 0.05, hiY = 0.05;
+  p.pts.forEach((q) => { hiX = Math.max(hiX, q.a.s.hi); hiY = Math.max(hiY, q.b.s.hi); });
+  const hi = Math.min(1, Math.max(hiX, hiY) * 1.06);
+  const X = (v) => m.l + v / hi * (W - m.l - m.r), Y = (v) => H - m.b - v / hi * (H - m.t - m.b);
+  const svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', style: 'max-width:' + W + 'px', 'aria-label': 'Prevalence by cell of ' + b + ' against ' + a });
+  const t = niceTicks(0, hi * 100, 5);
+  t.ticks.forEach((v) => {
+    sv('line', { x1: X(v / 100), x2: X(v / 100), y1: m.t, y2: H - m.b, class: 'grid' }, svg);
+    sv('line', { x1: m.l, x2: W - m.r, y1: Y(v / 100), y2: Y(v / 100), class: 'grid' }, svg);
+    sv('text', { x: X(v / 100), y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick-label', text: num(v, t.dec) + '%' }, svg);
+    sv('text', { x: m.l - 6, y: Y(v / 100) + 4, 'text-anchor': 'end', class: 'tick-label', text: num(v, t.dec) + '%' }, svg);
+  });
+  sv('line', { x1: X(0), y1: Y(0), x2: X(hi), y2: Y(hi), class: 'corr-id' }, svg);
+  sv('line', { x1: m.l, x2: W - m.r, y1: H - m.b, y2: H - m.b, class: 'axis' }, svg);
+  sv('line', { x1: m.l, x2: m.l, y1: m.t, y2: H - m.b, class: 'axis' }, svg);
+  sv('text', { x: (m.l + W - m.r) / 2, y: H - 6, 'text-anchor': 'middle', class: 'axis-title', text: 'Prevalence, ' + a }, svg);
+  sv('text', { x: 14, y: (m.t + H - m.b) / 2, transform: 'rotate(-90 14 ' + (m.t + H - m.b) / 2 + ')', 'text-anchor': 'middle', class: 'axis-title', text: 'Prevalence, ' + b }, svg);
+  const cols = D.cells.get(a).row.model.cols;
+  p.pts.forEach((q) => {
+    const cx = X(q.a.s.med), cy = Y(q.b.s.med);
+    const l1 = sv('line', { x1: X(q.a.s.lo), x2: X(q.a.s.hi), y1: cy, y2: cy, class: 'grp-ci' }, svg), l2 = sv('line', { x1: cx, x2: cx, y1: Y(q.b.s.lo), y2: Y(q.b.s.hi), class: 'grp-ci' }, svg);
+    [l1, l2].forEach((l) => { l.style.stroke = 'var(--text-2)'; l.style.strokeWidth = '1'; l.style.opacity = '0.45'; });
+    const dot = sv('circle', { cx, cy, r: 4, class: 'grp-dot' }, svg);
+    if (q.big) dot.style.fill = 'var(--text)'; else { dot.style.fill = 'var(--surface)'; dot.style.stroke = 'var(--text)'; dot.style.strokeWidth = '1.5'; }
+    const hit = sv('circle', { cx, cy, r: 8, class: 'hit', tabindex: 0 }, svg);
+    hoverable(hit, q.a.c.labels.map((l, i) => cols[i] + ' = ' + l).join(' · '), () => [[a, fmtPar('pi', q.a.s.med) + ' ' + fmtCI('pi', q.a.s)], [b, fmtPar('pi', q.b.s.med) + ' ' + fmtCI('pi', q.b.s)],
+      ['Samples', fmtInt(q.a.c.n) + ' · ' + fmtInt(q.b.c.n)]].concat(q.big ? [] : [['', 'Fewer than 10 samples: left out of r']]));
+  });
+  box.appendChild(svg);
+}
 function renderCovView(run) {
   if (!renderCovCellsToggle()) return;
   const C = covState(), agBox = $('cov-view-ags'), msel = $('cov-view-model');
@@ -7850,12 +8694,11 @@ function renderCovView(run) {
   box.textContent = ''; shared.textContent = ''; setLegend(lg, []);
   const ex = $('cov-export');
   ex.textContent = '';
-  if (!row || !row.fit) { box.appendChild(placeholder(row ? (row.status === 'skipped' ? 'Skipped: ' + row.error : 'Not fitted yet.') : 'Not fitted.')); renderCovTable(row); return; }
+  if (!row || !row.fit) { box.appendChild(placeholder(row ? (row.status === 'skipped' ? 'Skipped: ' + row.error : 'Not fitted yet.') : 'Not fitted.')); return; }
   drawCov(box, row, base && base.fit ? base : null, lg);
   ex.appendChild(exportButtons(() => svgExport(box.querySelector('svg'), lg, $('cov-view-title').textContent), 'prevalence_by_cell_' + safeName(C.view.ag) + '_' + safeName(row.model.label)));
   const cp = row.fit.comp;
   shared.textContent = 'Shared by all cells: ' + ['mu0', 'muR', 'sd0', 'sd1'].map((p) => p + ' ' + num(cp[p].med, 2) + ' [' + num(cp[p].lo, 2) + ', ' + num(cp[p].hi, 2) + ']').join(' · ') + '. Sampler check: ' + row.fit.check;
-  renderCovTable(row);
 }
 function drawCov(box, row, base, lg) {
   const f = row.fit, cols = row.model.cols, cells = row.cells, nc = cols.length;
@@ -7915,24 +8758,6 @@ function drawCov(box, row, base, lg) {
   if (base) items.push({ type: 'dash', color: 'var(--text-2)', label: 'Base model (one prevalence, shaded: 95% CrI)' });
   setLegend(lg, items);
 }
-function renderCovTable(row) {
-  const C = covState(), tw = $('cov-table-wrap'), btn = $('cov-table-btn'), tbl = $('cov-table');
-  tw.hidden = !C.table;
-  btn.textContent = C.table ? 'Hide table' : 'Show table';
-  btn.setAttribute('aria-expanded', C.table ? 'true' : 'false');
-  tbl.textContent = '';
-  if (!row || !row.fit) return;
-  const cols = row.model.cols.length ? row.model.cols : ['Cell'];
-  tbl.appendChild(h('thead', null, h('tr', null, cols.map((c) => h('th', { text: c })), ['Samples', 'pi median', '95% CrI', 'R-hat', 'Bulk ESS'].map((c) => h('th', { class: 'num', text: c })))));
-  const tb = h('tbody');
-  row.cells.forEach((c, g) => {
-    const s = row.fit.pis[g];
-    tb.appendChild(h('tr', null, (c.labels.length ? c.labels : ['All samples']).map((l) => h('td', { text: l })),
-      h('td', { class: 'num' + (c.n < COV_SMALL ? ' small' : ''), text: fmtInt(c.n) }), h('td', { class: 'num', text: fmtPar('pi', s.med) }), h('td', { class: 'num', text: fmtCI('pi', s) }),
-      h('td', { class: 'num', text: num(s.rhat, 3) }), h('td', { class: 'num', text: fmtInt(Math.round(s.ess)) })));
-  });
-  tbl.appendChild(tb);
-}
 function covPrevCSV() {
   const run = covState().run, maxC = Math.max(0, ...run.models.map((m) => m.cols.length));
   const head = ['antigen', 'model'].concat(Array.from({ length: maxC }, (_, q) => ['column_' + (q + 1), 'value_' + (q + 1)]).flat(),
@@ -7954,15 +8779,16 @@ function covPrevCSV() {
 function covCmpCSV() {
   const run = covState().run;
   const head = ['antigen', 'model', 'N', 'cells', 'parameters', 'mean_loglik', 'elpd_loo', 'se_elpd_loo', 'delta_elpd', 'se_delta_elpd', 'p_loo', 'n_pareto_k_gt_0.7', 'max_pareto_k',
-    'mu0_median', 'muR_median', 'sd0_median', 'sd1_median', 'max_rhat', 'min_ess_bulk', 'min_ess_tail', 'divergences', 'sampler_check'];
+    'mu0_median', 'muR_median', 'sd0_median', 'sd1_median', 'max_rhat', 'min_ess_bulk', 'min_ess_tail', 'divergences', 'sampler_check', 'selected', 'overall_prev_median', 'overall_prev_lo95', 'overall_prev_hi95'];
   const L = [head.join(',')];
   run.ags.forEach((ag) => {
     const rec = run.byAg.get(ag);
-    const cmp = covCompare(rec.rows);
+    const cmp = covCompare(rec.rows), pick = covSelect(rec);
     rec.rows.forEach((r) => {
       const f = r.fit, c = f && cmp ? cmp.get(r) : null;
       L.push([ag, r.model.label, rec.N, r.G, r.G + 4].concat(f ? [f.loo.meanLL, f.loo.elpd, f.loo.se, c.delta, Math.sqrt(c.seVar), f.loo.p_loo, f.loo.kBad, f.loo.kMax,
-        f.comp.mu0.med, f.comp.muR.med, f.comp.sd0.med, f.comp.sd1.med, f.maxRhat, f.minEss, f.minTail, f.divergences, f.level] : Array(17).fill('').concat([r.error || r.status])).map(csvCell).join(','));
+        f.comp.mu0.med, f.comp.muR.med, f.comp.sd0.med, f.comp.sd1.med, f.maxRhat, f.minEss, f.minTail, f.divergences, f.level] : Array(17).fill('').concat([r.error || r.status]))
+        .concat([pick && pick.sel === r ? 'yes' : 'no'], f && f.overall ? [f.overall.med, f.overall.lo, f.overall.hi] : ['', '', '']).map(csvCell).join(','));
     });
   });
   return L.join('\n') + '\n';
@@ -7977,7 +8803,7 @@ function covCmpCSV() {
  * results inside. Opening the copy restores everything; nothing is uploaded.
  * ==================================================================== */
 const SESSION_VERSION = 1;
-const SESSION_SKIP = new Set(['busy', 'allRun', 'dataCache', 'dupCache']);
+const SESSION_SKIP = new Set(['busy', 'allRun', 'dataCache', 'dupCache', 'emJob', 'priDataShared']);
 function u8ToB64(u8) {
   let out = '';
   for (let i = 0; i < u8.length; i += 0x8000) out += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
@@ -8115,6 +8941,9 @@ async function restoreSession(el) {
   const st = decodeSession(pkg.state);
   Object.keys(st).forEach((k) => { S[k] = st[k]; });
   S.busy = null; S.allRun = null; S.dataCache = new Map(); S.dupCache = null;
+  if (S.runOff && S.runOff.size) { S.runOff.forEach((a) => S.agCols.delete(a)); S.runOff = new Set(); }
+  S.emJob = null;
+  if (S.pmode && S.pmode.dataMethod !== 'em') { S.pmode.dataMethod = 'em'; S.priData = {}; S.priDataKey = null; }
   if (S.cov) { S.cov.info = new Map(); S.cov.infoVersion = -1; }
   // inputs that are set once at start-up rather than re-rendered
   $('s-chains').value = S.settings.chains; $('s-warmup').value = S.settings.warmup; $('s-iter').value = S.settings.iter; $('s-seed').value = S.settings.seed;
@@ -8128,6 +8957,7 @@ async function restoreSession(el) {
 }
 
 function renderAll() {
+  hideTip();   // a tooltip left over from a chart that is redrawn
   renderData();
   renderPriors();
   ensureScenarios();
@@ -8160,14 +8990,15 @@ function bindInputs() {
   /* drag and drop onto the file boxes: hand the file to the matching input */
   const enableDrop = (zone, input) => {
     zone.classList.add('drop-zone');
-    input.insertAdjacentElement('afterend', h('span', { class: 'drop-hint', text: 'or drop a file here' }));
+    input.insertAdjacentElement('afterend', h('span', { class: 'drop-hint', text: input.multiple ? 'or drop one or more files here' : 'or drop a file here' }));
     zone.addEventListener('dragover', (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; zone.classList.add('drag'); });
     zone.addEventListener('dragleave', (e) => { if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag'); });
     zone.addEventListener('drop', (e) => {
       e.preventDefault(); e.stopPropagation(); zone.classList.remove('drag');
-      const f = e.dataTransfer.files && e.dataTransfer.files[0];
-      if (!f) return;
-      const dt = new DataTransfer(); dt.items.add(f);
+      const fl = e.dataTransfer.files;
+      if (!fl || !fl.length) return;
+      const dt = new DataTransfer();
+      [...fl].slice(0, input.multiple ? fl.length : 1).forEach((f) => dt.items.add(f));
       input.files = dt.files;
       input.dispatchEvent(new Event('change'));
     });
@@ -8179,16 +9010,47 @@ function bindInputs() {
   document.addEventListener('dragover', (e) => e.preventDefault());
   document.addEventListener('drop', (e) => e.preventDefault());
   $('f-data').addEventListener('change', (ev) => {
-    const file = ev.target.files && ev.target.files[0];
-    if (!file) return;
-    readTable(file, 'data', (t) => {
+    const files = [...(ev.target.files || [])];
+    if (!files.length) return;
+    statusLine($('data-info'), null, 'Reading ' + (files.length === 1 ? files[0].name : files.length + ' files') + '…');
+    const readOne = (file) => new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onerror = () => resolve({ name: file.name, err: 'could not be read' });
+      reader.onload = () => {
+        try {
+          const t = parseDelimited(reader.result);
+          if (!t.rows.length) throw new Error('there are no rows after the header');
+          t.name = file.name;
+          resolve({ name: file.name, t });
+        } catch (err) { resolve({ name: file.name, err: err.message }); }
+      };
+      reader.readAsText(file);
+    });
+    Promise.all(files.map(readOne)).then((res) => {
+      const ok = res.filter((r) => r.t), bad = res.filter((r) => !r.t).map((r) => r.name + ': ' + r.err);
+      let out = null;
+      try { out = assembleData(ok); } catch (err) { bad.push(err.message); }
+      const errs = bad.concat(out ? out.errors : []);
+      if (!out || !out.list.length) {
+        S.dataErr = 'Could not use ' + (files.length === 1 ? files[0].name : 'these files') + ': ' + (errs.join('; ') || 'no usable data') + '. The previous data is still loaded.';
+        renderData();
+        return;
+      }
+      S.dataErr = null;
       const wasExample = S.ds && S.ds.isExample;
       S.metaNote = wasExample ? 'The example metadata was removed with the example data. Load your own metadata file if you have one.' : null;
       S.metaErr = null;
-      setDataset(t, false);
+      const pick = out.list[0];
+      setDataset(pick.table, false);
+      S.measureSets = out.list; S.measure = pick.measure;
+      S.dataNote = errs.length ? 'Skipped: ' + errs.join('; ') + '.' : null;
+      renderData();
       $('f-meta').value = '';
     });
   });
+  $('m-measure').addEventListener('change', (ev) => setMeasure(ev.target.value));
+  $('ag-all').addEventListener('click', () => setAgIncluded(agPillCands(), true));
+  $('ag-none').addEventListener('click', () => setAgIncluded(agPillCands(), false));
   $('f-meta').addEventListener('change', (ev) => {
     const file = ev.target.files && ev.target.files[0];
     if (!file) return;
@@ -8212,7 +9074,8 @@ function bindInputs() {
   $('dl-ex-meta').addEventListener('click', () => download('example_metadata.csv', tableCSV(exampleTables().meta), 'text/csv'));
   $('btn-example').addEventListener('click', () => { $('f-data').value = ''; $('f-meta').value = ''; S.dataErr = null; S.metaErr = null; S.metaNote = null; loadExample(); });
   $('m-dup').addEventListener('change', (ev) => { S.filt.dropDup = ev.target.checked; filtersChanged(); });
-  $('m-transform').addEventListener('change', (ev) => { S.filt.transform = ev.target.value; filtersChanged(); });
+  $('m-transform').addEventListener('change', (ev) => setTransform(ev.target.value));
+  $('m-transform2').addEventListener('change', (ev) => setTransform(ev.target.value));
   $('m-subset').addEventListener('change', (ev) => { S.filt.subsetCol = ev.target.value; S.filt.subsetExcluded = new Set(); filtersChanged(); });
   document.querySelectorAll('.ag-select').forEach((sel) => sel.addEventListener('change', () => setAntigen(sel.value)));
   fillSelect($('excl-type'), Object.keys(EXCLUDE_TYPES), 'exact', EXCLUDE_TYPES);
@@ -8230,12 +9093,17 @@ function bindInputs() {
   });
   document.querySelectorAll('input[name=pmode]').forEach((r) => r.addEventListener('change', () => { if (r.checked) setPriorMode(r.value); }));
   document.querySelectorAll('input[name=pown]').forEach((r) => r.addEventListener('change', () => { if (r.checked) setPriorMode('own', r.value); }));
-  document.querySelectorAll('input[name=pdata]').forEach((r) => r.addEventListener('change', () => {
-    if (!r.checked || S.pmode.dataMethod === r.value) return;
-    S.pmode.dataMethod = r.value; resetScenarios(); priorsChanged();
-  }));
   $('btn-data-edit').addEventListener('click', dataToOwn);
+  document.querySelectorAll('input[name=pdshare]').forEach((r) => r.addEventListener('change', () => {
+    if (!r.checked || !!S.pmode.dataShared === (r.value === 'shared')) return;
+    S.pmode.dataShared = r.value === 'shared'; resetScenarios(); priorsChanged();
+  }));
   $('btn-clear-prior').addEventListener('click', clearPrior);
+  $('btn-fill-data').addEventListener('click', fillFromData);
+  $('dash-close').addEventListener('click', () => { S.dashOpen = false; renderInspect(); $('sec-conv').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('dl-post-all').addEventListener('click', () => download('posterior_estimates_all_antigens.csv', posteriorCSV(), 'text/csv'));
+  $('fg-fit').addEventListener('click', () => fitAllAntigens());
+  $('data-table-btn').addEventListener('click', () => { S.dataTableShown = !S.dataTableShown; renderDataPanel(); });
   window.addEventListener('scroll', hidePop, { passive: true });
   document.addEventListener('pointerdown', (ev) => { if (!ev.target.closest || !ev.target.closest('.has-card')) hidePop(); });
   document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') hidePop(); });
@@ -8298,11 +9166,11 @@ function bindInputs() {
   $('btn-cov-cancel').addEventListener('click', () => Pool.cancel());
   $('cov-view-model').addEventListener('change', (ev) => { covState().view.model = ev.target.value; renderCovResults(); });
   $('cov-cells-btn').addEventListener('click', () => { const C = covState(); C.cellsShown = !C.cellsShown; renderCovResults(); });
+  $('cov-corr-btn').addEventListener('click', () => { const C = covState(); C.corrShown = !C.corrShown; renderCovCorr(C.run); });
+  $('cov-corr-model').addEventListener('change', (ev) => { const C = covState(); C.corrModel = ev.target.value; C.corrPair = null; renderCovCorr(C.run); });
   $('sens-cells-btn').addEventListener('click', () => { S.sensCellsShown = !S.sensCellsShown; if (S.sens) renderSensCells(S.sens); });
-  $('cov-table-btn').addEventListener('click', () => { const C = covState(); C.table = !C.table; renderCovResults(); });
-  $('dl-cov-prev').addEventListener('click', () => { if (covState().run) download('prevalence_by_covariates.csv', covPrevCSV(), 'text/csv'); });
-  $('dl-cov-cmp').addEventListener('click', () => { if (covState().run) download('covariate_model_comparison.csv', covCmpCSV(), 'text/csv'); });
-  $('dl-cov-stan').addEventListener('click', () => download('Mixture1D_cells.stan', $('stan-cells-src').textContent.trim() + '\n', 'text/plain'));
+  $('dl-cov-prev').addEventListener('click', () => { if (covState().run) download('prevalence_estimates_by_cell.csv', covPrevCSV(), 'text/csv'); });
+  $('dl-cov-cmp').addEventListener('click', () => { if (covState().run) download('likelihood_comparison.csv', covCmpCSV(), 'text/csv'); });
 
   const dlg = $('about');
   $('btn-about').addEventListener('click', () => { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });

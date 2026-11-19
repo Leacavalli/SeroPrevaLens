@@ -6,7 +6,8 @@
 <p align="center"><b>Estimate SeroPrevalence using Bayesian Mixture Models</b></p>
 
 <p align="center">
-  <a href="https://leacavalli.github.io/SeroPrevaLens/"><b>Open the tool</b></a>
+  <a href="https://leacavalli.github.io/SeroPrevaLens/"><b>Open the tool</b></a> &nbsp;&middot;&nbsp;
+  <a href="https://leacavalli.github.io/SeroPrevaLens/mv.html"><b>Open SeroPrevaLens MV</b></a>
 </p>
 
 SeroPrevaLens is a browser tool for multiplex serology. For each antigen it fits a
@@ -21,8 +22,8 @@ computer.** There is nothing to install and no server.
 
 | Step | What you do |
 |---|---|
-| 1. Data | Load SerolyzeR output (a `sample_name` column and one column per antigen) and, optionally, a metadata file. Filter samples and choose the log transform. |
-| 2. Baseline priors | Inform the priors yourself (per antigen, shared, or from a prior table), or use priors suggested by the data: a peak and tail rule or a maximum-likelihood mixture fit (EM). Set whether each antigen's prevalence is expected to be below or above 50%. |
+| 1. Data | Load one or more SerolyzeR output files (RAU, nMFI or MFI; per plate or merged), choose the measure and the antigens to include, and optionally add a metadata file. Filter samples and choose the log transform. |
+| 2. Baseline priors | Inform the priors yourself (per antigen, shared, or from a prior table), or use priors suggested by the data: a maximum-likelihood mixture fit (EM) to each antigen, assuming prevalence below 50%. |
 | 3. Fit checks | R-hat, bulk and tail ESS, divergences, and whether the chains agree, for every fit. |
 | 4. Prevalence estimates | Prevalence with 95% credible intervals for each antigen, overall or by group. |
 | 5. Prevalence by covariates | Let prevalence differ between cells defined by metadata (for example subdistrict × age group), with shared negative and positive distributions. Models are compared with ELPD-LOO. |
@@ -35,6 +36,24 @@ The sampler is a JavaScript implementation of the No-U-Turn sampler (as in Stan)
 equivalent Stan models are in [`stan/`](stan/) and can be downloaded from the page,
 together with an R script to rerun any analysis in Stan.
 
+## SeroPrevaLens MV
+
+[`mv.html`](mv.html) is a companion page (the **MV** button at the top of the tool) that
+fits the **multivariate cross-reactive model** instead of one antigen at a time: a
+Gaussian mixture over all 2^P infection-status combinations, with an additive
+cross-reactivity term phi for every pathogen-antigen pair. It estimates which pathogens
+circulate (adding them one at a time and stopping when the log-likelihood stops
+improving), their prevalences, the cross-reactivity matrix and an antigenic map, and
+prevalence by covariate. It reproduces the O'Driscoll et al. (2025) analysis of the
+example data by default, and loads data, filters samples and saves sessions exactly like
+the 1D page.
+
+The model follows
+[`stan/multiSero_noStrata_improved_v2_antigenLoc_seroVec.stan`](stan/multiSero_noStrata_improved_v2_antigenLoc_seroVec.stan),
+adapted from the authors' code by Haowei Wang for the `xstar_multisero_uganda` project;
+it allows a separate negative mean and SD per antigen and a separate positive SD per
+pathogen, where the paper held these constant across antigens.
+
 ## Input format
 
 **Antibody data** (required): CSV or TSV, one row per sample.
@@ -45,7 +64,10 @@ CHPI_1,1.07,0.67,...,3.68
 ```
 
 An optional `plate_name` column is recognised. Every other numeric column is treated as
-an antigen.
+an antigen. Several files can be loaded at once: they are grouped by measure from the file
+name (`_RAU`, `_nMFI`, `_MFI`, as written by SerolyzeR's `process_plate()` and
+`process_dir()`), per-plate files of one measure are stacked, and a merged file replaces
+the per-plate files it covers. The measure to analyse is chosen on the page.
 
 **Metadata** (optional): CSV or TSV with one column of sample names matching the data
 file (any name; the page finds it) and any number of covariate columns.
@@ -74,7 +96,7 @@ The repository is [github.com/Leacavalli/SeroPrevaLens](https://github.com/Leaca
    <https://leacavalli.github.io/SeroPrevaLens/>. On a free account the repository
    must be public for Pages to work.
 
-To update the tool, replace `index.html` and push again.
+To update the tool, replace `index.html` (or `mv.html`) and push again.
 
 ## Use it offline
 
@@ -85,12 +107,15 @@ system fonts and everything else works.
 ## Repository contents
 
 ```
-index.html                  the tool (self-contained)
+index.html                  the tool, one antigen at a time (self-contained)
+mv.html                     the multivariate cross-reactive model (self-contained)
 assets/logo.svg             logo, light background
 assets/logo-dark.svg        logo, dark background
 assets/favicon.svg          icon without labels
 stan/Mixture1D_priors.stan  1D mixture with priors and limits passed as data
 stan/Mixture1D_cells.stan   one prevalence per cell, shared components (step 5)
+stan/multiSero_noStrata_improved_v2_antigenLoc_seroVec.stan
+                            the multivariate cross-reactive model (mv.html)
 examples/                   example antibody data and metadata (see below)
 CITATION.cff                how to cite this tool
 LICENSE                     licence for the code
