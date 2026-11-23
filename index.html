@@ -501,6 +501,11 @@ details.howto li { margin: 3px 0; }
 .pg-cell.off .pg-name { color: var(--muted); font-weight: 500; }
 .pg-cell.off .pg-chart { opacity: 0.4; }
 .run-count { color: var(--muted); margin-left: 4px; }
+.sens-corr-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px 14px; margin-top: 8px; font-size: 13px; }
+.sens-corr-pick label { display: flex; flex-direction: row; align-items: center; gap: 8px; min-width: 0; font-size: 13px; color: var(--text); }
+.sens-corr-pick label b { flex: none; min-width: 4.5em; }
+.sens-corr-pick select { min-width: 0; flex: 1; font: inherit; font-size: 12.5px; }
+#sens-corr-heat svg .corr-sel { fill: none; stroke: var(--text); stroke-width: 2; pointer-events: none; }
 .data-summary .scale-pick { margin-left: auto; white-space: nowrap; }
 .data-summary .scale-pick + #btn-adv { margin-left: 8px; }
 .prior-table .fix-cell { text-align: center; }
@@ -1266,6 +1271,18 @@ svg .heat-val.on-dark { fill: #fff; }
         <button type="button" class="btn small" id="dl-sens-all">Download all results (CSV)</button>
       </div>
       <div class="table-wrap" id="sens-all-table-wrap" style="margin-top:10px" hidden><table id="sens-all-table" class="res-table"></table></div>
+      <div class="toggle-row" style="margin-top:12px"><button type="button" class="btn small toggle-btn" id="sens-corr-btn" aria-expanded="false" aria-controls="sens-corr-wrap">Show correlation of prevalence by cell</button></div>
+      <div id="sens-corr-wrap" hidden>
+        <div class="chart-head" style="margin-top:18px"><h3>Correlation of prevalence by cell</h3></div>
+        <p class="hint" style="margin-top:4px">As in step 5, with the cell prevalences from the refit you choose for each antigen: for example the baseline for one antigen and a wider prior for another. Click a square to plot the two antigens against each other.</p>
+        <div id="sens-corr-pick" class="sens-corr-pick"></div>
+        <div class="cov-view"><span class="export-slot" id="sens-corr-export" style="margin-left:auto"></span></div>
+        <div id="sens-corr-heat" class="chart heat-scroll"></div>
+        <div class="chart-head" style="margin-top:18px"><h3 id="sens-corr-title" style="font-size:14px"></h3><div class="legend" id="lg-sens-corr"></div></div>
+        <div class="cov-view" style="margin-top:0"><span class="export-slot" id="sens-corr-sc-export" style="margin-left:auto"></span></div>
+        <div id="sens-corr-scatter" class="chart"></div>
+        <p class="caption">Pearson correlation of the cells&rsquo; median prevalences, over the cells with at least 10 samples for both antigens (n in each square); smaller cells are hollow in the plot and left out of r. Treat r as descriptive: it ignores each cell&rsquo;s uncertainty, and each antigen is a separate 1D fit.</p>
+      </div>
       <p class="hint detail-hint" id="sens-detail-hint" hidden>Click an antigen in the plot, the heatmap or the table, or an antigen button at the top of this step, to see its scenarios in detail.</p>
     </div>
     <div id="sens-results" hidden>
@@ -7254,6 +7271,7 @@ function renderSensAll() {
   hx.textContent = '';
   hx.appendChild(exportButtons(() => svgExport($('ch-sens-heat').querySelector('svg'), null, 'Change in prevalence (pp) by antigen and scenario'), 'prior_sensitivity_heatmap'));
   $('sens-detail-hint').hidden = detailOpen();
+  renderSensCorr(a);
 }
 function drawSensAll(box, a) {
   box.textContent = '';
@@ -8558,6 +8576,63 @@ function pearson(x, y) {
   return sxx > 0 && syy > 0 ? sxy / Math.sqrt(sxx * syy) : NaN;
 }
 function covCorrModels(run) { return run.models.filter((m) => m.cols.length && run.ags.some((ag) => { const rec = run.byAg.get(ag); const r = !rec.skipped && rec.rows.find((x) => x.model.id === m.id); return r && r.fit && r.G >= 3; })); }
+/* list: [{ ag, cols, cells: [{ labels, n, s: { med, lo, hi } }] }] */
+function corrData(list) {
+  const ags = [], cells = new Map();
+  list.forEach((x) => {
+    ags.push(x.ag);
+    const m = new Map();
+    x.cells.forEach((c) => m.set(c.labels.join('\u0001'), { c, s: c.s }));
+    cells.set(x.ag, { m, row: { model: { cols: x.cols } } });
+  });
+  const pair = (a, b) => {
+    const A = cells.get(a).m, B = cells.get(b).m, pts = [];
+    A.forEach((va, k) => { const vb = B.get(k); if (vb) pts.push({ k, a: va, b: vb, big: va.c.n >= COV_SMALL && vb.c.n >= COV_SMALL }); });
+    const big = pts.filter((p) => p.big);
+    return { pts, n: big.length, r: pearson(big.map((p) => p.a.s.med), big.map((p) => p.b.s.med)) };
+  };
+  return { ags, cells, pair };
+}
+/* Step 6: correlation of cell prevalences, with the refit chosen for each antigen */
+function renderSensCorr(a) {
+  const C = S.sensCorr || (S.sensCorr = { shown: false, pick: {}, pair: null }), btn = $('sens-corr-btn');
+  const open = !!C.shown;
+  $('sens-corr-wrap').hidden = !open;
+  btn.textContent = open ? 'Hide correlation of prevalence by cell' : 'Show correlation of prevalence by cell';
+  btn.setAttribute('aria-expanded', String(open));
+  if (!open) return;
+  const pick = $('sens-corr-pick'), heat = $('sens-corr-heat'), sc = $('sens-corr-scatter'), hx = $('sens-corr-export'), sx = $('sens-corr-sc-export'), lg = $('lg-sens-corr');
+  [pick, heat, sc, hx, sx].forEach((el) => { el.textContent = ''; }); setLegend(lg, []); $('sens-corr-title').textContent = '';
+  if (!a.cm) { heat.appendChild(placeholder('Prevalence by cell needs cells: choose a step 5 model in the Model menu at the top of this step and run the sensitivity analysis for all antigens again.')); return; }
+  const list = [];
+  a.ags.forEach((ag) => {
+    const rows = a.byAg.get(ag).rows.filter((r) => r.fit && r.fit.cells);
+    if (!rows.length) return;
+    let r = rows.find((x) => scenKey(x.scen) === C.pick[ag]);
+    if (!r) { r = rows.find((x) => x.scen.isBase) || rows[0]; C.pick[ag] = scenKey(r.scen); }
+    const sel = h('select', { 'aria-label': 'Refit to use for ' + ag });
+    rows.forEach((x) => sel.appendChild(h('option', { value: scenKey(x.scen), text: x.scen.isBase ? 'Baseline' : scenLabel(x.scen) })));
+    sel.value = C.pick[ag];
+    sel.addEventListener('change', () => { C.pick[ag] = sel.value; renderSensCorr(a); });
+    pick.appendChild(h('label', null, h('b', { text: ag }), sel));
+    list.push({ ag, cols: r.fit.covModel ? r.fit.covModel.cols : a.cm.cols, cells: r.fit.cells.map((c) => ({ labels: c.labels, n: c.n, s: c })) });
+  });
+  if (list.length < 2) { heat.appendChild(placeholder('At least two antigens need a finished refit to compare them.')); return; }
+  const D = corrData(list), ags = D.ags;
+  if (!C.pair || !ags.includes(C.pair[0]) || !ags.includes(C.pair[1]) || C.pair[0] === C.pair[1]) {
+    let best = null;
+    ags.forEach((x, i) => ags.slice(i + 1).forEach((y) => { const q = D.pair(x, y); if (Number.isFinite(q.r) && (!best || Math.abs(q.r) > Math.abs(best.r))) best = { x, y, r: q.r }; }));
+    C.pair = best ? [best.x, best.y] : [ags[0], ags[1]];
+  }
+  const modLabel = covModelLabel(a.cm), lab = (ag) => { const k = C.pick[ag]; return k === 'base' ? '' : ' (' + k.split('|').pop() + ')'; };
+  drawCorrHeat(heat, D, C.pair, (x, y) => { C.pair = [x, y]; renderSensCorr(a); });
+  hx.appendChild(exportButtons(() => svgExport(heat.querySelector('svg'), null, 'Correlation of prevalence by cell · ' + modLabel + ' · refits chosen per antigen'), 'sensitivity_prevalence_correlation_' + safeName(modLabel)));
+  const [x, y] = C.pair, q = D.pair(x, y);
+  $('sens-corr-title').textContent = y + lab(y) + ' against ' + x + lab(x) + ' · ' + modLabel + ' · ' + (Number.isFinite(q.r) ? 'r = ' + num(q.r, 2).replace('-', MINUS) + ' over ' + q.n + ' cells' : 'too few cells with 10 or more samples for r');
+  drawCorrScatter(sc, D, x, y, q);
+  setLegend(lg, [{ type: 'dot', color: 'var(--text)', label: 'Cell (median, 95% CrI)' }, { type: 'dash', color: 'var(--text-2)', label: 'Equal prevalence' }]);
+  sx.appendChild(exportButtons(() => svgExport(sc.querySelector('svg'), lg, $('sens-corr-title').textContent), 'sensitivity_prevalence_by_cell_' + safeName(x) + '_vs_' + safeName(y)));
+}
 function covCorrData(run, modelId) {
   const ags = [], cells = new Map();
   run.ags.forEach((ag) => {
@@ -9138,6 +9213,7 @@ function bindInputs() {
   $('btn-run').addEventListener('click', runSensitivity);
   $('btn-run-all').addEventListener('click', runSensitivityAll);
   $('sens-all-table-btn').addEventListener('click', () => { S.sensAllTable = !S.sensAllTable; renderSensAll(); });
+  $('sens-corr-btn').addEventListener('click', () => { const C = S.sensCorr || (S.sensCorr = { shown: false, pick: {}, pair: null }); C.shown = !C.shown; if (S.sensAll) renderSensCorr(S.sensAll); });
   $('sens-detail-hide').addEventListener('click', () => { S.sensDetail = false; renderSens(); $('sens-all').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   $('dl-sens-all').addEventListener('click', () => { if (S.sensAll) download('prior_sensitivity_all_antigens.csv', resultsCSVAll(), 'text/csv'); });
   $('btn-cancel').addEventListener('click', () => Pool.cancel());
